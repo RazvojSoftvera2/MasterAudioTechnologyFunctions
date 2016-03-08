@@ -1,0 +1,16 @@
+Public variable: FooBar;
+Private variable: _fooBar;
+Method name: FooBar;
+Class name: FooBar;
+Kernighan-Ritchie styled brackets;
+Comments: any style;
+Implicit declaration of variable in for and foreach loop;
+GUI naming: 
+	btnFoo - button;
+	lblFoo - label;
+	tbFoo - txtBlocks;
+	pnlFoo - panel;
+	chkbFoo - checkBox;
+	cmbbFoo - comboBox;
+	rbFoo - radioButton;
+	
