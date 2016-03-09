@@ -14,6 +14,8 @@ namespace MasterAudioTechnologyFunctions
     {
         private string _productName = "Master Audio Technology Functions";
         private string _openedFile;
+        
+        private bool _playing = false;
 
         public frmMatf()
         {
@@ -58,17 +60,29 @@ namespace MasterAudioTechnologyFunctions
         #region PlayButtons
         private void btnPlay_Click(object sender, EventArgs e)
         {
-
+            if (_playing)
+            {
+                // Pause
+                _playing = false;
+                btnPlay.Text = "⏵";
+            }
+            else
+            {
+                // Play
+                _playing = true;
+                btnPlay.Text = "⏸";
+            }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-
+            // Stop
+            _playing = false;
         }
 
         private void btnLoop_Click(object sender, EventArgs e)
         {
-
+            
         }
         #endregion PlayButtons
 
