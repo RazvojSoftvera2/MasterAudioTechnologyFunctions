@@ -23,6 +23,7 @@ namespace MasterAudioTechnologyFunctions
         
 
         private bool _playing = false;
+        private bool _looping = false;
 
         public frmMatf()
         {
@@ -135,6 +136,9 @@ namespace MasterAudioTechnologyFunctions
             {
                 _waveOut.Stop();
                 _waveOffsetStream.CurrentTime = new TimeSpan(0);
+
+                trbTime.Value = 0;
+
                 TimeSpan time = _waveOffsetStream.CurrentTime;
                 lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
             }
@@ -148,7 +152,16 @@ namespace MasterAudioTechnologyFunctions
 
         private void btnLoop_Click(object sender, EventArgs e)
         {
-            
+            if(_looping)
+            {
+                _looping = false;
+                btnLoop.Text = "l";
+            }
+            else
+            {
+                _looping = true;
+                btnLoop.Text = "L";
+            }
         }
         #endregion PlayButtons
 
@@ -162,6 +175,12 @@ namespace MasterAudioTechnologyFunctions
             {
                 btnStop_Click(this, null);
                 tmrSong.Enabled = false;
+
+                if(_looping)
+                {
+                    btnPlay_Click(this, null);
+                    tmrSong.Enabled = true;
+                }
             }
             
             if(_waveOut != null && _waveOffsetStream.Position < _waveOffsetStream.Length)
@@ -173,6 +192,7 @@ namespace MasterAudioTechnologyFunctions
                 trbTime.Value = (int)_waveOffsetStream.Position;
             }
 
+            
             
         }
 

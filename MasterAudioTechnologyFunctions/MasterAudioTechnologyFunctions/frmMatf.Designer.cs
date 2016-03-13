@@ -124,7 +124,7 @@
             this.btnLoop.Name = "btnLoop";
             this.btnLoop.Size = new System.Drawing.Size(30, 30);
             this.btnLoop.TabIndex = 1;
-            this.btnLoop.Text = "L";
+            this.btnLoop.Text = "l";
             this.btnLoop.UseVisualStyleBackColor = true;
             this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
             // 
