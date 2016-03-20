@@ -49,6 +49,7 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
+            this.pnlSong = new System.Windows.Forms.Panel();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).BeginInit();
             this.pnlPlay.SuspendLayout();
@@ -104,6 +105,8 @@
             this.trbTime.TabIndex = 3;
             this.trbTime.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trbTime.Scroll += new System.EventHandler(this.trbTime_Scroll);
+            this.trbTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseDown);
+            this.trbTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseUp);
             // 
             // pnlPlay
             // 
@@ -174,11 +177,10 @@
             // 
             // trbVolume
             // 
-            this.trbVolume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trbVolume.Location = new System.Drawing.Point(0, 0);
             this.trbVolume.Name = "trbVolume";
             this.trbVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trbVolume.Size = new System.Drawing.Size(113, 100);
+            this.trbVolume.Size = new System.Drawing.Size(45, 100);
             this.trbVolume.TabIndex = 4;
             // 
             // pnlMenu
@@ -289,6 +291,15 @@
             this.tmrSong.Interval = 1;
             this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
             // 
+            // pnlSong
+            // 
+            this.pnlSong.AutoScroll = true;
+            this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSong.Location = new System.Drawing.Point(113, 30);
+            this.pnlSong.Name = "pnlSong";
+            this.pnlSong.Size = new System.Drawing.Size(496, 318);
+            this.pnlSong.TabIndex = 4;
+            // 
             // frmMatf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,6 +307,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(609, 348);
             this.Controls.Add(this.pnlMenu);
+            this.Controls.Add(this.pnlSong);
             this.Controls.Add(this.pnlSideBar);
             this.Controls.Add(this.pnlTopBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -336,6 +348,7 @@
         private System.Windows.Forms.Panel pnlVolume;
         private System.Windows.Forms.TrackBar trbVolume;
         private System.Windows.Forms.Timer tmrSong;
+        private System.Windows.Forms.Panel pnlSong;
     }
 }
 
