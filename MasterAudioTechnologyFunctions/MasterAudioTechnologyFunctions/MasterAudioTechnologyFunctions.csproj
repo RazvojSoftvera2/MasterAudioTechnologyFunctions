@@ -52,6 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Timeline\Track.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\Track.Designer.cs">
+      <DependentUpon>Track.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Timeline\WaveViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="frmMatf.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +69,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timeline\AddNewTrack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Timeline\AddNewTrack.Designer.cs">
+      <DependentUpon>AddNewTrack.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Timeline\Track.resx">
+      <DependentUpon>Track.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMatf.resx">
       <DependentUpon>frmMatf.cs</DependentUpon>
     </EmbeddedResource>
@@ -72,6 +90,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Timeline\AddNewTrack.resx">
+      <DependentUpon>AddNewTrack.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

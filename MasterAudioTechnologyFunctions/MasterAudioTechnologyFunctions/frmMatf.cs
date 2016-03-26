@@ -17,26 +17,12 @@ namespace MasterAudioTechnologyFunctions
         private string _productName = "Master Audio Technology Functions";
         private string _openedFile;
 
-        private WaveOut _waveOut;
-        private WaveOffsetStream _waveOffsetStream;
-        private WaveFileReader _waveFileReader;
-
         private bool _playing = false;
         private bool _looping = false;
-
-        private WaveViewer wvTimeline = new WaveViewer();
-        private VolumeSlider vslMasterVolume = new VolumeSlider();
 
         public frmMatf()
         {
             InitializeComponent();
-
-            pnlSong.Controls.Add(wvTimeline);
-            wvTimeline.Width = 500;
-            wvTimeline.Height = 100;
-            wvTimeline.BackColor = Color.BlueViolet;
-            wvTimeline.ForeColor = Color.Beige;
-            wvTimeline.SamplesPerPixel = 100;
 
             pnlMenu.Hide();
         }
@@ -66,23 +52,14 @@ namespace MasterAudioTechnologyFunctions
             }
             
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Waveform audio files (.wav)|*.wav|MATF projects (.matf)|*.matf";
-            dialog.ShowDialog();
+            dialog.Filter = "MATF projects (.matf)|*.matf";
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
 
             _openedFile = dialog.FileName;
+            // Load project
 
-            if (String.IsNullOrEmpty(_openedFile))
-            {
-                _openedFile = null;
-                return;
-            }
-
-            _waveOut = new WaveOut();
-            _waveFileReader = new WaveFileReader(_openedFile);
-            _waveOffsetStream = new WaveOffsetStream(_waveFileReader);
-            _waveOut.Init(_waveOffsetStream);
-
-            wvTimeline.WaveStream = _waveFileReader;
             trbTime.Maximum = (int) _waveOffsetStream.Length;
             
             Text = _productName + " - " + _openedFile;
@@ -112,59 +89,55 @@ namespace MasterAudioTechnologyFunctions
         private void btnStop_Click(object sender, EventArgs e)
         {
             Stop();
-
-            //_waveOut.Dispose();
-            //_waveFileReader = new WaveFileReader(_openedFile);
-            //_waveOffsetStream = new WaveOffsetStream(_waveFileReader);
-            //_waveOut.Init(_waveOffsetStream);
         }
+
         private void Play()
         {
-            if (_waveOut != null)
-            {
-                _playing = true;
-                btnPlay.Text = "Pa";
-                tmrSong.Enabled = true;
+            if (_waveOut == null)
+                return;
+
+            _playing = true;
+            btnPlay.Text = "Pa";
+            tmrSong.Enabled = true;
             
-                if (_waveOut.GetPosition() == 0)
-                {
-                    _waveOut.Play();
-                }
-                else
-                {
-                    _waveOut.Resume();
-                }
+            if (_waveOut.GetPosition() == 0)
+            {
+                _waveOut.Play();
+            }
+            else
+            {
+                _waveOut.Resume();
             }
         }
 
         private void Pause()
         {
-            if (_waveOut != null)
-            {
-                _playing = false;
-                btnPlay.Text = "Pl";
-                tmrSong.Enabled = false;
+            if (_waveOut == null)
+                return;
 
-                _waveOut.Pause();
-            }
+            _playing = false;
+            btnPlay.Text = "Pl";
+            tmrSong.Enabled = false;
+
+            _waveOut.Pause();
         }
 
         private void Stop()
         {
-            if (_waveOut != null)
-            {
-                _playing = false;
-                btnPlay.Text = "Pl";
-                tmrSong.Enabled = false;
+            if (_waveOut == null)
+                return;
 
-                _waveOut.Stop();
-                _waveOffsetStream.CurrentTime = new TimeSpan(0);
+            _playing = false;
+            btnPlay.Text = "Pl";
+            tmrSong.Enabled = false;
 
-                trbTime.Value = 0;
+            _waveOut.Stop();
+            _waveOffsetStream.CurrentTime = new TimeSpan(0);
 
-                TimeSpan time = _waveOffsetStream.CurrentTime;
-                lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
-            }
+            trbTime.Value = 0;
+
+            TimeSpan time = _waveOffsetStream.CurrentTime;
+            lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
         }
 
         private void btnLoop_Click(object sender, EventArgs e)
