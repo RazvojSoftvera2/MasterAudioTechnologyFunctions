@@ -44,9 +44,9 @@
             this.lblTrackName.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTrackName.Location = new System.Drawing.Point(6, 8);
             this.lblTrackName.Name = "lblTrackName";
-            this.lblTrackName.Size = new System.Drawing.Size(76, 16);
-            this.lblTrackName.TabIndex = 0;
-            this.lblTrackName.Text = "New track";
+            this.lblTrackName.Size = new System.Drawing.Size(82, 16);
+            this.lblTrackName.TabIndex = 1;
+            this.lblTrackName.Text = "New Track";
             // 
             // pnlInfo
             // 
@@ -55,15 +55,15 @@
             this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlInfo.Location = new System.Drawing.Point(0, 0);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(92, 63);
-            this.pnlInfo.TabIndex = 1;
+            this.pnlInfo.Size = new System.Drawing.Size(92, 61);
+            this.pnlInfo.TabIndex = 0;
             // 
             // btnEdit
             // 
             this.btnEdit.Location = new System.Drawing.Point(9, 28);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 1;
+            this.btnEdit.TabIndex = 0;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -74,7 +74,7 @@
             this.pnlWaveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlWaveViewer.Location = new System.Drawing.Point(92, 0);
             this.pnlWaveViewer.Name = "pnlWaveViewer";
-            this.pnlWaveViewer.Size = new System.Drawing.Size(559, 63);
+            this.pnlWaveViewer.Size = new System.Drawing.Size(557, 61);
             this.pnlWaveViewer.TabIndex = 2;
             // 
             // wvTrack
@@ -86,7 +86,7 @@
             this.wvTrack.PenColor = System.Drawing.Color.White;
             this.wvTrack.PenWidth = 1F;
             this.wvTrack.SamplesPerPixel = 128;
-            this.wvTrack.Size = new System.Drawing.Size(559, 63);
+            this.wvTrack.Size = new System.Drawing.Size(557, 61);
             this.wvTrack.StartPosition = ((long)(0));
             this.wvTrack.TabIndex = 0;
             this.wvTrack.WaveStream = null;
@@ -96,10 +96,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnlWaveViewer);
             this.Controls.Add(this.pnlInfo);
             this.Name = "Track";
-            this.Size = new System.Drawing.Size(651, 63);
+            this.Size = new System.Drawing.Size(649, 61);
             this.pnlInfo.ResumeLayout(false);
             this.pnlInfo.PerformLayout();
             this.pnlWaveViewer.ResumeLayout(false);
@@ -113,6 +114,6 @@
         private System.Windows.Forms.Panel pnlInfo;
         private System.Windows.Forms.Panel pnlWaveViewer;
         private System.Windows.Forms.Button btnEdit;
-        private WaveViewer wvTrack;
+        private MasterAudioTechnologyFunctions.Timeline.WaveViewer wvTrack;
     }
 }

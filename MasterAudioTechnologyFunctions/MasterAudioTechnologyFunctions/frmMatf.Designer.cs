@@ -50,7 +50,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlSong = new System.Windows.Forms.Panel();
-            this.wvTimeline = new MasterAudioTechnologyFunctions.Timeline.WaveViewer();
+            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).BeginInit();
             this.pnlPlay.SuspendLayout();
@@ -103,7 +103,7 @@
             this.trbTime.Dock = System.Windows.Forms.DockStyle.Left;
             this.trbTime.Location = new System.Drawing.Point(149, 0);
             this.trbTime.Name = "trbTime";
-            this.trbTime.Size = new System.Drawing.Size(104, 45);
+            this.trbTime.Size = new System.Drawing.Size(104, 30);
             this.trbTime.TabIndex = 3;
             this.trbTime.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trbTime.Scroll += new System.EventHandler(this.trbTime_Scroll);
@@ -296,26 +296,21 @@
             // pnlSong
             // 
             this.pnlSong.AutoScroll = true;
-            this.pnlSong.Controls.Add(this.wvTimeline);
+            this.pnlSong.Controls.Add(this.timeLine);
             this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSong.Location = new System.Drawing.Point(113, 30);
             this.pnlSong.Name = "pnlSong";
             this.pnlSong.Size = new System.Drawing.Size(496, 318);
             this.pnlSong.TabIndex = 4;
             // 
-            // wvTimeline
+            // timeLine
             // 
-            this.wvTimeline.BackColor = System.Drawing.Color.Gray;
-            this.wvTimeline.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wvTimeline.Location = new System.Drawing.Point(0, 0);
-            this.wvTimeline.Name = "wvTimeline";
-            this.wvTimeline.PenColor = System.Drawing.Color.White;
-            this.wvTimeline.PenWidth = 1F;
-            this.wvTimeline.SamplesPerPixel = 128;
-            this.wvTimeline.Size = new System.Drawing.Size(496, 318);
-            this.wvTimeline.StartPosition = ((long)(0));
-            this.wvTimeline.TabIndex = 0;
-            this.wvTimeline.WaveStream = null;
+            this.timeLine.BackColor = System.Drawing.Color.DarkGray;
+            this.timeLine.Dock = System.Windows.Forms.DockStyle.Top;
+            this.timeLine.Location = new System.Drawing.Point(0, 0);
+            this.timeLine.Name = "timeLine";
+            this.timeLine.Size = new System.Drawing.Size(496, 31);
+            this.timeLine.TabIndex = 0;
             // 
             // frmMatf
             // 
@@ -366,7 +361,7 @@
         private System.Windows.Forms.TrackBar trbVolume;
         private System.Windows.Forms.Timer tmrSong;
         private System.Windows.Forms.Panel pnlSong;
-        private Timeline.WaveViewer wvTimeline;
+        private Timeline.Timeline timeLine;
     }
 }
 

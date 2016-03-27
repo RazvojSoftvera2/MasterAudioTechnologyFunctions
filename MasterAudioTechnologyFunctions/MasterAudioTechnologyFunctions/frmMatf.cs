@@ -8,17 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
-using NAudio.Gui;
 
 namespace MasterAudioTechnologyFunctions
 {
     public partial class frmMatf : Form
     {
-        private string _productName = "Master Audio Technology Functions";
+        public static string SoftwareName = "Master Audio Technology Functions";
         private string _openedFile;
-
         private bool _playing = false;
-        private bool _looping = false;
 
         public frmMatf()
         {
@@ -43,13 +40,14 @@ namespace MasterAudioTechnologyFunctions
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            _playing = false;
-            btnPlay.Text = "Pl";
-            if (_waveOut != null)
-            {
-                _waveOut.Stop();
-                _waveOut.Dispose();
-            }
+            // TODO: Stop current play
+            //_playing = false;
+            //btnPlay.Text = "Pl";
+            //if (_waveOut != null)
+            //{
+            //    _waveOut.Stop();
+            //    _waveOut.Dispose();
+            //}
             
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "MATF projects (.matf)|*.matf";
@@ -58,11 +56,11 @@ namespace MasterAudioTechnologyFunctions
                 return;
 
             _openedFile = dialog.FileName;
-            // Load project
+            // TODO: Load project
 
-            trbTime.Maximum = (int) _waveOffsetStream.Length;
+            //trbTime.Maximum = (int) _waveOffsetStream.Length;
             
-            Text = _productName + " - " + _openedFile;
+            Text = SoftwareName + " - " + _openedFile;
             
             pnlMenu.Hide();
         }
@@ -78,80 +76,35 @@ namespace MasterAudioTechnologyFunctions
         {
             if (_playing)
             {
-                Pause();
+                // TODO: Pause all tracks
+                //Pause();
             }
             else
             {
-                Play();
+                // TODO: Play all tracks
+                //Play();
             }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            Stop();
+            // TODO: Stop all tracks
+            //Stop();
         }
-
-        private void Play()
-        {
-            if (_waveOut == null)
-                return;
-
-            _playing = true;
-            btnPlay.Text = "Pa";
-            tmrSong.Enabled = true;
-            
-            if (_waveOut.GetPosition() == 0)
-            {
-                _waveOut.Play();
-            }
-            else
-            {
-                _waveOut.Resume();
-            }
-        }
-
-        private void Pause()
-        {
-            if (_waveOut == null)
-                return;
-
-            _playing = false;
-            btnPlay.Text = "Pl";
-            tmrSong.Enabled = false;
-
-            _waveOut.Pause();
-        }
-
-        private void Stop()
-        {
-            if (_waveOut == null)
-                return;
-
-            _playing = false;
-            btnPlay.Text = "Pl";
-            tmrSong.Enabled = false;
-
-            _waveOut.Stop();
-            _waveOffsetStream.CurrentTime = new TimeSpan(0);
-
-            trbTime.Value = 0;
-
-            TimeSpan time = _waveOffsetStream.CurrentTime;
-            lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
-        }
-
+        
         private void btnLoop_Click(object sender, EventArgs e)
         {
-            if(_looping)
+            /* TODO: Refactor for Timeline
+            if (_looping)
             {
                 _looping = false;
-                btnLoop.Text = "l";
+                //btnLoop.Text = "l";
             }
             else
             {
                 _looping = true;
-                btnLoop.Text = "L";
-            }
+                //btnLoop.Text = "L";
+            }*/
         }
         #endregion PlayButtons
 
@@ -161,6 +114,7 @@ namespace MasterAudioTechnologyFunctions
             // Set the text of lblTimeElapsed to correct time since the start of the song
             // Time format: mm:ss:milliseconds
 
+            /* TODO: Refactor for Timeline
             if (_waveOut == null)
             {
                 tmrSong.Enabled = false;
@@ -187,25 +141,29 @@ namespace MasterAudioTechnologyFunctions
                 lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
                 trbTime.Value = (int)_waveOffsetStream.Position;
             }
+            */
         }
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {
             // Set the current position of the song to the value of trbTime in milliseconds
-            if(_waveOut != null)
-            {
-                _waveOffsetStream.Position = trbTime.Value;
-            }
+            // TODO: Refactor for Timeline
+            //if (_waveOut != null)
+            //{
+            //    _waveOffsetStream.Position = trbTime.Value;
+            //}
         }
 
         private void trbTime_MouseDown(object sender, MouseEventArgs e)
         {
-            Pause();
+            // TODO: Pause all tracks
+            //Pause();
         }
 
         private void trbTime_MouseUp(object sender, MouseEventArgs e)
         {
-            Play();
+            // TODO: Play all tracks
+            //Play();
         }
     }
 }

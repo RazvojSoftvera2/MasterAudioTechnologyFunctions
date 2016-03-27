@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Timeline\Timeline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\Timeline.Designer.cs">
+      <DependentUpon>Timeline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Timeline\Track.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Timeline\AddNewTrack.Designer.cs">
       <DependentUpon>AddNewTrack.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Timeline\Timeline.resx">
+      <DependentUpon>Timeline.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Timeline\Track.resx">
       <DependentUpon>Track.cs</DependentUpon>
     </EmbeddedResource>

@@ -19,6 +19,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public AddNewTrack()
         {
             InitializeComponent();
+            cdColorPicker.Color = Color.White;
         }
 
         public AddNewTrack(string name, string fileName, Color color)
@@ -30,6 +31,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             TrackColor = color;
 
             cdColorPicker.Color = TrackColor;
+            tbName.Text = TrackName;
             Text = "Edit Track";
         }
 
@@ -41,7 +43,21 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(tbName.Text.Trim()))
+            {
+                MessageBox.Show("Track name cannot be empty.", frmMatf.SoftwareName);
+                tbName.Focus();
+                return;
+            }
+
+            if (String.IsNullOrEmpty(TrackFileName))
+            {
+                MessageBox.Show("You must open a sound file for the track.", frmMatf.SoftwareName);
+                return;
+            }
+
             TrackName = tbName.Text.Trim();
+            TrackColor = cdColorPicker.Color;
 
             DialogResult = DialogResult.OK;
             Close();
