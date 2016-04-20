@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnMenu = new System.Windows.Forms.Button();
             this.pnlTopBar = new System.Windows.Forms.Panel();
             this.lblTimeElapsed = new System.Windows.Forms.Label();
@@ -48,7 +47,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlSong = new System.Windows.Forms.Panel();
             this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
@@ -288,11 +286,6 @@
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = true;
             // 
-            // tmrSong
-            // 
-            this.tmrSong.Interval = 1;
-            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
-            // 
             // pnlSong
             // 
             this.pnlSong.AutoScroll = true;
@@ -359,7 +352,6 @@
         private System.Windows.Forms.TrackBar trbTime;
         private System.Windows.Forms.Panel pnlVolume;
         private System.Windows.Forms.TrackBar trbVolume;
-        private System.Windows.Forms.Timer tmrSong;
         private System.Windows.Forms.Panel pnlSong;
         private Timeline.Timeline timeLine;
     }
