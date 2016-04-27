@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.pnlTracks = new System.Windows.Forms.Panel();
-            this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,10 +61,6 @@
             this.pnlTracks.Size = new System.Drawing.Size(477, 1);
             this.pnlTracks.TabIndex = 0;
             // 
-            // tmrSong
-            // 
-            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
-            // 
             // Timeline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,6 +80,5 @@
         private System.Windows.Forms.Button btnAddTrack;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Panel pnlTracks;
-        private System.Windows.Forms.Timer tmrSong;
     }
 }

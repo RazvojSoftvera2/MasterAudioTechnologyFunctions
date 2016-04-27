@@ -8,26 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
-using MasterAudioTechnologyFunctions.Timeline;
 
 namespace MasterAudioTechnologyFunctions
 {
     public partial class frmMatf : Form
     {
-        
         public static string SoftwareName = "Master Audio Technology Functions";
         private string _openedFile;
         private bool _playing = false;
-        
+
         public frmMatf()
         {
             InitializeComponent();
-            pnlMenu.Hide();
-        }
 
-        public void SetTime(long time)
-        {
-            lblTimeElapsed.Text = time + "";
+            pnlMenu.Hide();
         }
 
         #region Menu
@@ -84,14 +78,11 @@ namespace MasterAudioTechnologyFunctions
             {
                 // TODO: Pause all tracks
                 //Pause();
-                _playing = false;
             }
             else
             {
                 // TODO: Play all tracks
                 //Play();
-                _playing = true;
-                timeLine.Play();
             }
         }
 
@@ -117,9 +108,41 @@ namespace MasterAudioTechnologyFunctions
         }
         #endregion PlayButtons
 
-   
+        private void tmrSong_Tick(object sender, EventArgs e)
+        {
+            // Set trbTime to the number of miliseconds that since the start of the song
+            // Set the text of lblTimeElapsed to correct time since the start of the song
+            // Time format: mm:ss:milliseconds
+
+            /* TODO: Refactor for Timeline
+            if (_waveOut == null)
+            {
+                tmrSong.Enabled = false;
+                return;
+            }
+
+            // Song has ended
+            if(_waveOffsetStream.Position >= _waveOffsetStream.Length)
+            {
+                Stop();
+                tmrSong.Enabled = false;
+
+                if(_looping)
+                {
+                    Play();
+                    tmrSong.Enabled = true;
+                }
+            }
             
- 
+            // Song is still playing
+            if(_waveOffsetStream.Position < _waveOffsetStream.Length)
+            {
+                TimeSpan time = _waveOffsetStream.CurrentTime;
+                lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
+                trbTime.Value = (int)_waveOffsetStream.Position;
+            }
+            */
+        }
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {

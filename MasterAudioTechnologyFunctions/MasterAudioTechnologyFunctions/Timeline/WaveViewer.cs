@@ -13,13 +13,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
     /// </summary>
     public class WaveViewer : System.Windows.Forms.UserControl
     {
-
-
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
-        public int WaveLength { get; set; }
-
-        
 
         /// <summary> 
         /// Required designer variable.
@@ -116,11 +111,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (waveStream != null)
             {
-                waveStream.Position =0;
+                waveStream.Position = 0;
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
                 waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
-                
 
                 using (Pen linePen = new Pen(PenColor, PenWidth))
                 {
@@ -152,9 +146,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveStream == null)
                 return;
 
-           // Width = WaveLength;
             int samples = (int)(WaveStream.Length / bytesPerSample);
-            //startPosition = 0;
+            startPosition = 0;
             SamplesPerPixel = samples / Width;
         }
 
@@ -167,7 +160,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            
             FitToScreen();
         }
 
@@ -203,9 +195,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveStream == null)
                 return;
 
-            Track p = (Track)Parent.Parent;
-            p.RemoveWave(this);
-            
             if (mouseDrag && e.Button == MouseButtons.Left)
             {
                 mouseDrag = false;
