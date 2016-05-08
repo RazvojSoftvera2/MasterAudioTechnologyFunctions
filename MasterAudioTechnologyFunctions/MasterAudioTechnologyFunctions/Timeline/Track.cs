@@ -17,39 +17,88 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public string TrackFileName { get; set; }
         public Color TrackColor { get; set; }
 
-        private bool _playing = false;
+        public int TrackLen { get; set; }
 
-        private WaveOut _waveOut;
-        private WaveOffsetStream _waveOffsetStream;
-        private WaveFileReader _waveFileReader;
+        public bool SelectMode = true;
+        public bool EditMode = false;
+        public bool DeleteMode = false;
 
-        public Track()
+        public List<WaveViewer> Tracks;
+        public List<long> Times;
+
+        public bool Playing = false;
+
+        public WaveOut WaveOut;
+        public WaveOffsetStream WaveOffsetStream;
+        public WaveFileReader WaveFileReader;
+
+
+
+        private Timeline _timeline;
+
+        public Track(Timeline tl)
         {
             InitializeComponent();
+            _timeline = tl;
+            Tracks = new List<WaveViewer>();
+            Times = new List<long>();
+     
         }
 
-        public Track(string name, string fileName, Color color)
+        public Track(string name, string fileName, Color color, Timeline tl)
         {
             InitializeComponent();
-            InitializeTrack(name, fileName, color);
+            InitializeTrack(name, fileName, color, tl);
+            Tracks = new List<WaveViewer>();
+            Times = new List<long>();
+       
+     
         }
 
-        private void InitializeTrack(string name, string fileName, Color color)
+        public long getTrackLength()
+        {
+            return WaveOffsetStream.Length;
+        }
+
+        private void InitializeTrack(string name, string fileName, Color color, Timeline tl)
         {
             TrackName = name;
             TrackFileName = fileName;
             TrackColor = color;
 
-            _waveOut = new WaveOut();
-            _waveFileReader = new WaveFileReader(TrackFileName);
-            _waveOffsetStream = new WaveOffsetStream(_waveFileReader);
-            _waveOut.Init(_waveOffsetStream);
+
+            if (tl!=null)
+            {
+                _timeline = tl;
+            }
+
+            WaveOut = new WaveOut();
+            WaveFileReader = new WaveFileReader(TrackFileName);
+            WaveOffsetStream = new WaveOffsetStream(WaveFileReader);
+            WaveOut.Init(WaveOffsetStream);
 
             lblTrackName.Text = TrackName;
-            wvTrack.WaveStream = _waveFileReader;
-            wvTrack.PenColor = TrackColor;
 
-            wvTrack.FitToScreen();
+            TrackLen = (int)WaveOffsetStream.Length / 10000;
+
+        }
+
+        public void addSound(int startPosition)
+        {
+            WaveViewer wvTrack = new WaveViewer();
+           
+            wvTrack.WaveStream = WaveFileReader;
+            wvTrack.PenColor = TrackColor;
+            //TODO: Replace 10000 with something concrete 
+            wvTrack.Height = pnlWaveViewer.Height;
+            wvTrack.Width = TrackLen;
+          //  wvTrack.FitToScreen();
+
+            pnlWaveViewer.Controls.Add(wvTrack);
+            wvTrack.Location = new Point(startPosition, 0);
+            
+            Tracks.Add(wvTrack);
+            Times.Add(startPosition);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -58,56 +107,118 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (editTrack.ShowDialog() != DialogResult.OK)
                 return;
 
-            InitializeTrack(editTrack.TrackName, editTrack.TrackFileName, editTrack.TrackColor);
+            InitializeTrack(editTrack.TrackName, editTrack.TrackFileName, editTrack.TrackColor, null);
         }
         
-        private void Play()
+        public void Update(long globalTime)
         {
-            if (_waveOut == null)
+            foreach(long l in Times)
+            {
+                if(l==globalTime)
+                {
+                    Play();
+                }
+            }
+        }
+
+        public void Play()
+        {
+            if (WaveOut == null)
                 return;
 
-            _playing = true;
+            Playing = true;
             //btnPlay.Text = "Pa";
             //tmrSong.Enabled = true;
 
-            if (_waveOut.GetPosition() == 0)
+            if (WaveOut.GetPosition() == 0)
             {
-                _waveOut.Play();
+                WaveOut.Play();
             }
             else
             {
-                _waveOut.Resume();
+                WaveOut.Resume();
             }
         }
 
-        private void Pause()
+        public void Pause()
         {
-            if (_waveOut == null)
+            if (WaveOut == null)
                 return;
 
-            _playing = false;
+            Playing = false;
             //btnPlay.Text = "Pl";
             //tmrSong.Enabled = false;
 
-            _waveOut.Pause();
+            WaveOut.Pause();
         }
 
-        private void Stop()
+        public void Stop()
         {
-            if (_waveOut == null)
+            if (WaveOut == null)
                 return;
 
-            _playing = false;
+            Playing = false;
             //btnPlay.Text = "Pl";
             //tmrSong.Enabled = false;
 
-            _waveOut.Stop();
-            _waveOffsetStream.CurrentTime = new TimeSpan(0);
+            WaveOut.Stop();
+            WaveOffsetStream.CurrentTime = new TimeSpan(0);
 
             //trbTime.Value = 0;
 
-            TimeSpan time = _waveOffsetStream.CurrentTime;
+            TimeSpan time = WaveOffsetStream.CurrentTime;
             //lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
+        }
+
+        private void BtnX_Click(object sender, EventArgs e)
+        {
+            _timeline.removeTrack(this);
+        }
+
+        private void BtnSelect_Click(object sender, EventArgs e)
+        {
+            SelectMode = true;
+            EditMode = false;
+            DeleteMode = false;
+        }
+
+        private void EditBtn_Click(object sender, EventArgs e)
+        {
+            SelectMode = false;
+            EditMode = true;
+            DeleteMode = false;
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            SelectMode = false;
+            EditMode = false;
+            DeleteMode = true;
+        }
+
+        public void RemoveWave(WaveViewer wv)
+        {
+            if (DeleteMode)
+            {
+                pnlWaveViewer.Controls.Remove(wv);
+                int i = Tracks.IndexOf(wv);
+                Tracks.RemoveAt(i);
+                Times.RemoveAt(i);
+            }
+        }
+
+        private void pnlWaveViewer_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(e.Button==MouseButtons.Left)
+            {
+                if(EditMode)
+                {
+                    int start = e.X;
+                    addSound(start);
+                }
+                
+
+            }
         }
     }
 }
