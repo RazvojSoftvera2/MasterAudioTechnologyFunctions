@@ -26,7 +26,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public List<WaveViewer> Tracks;
         public List<long> Times;
 
-        public bool Playing = false;
+        // public bool Playing = false;
+        public List<bool> Playing;
 
         public WaveOut WaveOut;
         public WaveOffsetStream WaveOffsetStream;
@@ -42,6 +43,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _timeline = tl;
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
+            Playing = new List<bool>();
      
         }
 
@@ -51,7 +53,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             InitializeTrack(name, fileName, color, tl);
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
-       
+            Playing = new List<bool>();
      
         }
 
@@ -99,6 +101,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             
             Tracks.Add(wvTrack);
             Times.Add(startPosition);
+            Playing.Add(false);
+            
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -126,7 +130,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveOut == null)
                 return;
 
-            Playing = true;
+            //Playing = true;
             //btnPlay.Text = "Pa";
             //tmrSong.Enabled = true;
 
@@ -145,7 +149,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveOut == null)
                 return;
 
-            Playing = false;
+            //Playing = false;
             //btnPlay.Text = "Pl";
             //tmrSong.Enabled = false;
 
@@ -157,7 +161,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveOut == null)
                 return;
 
-            Playing = false;
+            //Playing = false;
             //btnPlay.Text = "Pl";
             //tmrSong.Enabled = false;
 
@@ -204,6 +208,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 int i = Tracks.IndexOf(wv);
                 Tracks.RemoveAt(i);
                 Times.RemoveAt(i);
+                Playing.RemoveAt(i);
             }
         }
 
@@ -220,5 +225,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             }
         }
+
+
     }
 }

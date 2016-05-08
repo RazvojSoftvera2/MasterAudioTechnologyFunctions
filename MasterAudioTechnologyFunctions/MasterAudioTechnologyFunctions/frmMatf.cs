@@ -18,7 +18,8 @@ namespace MasterAudioTechnologyFunctions
         public static string SoftwareName = "Master Audio Technology Functions";
         private string _openedFile;
         private bool _playing = false;
-        
+        public long Timer = 0;
+
         public frmMatf()
         {
             InitializeComponent();
@@ -80,25 +81,27 @@ namespace MasterAudioTechnologyFunctions
         #region PlayButtons
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (_playing)
-            {
+          //  if (_playing)
+          //  {
                 // TODO: Pause all tracks
                 //Pause();
-                _playing = false;
-            }
-            else
-            {
+          //      _playing = false;
+         //   }
+        //    else
+        //    {
                 // TODO: Play all tracks
                 //Play();
-                _playing = true;
+         //       _playing = true;
                 timeLine.Play();
-            }
+        //    }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             // TODO: Stop all tracks
-            //Stop();
+            timeLine.Stop();
+            
+
         }
         
         private void btnLoop_Click(object sender, EventArgs e)

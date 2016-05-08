@@ -14,7 +14,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
     {
         private List<Track> _tracks;
         private bool _looping = false;
-        public long Timer = 0;
+        
         
         public Timeline()
         {
@@ -53,6 +53,46 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             //TODO: Refactor for Timeline
             
+            
+            foreach(Track t in _tracks)
+            {
+                if (t.WaveOut == null)
+                {
+                    tmrSong.Enabled = false;
+                    return;
+                }
+                frmMatf parent = (frmMatf)Parent.Parent;
+                if (t.Tracks.Count != 0)
+                {
+                    for (int i = 0; i < t.Tracks.Count; i++)
+                    {
+                        long time = t.Times.ElementAt(i);
+
+                        if (!t.Playing[i] && parent.Timer >= time && parent.Timer <= time + t.TrackLen)
+                        {
+                            //Console.Out.WriteLine("TEST1");
+                            t.Playing[i] = true;
+                            t.Play();
+                        }
+
+                        if (t.Playing[i] && parent.Timer > time + t.TrackLen)
+                        {
+                            //Console.Out.WriteLine("TEST2");
+                            t.Stop();
+                            t.Playing[i] = false;
+                        }
+                    }
+                }
+                
+                //Treba prebaciti da frmMatf povecava Timer kako se ne bi
+                //svaki put povecavao za onoliko koliko ima traka
+                parent.Timer += 1;
+                parent.SetTime(parent.Timer);
+            }
+
+       
+
+/*
             foreach(Track t in _tracks)
             {
                 if (t.WaveOut == null)
@@ -65,14 +105,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 {
                     if(!t.Playing && Timer >= time && Timer <= time+t.TrackLen)
                     {
-                        Console.Out.WriteLine("TEST1");
+                        //Console.Out.WriteLine("TEST1");
                         t.Playing = true;
                         t.Play();
                     }
 
                     if(t.Playing && Timer > time+t.TrackLen)
                     {
-                        Console.Out.WriteLine("TEST2");
+                        //Console.Out.WriteLine("TEST2");
                         t.Stop();
                         t.Playing = false;
                     }
@@ -83,6 +123,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 frmMatf parent = (frmMatf)Parent.Parent;
                 parent.SetTime(Timer);
 
+              
                 // Song has ended
                 //if (t.WaveOffsetStream.Position >= t.WaveOffsetStream.Length)
                 //{
@@ -106,13 +147,55 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 //}
             }
 
-
+    */
            
 
         }
 
+        public void Stop()
+        {
+
+            tmrSong.Enabled = false;
+            
+            frmMatf parent = (frmMatf)Parent.Parent;
+            parent.Timer = 0;
+            parent.SetTime(parent.Timer);
+
+            foreach (Track t in _tracks)
+            {
+                for (int i = 0; i < t.Tracks.Count; i++)
+                {
+                    if (t.Playing[i])
+                    {
+                        t.Stop();
+                        t.Playing[i] = false;
+                    }
+                }
+            }
+           
+
+            /*
+            foreach(Track t in _tracks)
+            {
+                if(t.Playing)
+                {
+                    t.Stop();
+                    t.Playing = false;
+                }
+            }
+            */
+        }
+
         public void Play()
         {
+            //Iz nekog razloga mora svaka od traka jednom da "odsvira" pre nego sto
+            // moze da stvarno pusti ton
+            foreach (Track t in _tracks)
+            {
+                t.Play();
+                t.Stop();
+
+            }
             tmrSong.Enabled = true;
             
         }
