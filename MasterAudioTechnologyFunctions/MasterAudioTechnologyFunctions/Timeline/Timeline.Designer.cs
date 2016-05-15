@@ -29,22 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.pnlTracks = new System.Windows.Forms.Panel();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
+            this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnAddTrack
-            // 
-            this.btnAddTrack.Location = new System.Drawing.Point(3, 3);
-            this.btnAddTrack.Name = "btnAddTrack";
-            this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
-            this.btnAddTrack.TabIndex = 0;
-            this.btnAddTrack.Text = "+";
-            this.btnAddTrack.UseVisualStyleBackColor = true;
-            this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
             // 
             // pnlBottom
             // 
@@ -67,6 +57,17 @@
             // 
             this.tmrSong.Interval = 10;
             this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
+            // 
+            // btnAddTrack
+            // 
+            this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.plus;
+            this.btnAddTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddTrack.Location = new System.Drawing.Point(3, 3);
+            this.btnAddTrack.Name = "btnAddTrack";
+            this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
+            this.btnAddTrack.TabIndex = 0;
+            this.btnAddTrack.UseVisualStyleBackColor = true;
+            this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
             // 
             // Timeline
             // 

@@ -145,15 +145,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public void ChangeVolume(float change)
         {
             float _masterVolumeOld = _masterVolume;
-            _masterVolume = change;
+            if (change == 0)
+                _masterVolume = (float) 0.01;
+            else
+                _masterVolume = change;
+
             foreach (var track in _tracks)
             {
-                if (_masterVolumeOld == 0.0)
-                {
-                    track.TrackVolume = _masterVolume;
-                }
-                else
-                    track.TrackVolume *= _masterVolume/_masterVolumeOld;
+                track.TrackVolume *= _masterVolume/_masterVolumeOld;
 
                 if (track.TrackVolume > 1)
                 {

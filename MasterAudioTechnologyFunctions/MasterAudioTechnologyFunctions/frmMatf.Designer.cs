@@ -104,7 +104,7 @@
             this.trbTime.Dock = System.Windows.Forms.DockStyle.Left;
             this.trbTime.Location = new System.Drawing.Point(149, 0);
             this.trbTime.Name = "trbTime";
-            this.trbTime.Size = new System.Drawing.Size(104, 45);
+            this.trbTime.Size = new System.Drawing.Size(104, 30);
             this.trbTime.TabIndex = 3;
             this.trbTime.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trbTime.Scroll += new System.EventHandler(this.trbTime_Scroll);
@@ -297,7 +297,7 @@
             // 
             // btnLoop
             // 
-            this.btnLoop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.loop;
+            this.btnLoop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.loop1;
             this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
