@@ -148,8 +148,20 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _masterVolume = change;
             foreach (var track in _tracks)
             {
-                track.TrackVolume *= _masterVolume/_masterVolumeOld;
-                track.WaveOut.Volume = track.TrackVolume;
+                if (_masterVolumeOld == 0.0)
+                {
+                    track.TrackVolume = _masterVolume;
+                }
+                else
+                    track.TrackVolume *= _masterVolume/_masterVolumeOld;
+
+                if (track.TrackVolume > 1)
+                {
+                    track.WaveOut.Volume = 1;
+                    track.TrackVolume = 1;
+                }
+                else 
+                    track.WaveOut.Volume = track.TrackVolume;
             }
         }
     }
