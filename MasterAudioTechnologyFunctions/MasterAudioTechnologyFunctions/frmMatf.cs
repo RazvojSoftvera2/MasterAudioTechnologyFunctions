@@ -28,6 +28,8 @@ namespace MasterAudioTechnologyFunctions
 
         public void SetTime(long time)
         {
+            // TODO: Convert time to hh:mm:ss:fff
+            // Curently presented in number of miliseconds elapsed
             lblTimeElapsed.Text = time + "";
         }
 

@@ -13,13 +13,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
     /// </summary>
     public class WaveViewer : System.Windows.Forms.UserControl
     {
-
-
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
         public int WaveLength { get; set; }
-
-        
 
         /// <summary> 
         /// Required designer variable.
@@ -120,8 +116,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
                 waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
-                
-
+        
                 using (Pen linePen = new Pen(PenColor, PenWidth))
                 {
                     for (float x = e.ClipRectangle.X; x < e.ClipRectangle.Right; x += 1)
@@ -158,27 +153,13 @@ namespace MasterAudioTechnologyFunctions.Timeline
             SamplesPerPixel = samples / Width;
         }
 
-        public void Zoom(int leftSample, int rightSample)
-        {
-            startPosition = leftSample * bytesPerSample;
-            SamplesPerPixel = (rightSample - leftSample) / Width;
-        }
-
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
             
             FitToScreen();
         }
-
-        private void DrawVerticalLine(int x)
-        {
-            ControlPaint.DrawReversibleLine(PointToScreen(new Point(x, 0)), PointToScreen(new Point(x, Height)), Color.Gray);
-            //ControlPaint.DrawReversibleFrame(new Rectangle(PointToScreen(new Point(startPos.X, 0)), 
-            //                                               new Size(mousePos.X - startPos.X, Height)), 
-            //                                 Color.Black, FrameStyle.Thick);
-        }
-
+        
         private Point mousePos, startPos;
         private bool mouseDrag = false;
 
@@ -192,7 +173,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 startPos = e.Location;
                 mousePos = e.Location;
                 mouseDrag = true;
-                DrawVerticalLine(e.X);
             }
 
             base.OnMouseDown(e);
@@ -204,27 +184,31 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 return;
 
             Track p = (Track)Parent.Parent;
-            p.RemoveWave(this);
-            
-            if (mouseDrag && e.Button == MouseButtons.Left)
+
+            switch (Timeline.TrackMode)
             {
-                mouseDrag = false;
-                DrawVerticalLine(startPos.X);
+                case Timeline.TrackEditMode.Delete:
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        p.RemoveWave(this);
+                    }
+                    break;
+                case Timeline.TrackEditMode.Select:
+                    if (mouseDrag && e.Button == MouseButtons.Left)
+                    {
+                        mouseDrag = false;
+                        
+                        Point oldLocation = Location;
 
-                if (mousePos.X == startPos.X)
-                    return;
-
-                DrawVerticalLine(mousePos.X);
-
-                int leftSample = (int)(StartPosition / bytesPerSample + samplesPerPixel * Math.Min(startPos.X, mousePos.X));
-                int rightSample = (int)(StartPosition / bytesPerSample + samplesPerPixel * Math.Max(startPos.X, mousePos.X));
-
-                Zoom(leftSample, rightSample);
+                        if (mousePos.X != startPos.X)
+                        {
+                            Location = new Point(oldLocation.X + e.X - startPos.X, oldLocation.Y);
+                            p.MoveWave(this);
+                        }
+                    }
+                    break;
             }
-
-            if (e.Button == MouseButtons.Middle)
-                FitToScreen();
-
+            
             base.OnMouseDown(e);
         }
 
@@ -233,39 +217,21 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveStream == null)
                 return;
 
-            if (mouseDrag)
+            if (mouseDrag && Timeline.TrackMode == Timeline.TrackEditMode.Select)
             {
-                DrawVerticalLine(e.X);
+                Point oldLocation = Location;
+
                 if (mousePos.X != startPos.X)
-                    DrawVerticalLine(mousePos.X);
+                {
+                    Location = new Point(oldLocation.X + e.X - startPos.X, oldLocation.Y);
+                    Track p = (Track)Parent.Parent;
+                    p.MoveWave(this);
+                }
+
                 mousePos = e.Location;
             }
 
             base.OnMouseDown(e);
-        }
-
-        protected override void OnMouseWheel(MouseEventArgs e)
-        {
-            if (WaveStream == null)
-                return;
-
-            int leftSample;
-            int rightSample;
-
-            if (e.Delta > 0)
-            {
-                leftSample = (int)(StartPosition / bytesPerSample + samplesPerPixel * 1);
-                rightSample = (int)(StartPosition / bytesPerSample + samplesPerPixel * 5);
-            }
-            else
-            {
-                leftSample = (int)(StartPosition / bytesPerSample + samplesPerPixel * Math.Min(startPos.X, mousePos.X));
-                rightSample = (int)(StartPosition / bytesPerSample + samplesPerPixel * Math.Max(startPos.X, mousePos.X));
-            }
-
-            Zoom(leftSample, rightSample);
-
-            base.OnMouseWheel(e);
         }
 
         #region Component Designer generated code
