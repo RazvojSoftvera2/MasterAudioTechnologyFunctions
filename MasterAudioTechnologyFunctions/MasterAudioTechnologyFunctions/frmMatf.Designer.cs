@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnMenu = new System.Windows.Forms.Button();
             this.pnlTopBar = new System.Windows.Forms.Panel();
             this.lblTimeElapsed = new System.Windows.Forms.Label();
@@ -48,8 +47,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlSong = new System.Windows.Forms.Panel();
+            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).BeginInit();
             this.pnlPlay.SuspendLayout();
@@ -57,6 +56,7 @@
             this.pnlVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             this.pnlMenu.SuspendLayout();
+            this.pnlSong.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnMenu
@@ -286,19 +286,24 @@
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = true;
             // 
-            // tmrSong
-            // 
-            this.tmrSong.Interval = 1;
-            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
-            // 
             // pnlSong
             // 
             this.pnlSong.AutoScroll = true;
+            this.pnlSong.Controls.Add(this.timeLine);
             this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSong.Location = new System.Drawing.Point(113, 30);
             this.pnlSong.Name = "pnlSong";
             this.pnlSong.Size = new System.Drawing.Size(496, 318);
             this.pnlSong.TabIndex = 4;
+            // 
+            // timeLine
+            // 
+            this.timeLine.BackColor = System.Drawing.Color.DarkGray;
+            this.timeLine.Dock = System.Windows.Forms.DockStyle.Top;
+            this.timeLine.Location = new System.Drawing.Point(0, 0);
+            this.timeLine.Name = "timeLine";
+            this.timeLine.Size = new System.Drawing.Size(496, 31);
+            this.timeLine.TabIndex = 0;
             // 
             // frmMatf
             // 
@@ -310,7 +315,6 @@
             this.Controls.Add(this.pnlSong);
             this.Controls.Add(this.pnlSideBar);
             this.Controls.Add(this.pnlTopBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frmMatf";
             this.Text = "Master Audio Technology Functions";
             this.pnlTopBar.ResumeLayout(false);
@@ -322,6 +326,7 @@
             this.pnlVolume.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
             this.pnlMenu.ResumeLayout(false);
+            this.pnlSong.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -347,8 +352,8 @@
         private System.Windows.Forms.TrackBar trbTime;
         private System.Windows.Forms.Panel pnlVolume;
         private System.Windows.Forms.TrackBar trbVolume;
-        private System.Windows.Forms.Timer tmrSong;
         private System.Windows.Forms.Panel pnlSong;
+        private Timeline.Timeline timeLine;
     }
 }
 
