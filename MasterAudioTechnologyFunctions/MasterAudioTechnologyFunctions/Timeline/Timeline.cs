@@ -14,6 +14,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
     {
         private List<Track> _tracks;
         private bool _looping = false;
+        private float _masterVolume = (float)0.7;
         
         
         public Timeline()
@@ -198,6 +199,17 @@ namespace MasterAudioTechnologyFunctions.Timeline
             }
             tmrSong.Enabled = true;
             
+        }
+
+        public void ChangeVolume(float change)
+        {
+            float _masterVolumeOld = _masterVolume;
+            _masterVolume = change;
+            foreach (var track in _tracks)
+            {
+                track.TrackVolume *= _masterVolume/_masterVolumeOld;
+                track.WaveOut.Volume = track.TrackVolume;
+            }
         }
     }
 }

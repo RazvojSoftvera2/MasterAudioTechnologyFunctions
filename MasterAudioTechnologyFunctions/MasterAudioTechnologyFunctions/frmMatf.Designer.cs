@@ -49,6 +49,8 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.pnlSong = new System.Windows.Forms.Panel();
             this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
+            this.volumeBar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).BeginInit();
             this.pnlPlay.SuspendLayout();
@@ -57,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             this.pnlMenu.SuspendLayout();
             this.pnlSong.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnMenu
@@ -159,8 +162,11 @@
             // 
             this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlSideBar.Controls.Add(this.label1);
+            this.pnlSideBar.Controls.Add(this.volumeBar);
             this.pnlSideBar.Controls.Add(this.pnlVolume);
             this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlSideBar.Location = new System.Drawing.Point(0, 30);
             this.pnlSideBar.Name = "pnlSideBar";
             this.pnlSideBar.Size = new System.Drawing.Size(113, 318);
@@ -305,6 +311,27 @@
             this.timeLine.Size = new System.Drawing.Size(496, 31);
             this.timeLine.TabIndex = 0;
             // 
+            // volumeBar
+            // 
+            this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.volumeBar.Location = new System.Drawing.Point(3, 193);
+            this.volumeBar.Name = "volumeBar";
+            this.volumeBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.volumeBar.Size = new System.Drawing.Size(104, 45);
+            this.volumeBar.TabIndex = 5;
+            this.volumeBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.volumeBar.Value = 7;
+            this.volumeBar.Scroll += new System.EventHandler(this.volumeBar_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 177);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Master Volume";
+            // 
             // frmMatf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,11 +349,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).EndInit();
             this.pnlPlay.ResumeLayout(false);
             this.pnlSideBar.ResumeLayout(false);
+            this.pnlSideBar.PerformLayout();
             this.pnlVolume.ResumeLayout(false);
             this.pnlVolume.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
             this.pnlMenu.ResumeLayout(false);
             this.pnlSong.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -354,6 +383,8 @@
         private System.Windows.Forms.TrackBar trbVolume;
         private System.Windows.Forms.Panel pnlSong;
         private Timeline.Timeline timeLine;
+        private System.Windows.Forms.TrackBar volumeBar;
+        private System.Windows.Forms.Label label1;
     }
 }
 

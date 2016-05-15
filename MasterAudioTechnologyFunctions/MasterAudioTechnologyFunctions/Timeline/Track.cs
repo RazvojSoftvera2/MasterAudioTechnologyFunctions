@@ -32,6 +32,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public WaveOut WaveOut;
         public WaveOffsetStream WaveOffsetStream;
         public WaveFileReader WaveFileReader;
+        public float TrackVolume = (float)0.7;
 
 
 
@@ -44,7 +45,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
-     
         }
 
         public Track(string name, string fileName, Color color, Timeline tl)
@@ -54,7 +54,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
-     
         }
 
         public long getTrackLength()
@@ -129,6 +128,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (WaveOut == null)
                 return;
+
+            WaveOut.Volume = TrackVolume;
 
             //Playing = true;
             //btnPlay.Text = "Pa";
