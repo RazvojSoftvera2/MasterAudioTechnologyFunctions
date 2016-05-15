@@ -14,6 +14,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
     {
         private List<Track> _tracks;
         private bool _looping = false;
+        private float _masterVolume = (float)0.7;
 
         public enum TrackEditMode
         {
@@ -23,7 +24,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         };
 
         public static TrackEditMode TrackMode = TrackEditMode.Select;
-        
+
         public Timeline()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 return;
 
             Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
-            
+
             _tracks.Add(newTrack);
             newTrack.Dock = DockStyle.Top;
             pnlTracks.Controls.Add(newTrack);
@@ -105,7 +106,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
 
             tmrSong.Enabled = false;
-            
+
             frmMatf parent = (frmMatf)Parent.Parent;
             parent.Timer = 0;
             parent.SetTime(parent.Timer);
@@ -133,12 +134,34 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 t.Stop();
             }
 
-            tmrSong.Enabled = true;            
+            tmrSong.Enabled = true;
         }
 
         private void DrawVerticalLine(int x)
         {
             ControlPaint.DrawReversibleLine(PointToScreen(new Point(x, 0)), PointToScreen(new Point(x, Height)), Color.Gray);
+        }
+
+        public void ChangeVolume(float change)
+        {
+            float _masterVolumeOld = _masterVolume;
+            if (change == 0)
+                _masterVolume = (float) 0.01;
+            else
+                _masterVolume = change;
+
+            foreach (var track in _tracks)
+            {
+                track.TrackVolume *= _masterVolume/_masterVolumeOld;
+
+                if (track.TrackVolume > 1)
+                {
+                    track.WaveOut.Volume = 1;
+                    track.TrackVolume = 1;
+                }
+                else 
+                    track.WaveOut.Volume = track.TrackVolume;
+            }
         }
     }
 }

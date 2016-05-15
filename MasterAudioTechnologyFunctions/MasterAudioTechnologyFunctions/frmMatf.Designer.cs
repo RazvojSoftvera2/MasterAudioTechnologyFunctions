@@ -33,10 +33,9 @@
             this.lblTimeElapsed = new System.Windows.Forms.Label();
             this.trbTime = new System.Windows.Forms.TrackBar();
             this.pnlPlay = new System.Windows.Forms.Panel();
-            this.btnLoop = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
             this.pnlSideBar = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.volumeBar = new System.Windows.Forms.TrackBar();
             this.pnlVolume = new System.Windows.Forms.Panel();
             this.trbVolume = new System.Windows.Forms.TrackBar();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -48,11 +47,15 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.pnlSong = new System.Windows.Forms.Panel();
+            this.btnLoop = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).BeginInit();
             this.pnlPlay.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).BeginInit();
             this.pnlVolume.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             this.pnlMenu.SuspendLayout();
@@ -119,52 +122,40 @@
             this.pnlPlay.Size = new System.Drawing.Size(119, 30);
             this.pnlPlay.TabIndex = 2;
             // 
-            // btnLoop
-            // 
-            this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoop.Location = new System.Drawing.Point(60, 0);
-            this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(30, 30);
-            this.btnLoop.TabIndex = 1;
-            this.btnLoop.Text = "l";
-            this.btnLoop.UseVisualStyleBackColor = true;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
-            // 
-            // btnStop
-            // 
-            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(30, 0);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(30, 30);
-            this.btnStop.TabIndex = 3;
-            this.btnStop.Text = "St";
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlay.Location = new System.Drawing.Point(0, 0);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(30, 30);
-            this.btnPlay.TabIndex = 2;
-            this.btnPlay.Text = "Pl";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-            // 
             // pnlSideBar
             // 
             this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlSideBar.Controls.Add(this.label1);
+            this.pnlSideBar.Controls.Add(this.volumeBar);
             this.pnlSideBar.Controls.Add(this.pnlVolume);
             this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlSideBar.Location = new System.Drawing.Point(0, 30);
             this.pnlSideBar.Name = "pnlSideBar";
             this.pnlSideBar.Size = new System.Drawing.Size(113, 318);
             this.pnlSideBar.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 177);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Master Volume";
+            // 
+            // volumeBar
+            // 
+            this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.volumeBar.Location = new System.Drawing.Point(3, 193);
+            this.volumeBar.Name = "volumeBar";
+            this.volumeBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.volumeBar.Size = new System.Drawing.Size(104, 45);
+            this.volumeBar.TabIndex = 5;
+            this.volumeBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.volumeBar.Value = 7;
+            this.volumeBar.Scroll += new System.EventHandler(this.volumeBar_Scroll);
             // 
             // pnlVolume
             // 
@@ -200,6 +191,7 @@
             // 
             // btnExit
             // 
+            this.btnExit.BackColor = System.Drawing.Color.DarkGray;
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnExit.Location = new System.Drawing.Point(0, 138);
             this.btnExit.Name = "btnExit";
@@ -208,11 +200,12 @@
             this.btnExit.Text = "Exit";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnExport
             // 
+            this.btnExport.BackColor = System.Drawing.Color.DarkGray;
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnExport.Location = new System.Drawing.Point(0, 115);
             this.btnExport.Name = "btnExport";
@@ -221,10 +214,11 @@
             this.btnExport.Text = "Export as WAV/MP3";
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.UseVisualStyleBackColor = false;
             // 
             // btnImport
             // 
+            this.btnImport.BackColor = System.Drawing.Color.DarkGray;
             this.btnImport.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnImport.Location = new System.Drawing.Point(0, 92);
             this.btnImport.Name = "btnImport";
@@ -233,10 +227,11 @@
             this.btnImport.Text = "Import WAV/MP3";
             this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnImport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.UseVisualStyleBackColor = false;
             // 
             // btnSaveAs
             // 
+            this.btnSaveAs.BackColor = System.Drawing.Color.DarkGray;
             this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSaveAs.Location = new System.Drawing.Point(0, 69);
             this.btnSaveAs.Name = "btnSaveAs";
@@ -245,10 +240,11 @@
             this.btnSaveAs.Text = "Save Project as";
             this.btnSaveAs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSaveAs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSaveAs.UseVisualStyleBackColor = true;
+            this.btnSaveAs.UseVisualStyleBackColor = false;
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.Color.DarkGray;
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSave.Location = new System.Drawing.Point(0, 46);
             this.btnSave.Name = "btnSave";
@@ -257,10 +253,11 @@
             this.btnSave.Text = "Save Project";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             // 
             // btnOpen
             // 
+            this.btnOpen.BackColor = System.Drawing.Color.DarkGray;
             this.btnOpen.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnOpen.Location = new System.Drawing.Point(0, 23);
             this.btnOpen.Margin = new System.Windows.Forms.Padding(0);
@@ -270,11 +267,12 @@
             this.btnOpen.Text = "Open";
             this.btnOpen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOpen.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.UseVisualStyleBackColor = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // btnNew
             // 
+            this.btnNew.BackColor = System.Drawing.Color.DarkGray;
             this.btnNew.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnNew.Location = new System.Drawing.Point(0, 0);
             this.btnNew.Margin = new System.Windows.Forms.Padding(0);
@@ -284,17 +282,57 @@
             this.btnNew.Text = "New Project";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.UseVisualStyleBackColor = false;
             // 
             // pnlSong
             // 
             this.pnlSong.AutoScroll = true;
+            this.pnlSong.BackColor = System.Drawing.Color.DarkGray;
             this.pnlSong.Controls.Add(this.timeLine);
             this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSong.Location = new System.Drawing.Point(113, 30);
             this.pnlSong.Name = "pnlSong";
             this.pnlSong.Size = new System.Drawing.Size(496, 318);
             this.pnlSong.TabIndex = 4;
+            // 
+            // btnLoop
+            // 
+            this.btnLoop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.loop1;
+            this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoop.Location = new System.Drawing.Point(60, 0);
+            this.btnLoop.Name = "btnLoop";
+            this.btnLoop.Size = new System.Drawing.Size(30, 30);
+            this.btnLoop.TabIndex = 1;
+            this.btnLoop.UseVisualStyleBackColor = true;
+            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.stop;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(30, 0);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(30, 30);
+            this.btnStop.TabIndex = 3;
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.play;
+            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlay.Location = new System.Drawing.Point(0, 0);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(30, 30);
+            this.btnPlay.TabIndex = 2;
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // timeLine
             // 
@@ -322,6 +360,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).EndInit();
             this.pnlPlay.ResumeLayout(false);
             this.pnlSideBar.ResumeLayout(false);
+            this.pnlSideBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).EndInit();
             this.pnlVolume.ResumeLayout(false);
             this.pnlVolume.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
@@ -354,6 +394,8 @@
         private System.Windows.Forms.TrackBar trbVolume;
         private System.Windows.Forms.Panel pnlSong;
         private Timeline.Timeline timeLine;
+        private System.Windows.Forms.TrackBar volumeBar;
+        private System.Windows.Forms.Label label1;
     }
 }
 

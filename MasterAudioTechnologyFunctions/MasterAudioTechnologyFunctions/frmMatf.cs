@@ -147,5 +147,10 @@ namespace MasterAudioTechnologyFunctions
             // TODO: Play all tracks
             //Play();
         }
+
+        private void volumeBar_Scroll(object sender, EventArgs e)
+        {
+            timeLine.ChangeVolume((float)volumeBar.Value/10);
+        }
     }
 }
