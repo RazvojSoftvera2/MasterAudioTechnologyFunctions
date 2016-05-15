@@ -78,6 +78,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             TrackLen = (int)WaveOffsetStream.Length / 10000;
 
+            //inicijalizovanje jacine zvuka
+            WaveOut.Volume = TrackVolume;
         }
 
         public void addSound(int startPosition)
