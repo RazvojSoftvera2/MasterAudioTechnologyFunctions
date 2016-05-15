@@ -19,10 +19,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         public int TrackLen { get; set; }
 
-        public bool SelectMode = true;
-        public bool EditMode = false;
-        public bool DeleteMode = false;
-
         public List<WaveViewer> Tracks;
         public List<long> Times;
 
@@ -161,17 +157,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveOut == null)
                 return;
 
-            //Playing = false;
-            //btnPlay.Text = "Pl";
-            //tmrSong.Enabled = false;
-
             WaveOut.Stop();
             WaveOffsetStream.CurrentTime = new TimeSpan(0);
-
-            //trbTime.Value = 0;
-
-            TimeSpan time = WaveOffsetStream.CurrentTime;
-            //lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
         }
 
         private void BtnX_Click(object sender, EventArgs e)
@@ -181,51 +168,49 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void BtnSelect_Click(object sender, EventArgs e)
         {
-            SelectMode = true;
-            EditMode = false;
-            DeleteMode = false;
+            Timeline.TrackMode = Timeline.TrackEditMode.Select;
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            SelectMode = false;
-            EditMode = true;
-            DeleteMode = false;
+            Timeline.TrackMode = Timeline.TrackEditMode.Edit;
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            SelectMode = false;
-            EditMode = false;
-            DeleteMode = true;
+            Timeline.TrackMode = Timeline.TrackEditMode.Delete;
         }
 
         public void RemoveWave(WaveViewer wv)
         {
-            if (DeleteMode)
-            {
-                pnlWaveViewer.Controls.Remove(wv);
-                int i = Tracks.IndexOf(wv);
-                Tracks.RemoveAt(i);
-                Times.RemoveAt(i);
-                Playing.RemoveAt(i);
-            }
+            pnlWaveViewer.Controls.Remove(wv);
+            int i = Tracks.IndexOf(wv);
+            Tracks.RemoveAt(i);
+            Times.RemoveAt(i);
+            Playing.RemoveAt(i);
+        }
+
+        public void MoveWave(WaveViewer wv)
+        {
+            int i = Tracks.IndexOf(wv);
+            Times[i] = wv.Location.X;
         }
 
         private void pnlWaveViewer_MouseUp(object sender, MouseEventArgs e)
         {
-            if(e.Button==MouseButtons.Left)
+            if (e.Button != MouseButtons.Left)
+                return;
+            
+            switch (Timeline.TrackMode)
             {
-                if(EditMode)
-                {
+                case Timeline.TrackEditMode.Edit:
                     int start = e.X;
                     addSound(start);
-                }
-                
+                    break;
+                case Timeline.TrackEditMode.Select:
 
+                    break;
             }
         }
-
-
     }
 }

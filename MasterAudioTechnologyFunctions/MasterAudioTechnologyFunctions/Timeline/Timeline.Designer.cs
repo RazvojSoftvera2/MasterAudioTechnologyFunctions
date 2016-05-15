@@ -65,6 +65,7 @@
             // 
             // tmrSong
             // 
+            this.tmrSong.Interval = 10;
             this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
             // 
             // Timeline

@@ -14,7 +14,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
     {
         private List<Track> _tracks;
         private bool _looping = false;
-        
+
+        public enum TrackEditMode
+        {
+            Select,
+            Edit,
+            Delete
+        };
+
+        public static TrackEditMode TrackMode = TrackEditMode.Select;
         
         public Timeline()
         {
@@ -44,24 +52,22 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Height -= t.Height;
         }
 
-
         private void tmrSong_Tick(object sender, EventArgs e)
         {
             // Set trbTime to the number of miliseconds that since the start of the song
             // Set the text of lblTimeElapsed to correct time since the start of the song
             // Time format: mm:ss:milliseconds
 
-            //TODO: Refactor for Timeline
-            
-            
-            foreach(Track t in _tracks)
+            frmMatf parent = (frmMatf)Parent.Parent;
+
+            foreach (Track t in _tracks)
             {
                 if (t.WaveOut == null)
                 {
                     tmrSong.Enabled = false;
                     return;
                 }
-                frmMatf parent = (frmMatf)Parent.Parent;
+
                 if (t.Tracks.Count != 0)
                 {
                     for (int i = 0; i < t.Tracks.Count; i++)
@@ -70,86 +76,29 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
                         if (!t.Playing[i] && parent.Timer >= time && parent.Timer <= time + t.TrackLen)
                         {
-                            //Console.Out.WriteLine("TEST1");
                             t.Playing[i] = true;
                             t.Play();
                         }
 
                         if (t.Playing[i] && parent.Timer > time + t.TrackLen)
                         {
-                            //Console.Out.WriteLine("TEST2");
                             t.Stop();
                             t.Playing[i] = false;
                         }
                     }
                 }
-                
-                //Treba prebaciti da frmMatf povecava Timer kako se ne bi
-                //svaki put povecavao za onoliko koliko ima traka
-                parent.Timer += 1;
-                parent.SetTime(parent.Timer);
             }
 
-       
+            // Remove previous line
+            DrawVerticalLine((int)parent.Timer + 92);
 
-/*
-            foreach(Track t in _tracks)
-            {
-                if (t.WaveOut == null)
-                {
-                    tmrSong.Enabled = false;
-                    return;
-                }
+            parent.Timer += tmrSong.Interval;
+            parent.SetTime(parent.Timer);
 
-                foreach(int time in t.Times)
-                {
-                    if(!t.Playing && Timer >= time && Timer <= time+t.TrackLen)
-                    {
-                        //Console.Out.WriteLine("TEST1");
-                        t.Playing = true;
-                        t.Play();
-                    }
-
-                    if(t.Playing && Timer > time+t.TrackLen)
-                    {
-                        //Console.Out.WriteLine("TEST2");
-                        t.Stop();
-                        t.Playing = false;
-                    }
-                }
-
-                Timer += 1;
-
-                frmMatf parent = (frmMatf)Parent.Parent;
-                parent.SetTime(Timer);
-
-              
-                // Song has ended
-                //if (t.WaveOffsetStream.Position >= t.WaveOffsetStream.Length)
-                //{
-                //    t.Stop();
-                //    tmrSong.Enabled = false;
-
-                //    if (_looping)
-                //    {
-                //        t.Play();
-                //        tmrSong.Enabled = true;
-                //    }
-                //}
-
-                // Song is still playing
-                //if (t.WaveOffsetStream.Position < t.WaveOffsetStream.Length)
-                //{
-                //    TimeSpan time = t.WaveOffsetStream.CurrentTime;
-                //  //  frmMatf.lblTimeElapsed.Text = time.ToString(@"mm\:ss\:fff");
-                //    frmMatf.SetTimer(time.ToString(@"mm\:ss\:fff");
-                //    trbTime.Value = (int)WaveOffsetStream.Position;
-                //}
-            }
-
-    */
-           
-
+            // Draw new line
+            // TODO: Remove hardcoding of pnlWaveViewer X position
+            // 92: X position of pnlWaveViewer
+            DrawVerticalLine((int)parent.Timer + 92);
         }
 
         public void Stop()
@@ -172,32 +121,24 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     }
                 }
             }
-           
-
-            /*
-            foreach(Track t in _tracks)
-            {
-                if(t.Playing)
-                {
-                    t.Stop();
-                    t.Playing = false;
-                }
-            }
-            */
         }
 
         public void Play()
         {
-            //Iz nekog razloga mora svaka od traka jednom da "odsvira" pre nego sto
+            // TODO: Iz nekog razloga mora svaka od traka jednom da "odsvira" pre nego sto
             // moze da stvarno pusti ton
             foreach (Track t in _tracks)
             {
                 t.Play();
                 t.Stop();
-
             }
-            tmrSong.Enabled = true;
-            
+
+            tmrSong.Enabled = true;            
+        }
+
+        private void DrawVerticalLine(int x)
+        {
+            ControlPaint.DrawReversibleLine(PointToScreen(new Point(x, 0)), PointToScreen(new Point(x, Height)), Color.Gray);
         }
     }
 }
