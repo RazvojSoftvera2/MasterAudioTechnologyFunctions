@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MetroFramework.Controls;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
-    public partial class Timeline : MetroUserControl
+    public partial class Timeline : UserControl
     {
         private List<Track> _tracks;
         private bool _looping = false;
@@ -32,7 +31,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _tracks = new List<Track>();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddTrack_Click(object sender, EventArgs e)
         {
             AddNewTrack addTrack = new AddNewTrack();
             if (addTrack.ShowDialog() != DialogResult.OK)
@@ -164,7 +163,5 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     track.WaveOut.Volume = track.TrackVolume;
             }
         }
-
-        
     }
 }

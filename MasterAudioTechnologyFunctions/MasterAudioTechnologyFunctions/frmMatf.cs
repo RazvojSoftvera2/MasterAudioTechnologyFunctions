@@ -147,10 +147,5 @@ namespace MasterAudioTechnologyFunctions
             }*/
         }
         #endregion PlayButtons
-
-        private void btnAddTrack_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
