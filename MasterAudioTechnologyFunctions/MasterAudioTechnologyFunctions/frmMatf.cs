@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 using MasterAudioTechnologyFunctions.Timeline;
-using MetroFramework.Forms;
 
 namespace MasterAudioTechnologyFunctions
 {
-    public partial class frmMatf : MetroForm
+    public partial class frmMatf : Form
     {
         
         public static string SoftwareName = "Master Audio Technology Functions";
@@ -24,24 +23,23 @@ namespace MasterAudioTechnologyFunctions
         public frmMatf()
         {
             InitializeComponent();
-            //pnlMenu.Hide();
+            pnlMenu.Hide();
         }
 
         public void SetTime(long time)
         {
             // TODO: Convert time to hh:mm:ss:fff
             // Curently presented in number of miliseconds elapsed
-
-            //lblTimeElapsed.Text = time + "";
+            lblTimeElapsed.Text = time + "";
         }
 
         #region Menu
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            //if (pnlMenu.Visible)
-            //    pnlMenu.Hide();
-            //else
-            //    pnlMenu.Show();
+            if (pnlMenu.Visible)
+                pnlMenu.Hide();
+            else
+                pnlMenu.Show();
         }
 
         private void pnlMenu_Leave(object sender, EventArgs e)
@@ -51,12 +49,34 @@ namespace MasterAudioTechnologyFunctions
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            // TODO: Stop current play
+            //_playing = false;
+            //btnPlay.Text = "Pl";
+            //if (_waveOut != null)
+            //{
+            //    _waveOut.Stop();
+            //    _waveOut.Dispose();
+            //}
             
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "MATF projects (.matf)|*.matf";
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            _openedFile = dialog.FileName;
+            // TODO: Load project
+
+            //trbTime.Maximum = (int) _waveOffsetStream.Length;
+            
+            Text = SoftwareName + " - " + _openedFile;
+            
+            pnlMenu.Hide();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            //Close();
+            Close();
         }
         #endregion Menu
 
@@ -130,52 +150,7 @@ namespace MasterAudioTechnologyFunctions
 
         private void volumeBar_Scroll(object sender, EventArgs e)
         {
-            //timeLine.ChangeVolume((float)volumeBar.Value/10);
-        }
-
-        private void btnFile_Click(object sender, EventArgs e)
-        {
-            fileMenu.Show(btnFile, new Point(0, btnFile.Height));
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // TODO: Stop current play
-            //_playing = false;
-            //btnPlay.Text = "Pl";
-            //if (_waveOut != null)
-            //{
-            //    _waveOut.Stop();
-            //    _waveOut.Dispose();
-            //}
-
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "MATF projects (.matf)|*.matf";
-
-            if (dialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            _openedFile = dialog.FileName;
-            // TODO: Load project
-
-            //trbTime.Maximum = (int) _waveOffsetStream.Length;
-
-            Text = SoftwareName + " - " + _openedFile;
-        }
-
-        private void btnView_Click(object sender, EventArgs e)
-        {
-            viewMenu.Show(btnView, new Point(0, btnView.Height));
-        }
-
-        private void btnHelp_Click(object sender, EventArgs e)
-        {
-            helpMenu.Show(btnHelp, new Point(0, btnHelp.Height));
+            timeLine.ChangeVolume((float)volumeBar.Value/10);
         }
     }
 }
