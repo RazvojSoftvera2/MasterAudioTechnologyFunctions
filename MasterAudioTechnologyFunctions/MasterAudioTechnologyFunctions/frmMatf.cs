@@ -145,6 +145,5 @@ namespace MasterAudioTechnologyFunctions
         {
             timeLine.ChangeVolume((float)volumeBar.Value/10);
         }
-        
     }
 }
