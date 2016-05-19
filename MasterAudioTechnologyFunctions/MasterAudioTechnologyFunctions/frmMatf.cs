@@ -24,6 +24,7 @@ namespace MasterAudioTechnologyFunctions
         public frmMatf()
         {
             InitializeComponent();
+            //pnlMenu.Hide();
         }
 
         public void SetTime(long time)
@@ -33,6 +34,77 @@ namespace MasterAudioTechnologyFunctions
 
             //lblTimeElapsed.Text = time + "";
         }
+
+        #region Menu
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            //if (pnlMenu.Visible)
+            //    pnlMenu.Hide();
+            //else
+            //    pnlMenu.Show();
+        }
+
+        private void pnlMenu_Leave(object sender, EventArgs e)
+        {
+            // pnlMenu.Hide();
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            //Close();
+        }
+        #endregion Menu
+
+        #region PlayButtons
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+          //  if (_playing)
+          //  {
+                // TODO: Pause all tracks
+                //Pause();
+          //      _playing = false;
+         //   }
+        //    else
+        //    {
+                // TODO: Play all tracks
+                //Play();
+         //       _playing = true;
+                timeLine.Play();
+        //    }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            // TODO: Stop all tracks
+            timeLine.Stop();
+            
+
+        }
+        
+        private void btnLoop_Click(object sender, EventArgs e)
+        {
+            /* TODO: Refactor for Timeline
+            if (_looping)
+            {
+                _looping = false;
+                //btnLoop.Text = "l";
+            }
+            else
+            {
+                _looping = true;
+                //btnLoop.Text = "L";
+            }*/
+        }
+        #endregion PlayButtons
+
+   
+            
+ 
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {
@@ -56,7 +128,11 @@ namespace MasterAudioTechnologyFunctions
             //Play();
         }
 
-        #region Menu
+        private void volumeBar_Scroll(object sender, EventArgs e)
+        {
+            //timeLine.ChangeVolume((float)volumeBar.Value/10);
+        }
+
         private void btnFile_Click(object sender, EventArgs e)
         {
             fileMenu.Show(btnFile, new Point(0, btnFile.Height));
@@ -101,51 +177,5 @@ namespace MasterAudioTechnologyFunctions
         {
             helpMenu.Show(btnHelp, new Point(0, btnHelp.Height));
         }
-
-        private void volumeBar_Scroll(object sender, ScrollEventArgs e)
-        {
-            timeLine.ChangeVolume((float)volumeBar.Value / 100);
-        }
-        #endregion Menu
-
-        #region PlayButtons
-        private void btnPlay_Click_1(object sender, EventArgs e)
-        {
-            //  if (_playing)
-            //  {
-            // TODO: Pause all tracks
-            //Pause();
-            //      _playing = false;
-            //   }
-            //    else
-            //    {
-            // TODO: Play all tracks
-            //Play();
-            //       _playing = true;
-            timeLine.Play();
-            //    }
-        }
-
-        private void btnStop_Click_1(object sender, EventArgs e)
-        {
-            // TODO: Stop all tracks
-            timeLine.Stop();
-        }
-
-        private void btnLoop_Click_1(object sender, EventArgs e)
-        {
-            /* TODO: Refactor for Timeline
-            if (_looping)
-            {
-                _looping = false;
-                //btnLoop.Text = "l";
-            }
-            else
-            {
-                _looping = true;
-                //btnLoop.Text = "L";
-            }*/
-        }
-        #endregion PlayButtons
     }
 }

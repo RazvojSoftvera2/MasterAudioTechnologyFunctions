@@ -31,19 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.pnlTopBar = new System.Windows.Forms.Panel();
             this.pnlPlay = new System.Windows.Forms.Panel();
-            this.btnHelp = new MetroFramework.Controls.MetroButton();
-            this.btnView = new MetroFramework.Controls.MetroButton();
-            this.btnFile = new MetroFramework.Controls.MetroButton();
             this.pnlSideBar = new System.Windows.Forms.Panel();
             this.pnlVolume = new System.Windows.Forms.Panel();
-            this.btnLoop = new MetroFramework.Controls.MetroButton();
-            this.btnStop = new MetroFramework.Controls.MetroButton();
-            this.btnPlay = new MetroFramework.Controls.MetroButton();
-            this.playControls = new MetroFramework.Controls.MetroLabel();
-            this.volumeBar = new MetroFramework.Controls.MetroTrackBar();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.pnlSong = new System.Windows.Forms.Panel();
-            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
+            this.btnFile = new MetroFramework.Controls.MetroButton();
             this.fileMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +43,7 @@
             this.importWavmp3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAsWavmp3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnView = new MetroFramework.Controls.MetroButton();
             this.viewMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.themesAndButtonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.themesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,19 +53,17 @@
             this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnHelp = new MetroFramework.Controls.MetroButton();
             this.helpMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             this.pnlPlay.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
-            this.pnlVolume.SuspendLayout();
             this.pnlSong.SuspendLayout();
             this.fileMenu.SuspendLayout();
             this.viewMenu.SuspendLayout();
             this.helpMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTopBar
@@ -85,6 +75,7 @@
             this.pnlTopBar.Name = "pnlTopBar";
             this.pnlTopBar.Size = new System.Drawing.Size(866, 30);
             this.pnlTopBar.TabIndex = 1;
+            this.pnlTopBar.Leave += new System.EventHandler(this.pnlMenu_Leave);
             // 
             // pnlPlay
             // 
@@ -96,37 +87,6 @@
             this.pnlPlay.Name = "pnlPlay";
             this.pnlPlay.Size = new System.Drawing.Size(866, 30);
             this.pnlPlay.TabIndex = 2;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.Location = new System.Drawing.Point(130, 4);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(56, 23);
-            this.btnHelp.TabIndex = 2;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.UseSelectable = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            // 
-            // btnView
-            // 
-            this.btnView.Location = new System.Drawing.Point(67, 4);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(56, 23);
-            this.btnView.TabIndex = 1;
-            this.btnView.Text = "View";
-            this.btnView.UseSelectable = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
-            // 
-            // btnFile
-            // 
-            this.btnFile.BackColor = System.Drawing.Color.Transparent;
-            this.btnFile.Location = new System.Drawing.Point(4, 4);
-            this.btnFile.Name = "btnFile";
-            this.btnFile.Size = new System.Drawing.Size(56, 23);
-            this.btnFile.TabIndex = 0;
-            this.btnFile.Text = "File";
-            this.btnFile.UseSelectable = true;
-            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // pnlSideBar
             // 
@@ -143,83 +103,16 @@
             // pnlVolume
             // 
             this.pnlVolume.BackColor = System.Drawing.Color.Transparent;
-            this.pnlVolume.Controls.Add(this.btnLoop);
-            this.pnlVolume.Controls.Add(this.btnStop);
-            this.pnlVolume.Controls.Add(this.btnPlay);
-            this.pnlVolume.Controls.Add(this.playControls);
-            this.pnlVolume.Controls.Add(this.volumeBar);
-            this.pnlVolume.Controls.Add(this.metroLabel1);
             this.pnlVolume.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlVolume.Location = new System.Drawing.Point(0, 0);
             this.pnlVolume.Name = "pnlVolume";
             this.pnlVolume.Size = new System.Drawing.Size(113, 207);
             this.pnlVolume.TabIndex = 4;
             // 
-            // btnLoop
-            // 
-            this.btnLoop.Location = new System.Drawing.Point(73, 84);
-            this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(40, 30);
-            this.btnLoop.TabIndex = 5;
-            this.btnLoop.Text = "L";
-            this.btnLoop.UseSelectable = true;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click_1);
-            // 
-            // btnStop
-            // 
-            this.btnStop.Location = new System.Drawing.Point(36, 84);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(40, 30);
-            this.btnStop.TabIndex = 4;
-            this.btnStop.Text = "S";
-            this.btnStop.UseSelectable = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click_1);
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Location = new System.Drawing.Point(0, 84);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(40, 30);
-            this.btnPlay.TabIndex = 3;
-            this.btnPlay.Text = "PL";
-            this.btnPlay.UseSelectable = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click_1);
-            // 
-            // playControls
-            // 
-            this.playControls.AutoSize = true;
-            this.playControls.Location = new System.Drawing.Point(4, 61);
-            this.playControls.Name = "playControls";
-            this.playControls.Size = new System.Drawing.Size(89, 19);
-            this.playControls.TabIndex = 2;
-            this.playControls.Text = "PLay Controls";
-            this.playControls.UseStyleColors = true;
-            // 
-            // volumeBar
-            // 
-            this.volumeBar.BackColor = System.Drawing.Color.Transparent;
-            this.volumeBar.Location = new System.Drawing.Point(4, 31);
-            this.volumeBar.Name = "volumeBar";
-            this.volumeBar.Size = new System.Drawing.Size(106, 23);
-            this.volumeBar.TabIndex = 1;
-            this.volumeBar.Text = "volumeBar";
-            this.volumeBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.volumeBar_Scroll);
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(4, 8);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(97, 19);
-            this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "Master Volume";
-            this.metroLabel1.UseStyleColors = true;
-            // 
             // pnlSong
             // 
             this.pnlSong.AutoScroll = true;
             this.pnlSong.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSong.Controls.Add(this.metroPanel1);
             this.pnlSong.Controls.Add(this.timeLine);
             this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSong.Location = new System.Drawing.Point(20, 60);
@@ -227,14 +120,16 @@
             this.pnlSong.Size = new System.Drawing.Size(866, 391);
             this.pnlSong.TabIndex = 4;
             // 
-            // timeLine
+            // btnFile
             // 
-            this.timeLine.BackColor = System.Drawing.Color.DarkGray;
-            this.timeLine.Dock = System.Windows.Forms.DockStyle.Top;
-            this.timeLine.Location = new System.Drawing.Point(0, 0);
-            this.timeLine.Name = "timeLine";
-            this.timeLine.Size = new System.Drawing.Size(866, 31);
-            this.timeLine.TabIndex = 0;
+            this.btnFile.BackColor = System.Drawing.Color.Transparent;
+            this.btnFile.Location = new System.Drawing.Point(4, 4);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Size = new System.Drawing.Size(56, 23);
+            this.btnFile.TabIndex = 0;
+            this.btnFile.Text = "File";
+            this.btnFile.UseSelectable = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // fileMenu
             // 
@@ -292,6 +187,16 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // btnView
+            // 
+            this.btnView.Location = new System.Drawing.Point(67, 4);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(56, 23);
+            this.btnView.TabIndex = 1;
+            this.btnView.Text = "View";
+            this.btnView.UseSelectable = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // viewMenu
             // 
@@ -358,6 +263,16 @@
             this.greyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.greyToolStripMenuItem.Text = "Grey";
             // 
+            // btnHelp
+            // 
+            this.btnHelp.Location = new System.Drawing.Point(130, 4);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(56, 23);
+            this.btnHelp.TabIndex = 2;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.UseSelectable = true;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
             // helpMenu
             // 
             this.helpMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -371,23 +286,14 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // metroPanel1
+            // timeLine
             // 
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 31);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(866, 360);
-            this.metroPanel1.TabIndex = 1;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // metroStyleManager
-            // 
-            this.metroStyleManager.Owner = null;
+            this.timeLine.BackColor = System.Drawing.Color.DarkGray;
+            this.timeLine.Dock = System.Windows.Forms.DockStyle.Top;
+            this.timeLine.Location = new System.Drawing.Point(0, 0);
+            this.timeLine.Name = "timeLine";
+            this.timeLine.Size = new System.Drawing.Size(866, 31);
+            this.timeLine.TabIndex = 0;
             // 
             // frmMatf
             // 
@@ -402,13 +308,10 @@
             this.pnlTopBar.ResumeLayout(false);
             this.pnlPlay.ResumeLayout(false);
             this.pnlSideBar.ResumeLayout(false);
-            this.pnlVolume.ResumeLayout(false);
-            this.pnlVolume.PerformLayout();
             this.pnlSong.ResumeLayout(false);
             this.fileMenu.ResumeLayout(false);
             this.viewMenu.ResumeLayout(false);
             this.helpMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -442,14 +345,6 @@
         private MetroFramework.Controls.MetroButton btnHelp;
         private MetroFramework.Controls.MetroContextMenu helpMenu;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private MetroFramework.Controls.MetroTrackBar volumeBar;
-        private MetroFramework.Controls.MetroLabel metroLabel1;
-        private MetroFramework.Controls.MetroLabel playControls;
-        private MetroFramework.Controls.MetroButton btnLoop;
-        private MetroFramework.Controls.MetroButton btnStop;
-        private MetroFramework.Controls.MetroButton btnPlay;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
-        private MetroFramework.Components.MetroStyleManager metroStyleManager;
     }
 }
 
