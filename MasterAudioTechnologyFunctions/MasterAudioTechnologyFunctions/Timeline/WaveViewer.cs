@@ -5,13 +5,14 @@ using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 using NAudio.Wave;
+using MetroFramework.Controls;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
     /// <summary>
     /// Control for viewing waveforms
     /// </summary>
-    public class WaveViewer : System.Windows.Forms.UserControl
+    public class WaveViewer : MetroUserControl
     {
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }

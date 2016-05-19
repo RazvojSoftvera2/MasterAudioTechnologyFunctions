@@ -32,8 +32,8 @@
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlTracks = new System.Windows.Forms.Panel();
-            this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.btnAdd = new MetroFramework.Controls.MetroButton();
+            this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlBottom.SuspendLayout();
             this.pnlTracks.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +56,6 @@
             this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
             this.btnAddTrack.TabIndex = 0;
             this.btnAddTrack.UseVisualStyleBackColor = true;
-            this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
             // 
             // pnlTracks
             // 
@@ -68,19 +67,20 @@
             this.pnlTracks.Size = new System.Drawing.Size(477, 31);
             this.pnlTracks.TabIndex = 0;
             // 
-            // tmrSong
-            // 
-            this.tmrSong.Interval = 10;
-            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
-            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(4, 5);
+            this.btnAdd.Location = new System.Drawing.Point(3, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(30, 23);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "+";
             this.btnAdd.UseSelectable = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // tmrSong
+            // 
+            this.tmrSong.Interval = 10;
+            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
             // 
             // Timeline
             // 
