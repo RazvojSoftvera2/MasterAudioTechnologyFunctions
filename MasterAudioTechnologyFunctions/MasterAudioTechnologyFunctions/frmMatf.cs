@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using NAudio.Wave;
 using MasterAudioTechnologyFunctions.Timeline;
 using MetroFramework.Forms;
+using MetroFramework;
 
 namespace MasterAudioTechnologyFunctions
 {
@@ -24,7 +25,7 @@ namespace MasterAudioTechnologyFunctions
         public frmMatf()
         {
             InitializeComponent();
-            pnlMenu.Hide();
+            //metroStyleManager.Theme = MetroThemeStyle.Dark;
         }
 
         public void SetTime(long time)
@@ -35,13 +36,6 @@ namespace MasterAudioTechnologyFunctions
         }
 
         #region Menu
-        private void btnMenu_Click(object sender, EventArgs e)
-        {
-            if (pnlMenu.Visible)
-                pnlMenu.Hide();
-            else
-                pnlMenu.Show();
-        }
 
         private void pnlMenu_Leave(object sender, EventArgs e)
         {
@@ -72,7 +66,6 @@ namespace MasterAudioTechnologyFunctions
             
             Text = SoftwareName + " - " + _openedFile;
             
-            pnlMenu.Hide();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -82,31 +75,30 @@ namespace MasterAudioTechnologyFunctions
         #endregion Menu
 
         #region PlayButtons
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
-          //  if (_playing)
-          //  {
-                // TODO: Pause all tracks
-                //Pause();
-          //      _playing = false;
-         //   }
-        //    else
-        //    {
-                // TODO: Play all tracks
-                //Play();
-         //       _playing = true;
-                timeLine.Play();
-        //    }
+            //  if (_playing)
+            //  {
+            // TODO: Pause all tracks
+            //Pause();
+            //      _playing = false;
+            //   }
+            //    else
+            //    {
+            // TODO: Play all tracks
+            //Play();
+            //       _playing = true;
+            timeLine.Play();
+            //    }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             // TODO: Stop all tracks
             timeLine.Stop();
-            
-
         }
-        
+
         private void btnLoop_Click(object sender, EventArgs e)
         {
             /* TODO: Refactor for Timeline
@@ -123,9 +115,9 @@ namespace MasterAudioTechnologyFunctions
         }
         #endregion PlayButtons
 
-   
-            
- 
+
+
+
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {
@@ -153,5 +145,6 @@ namespace MasterAudioTechnologyFunctions
         {
             timeLine.ChangeVolume((float)volumeBar.Value/10);
         }
+        
     }
 }

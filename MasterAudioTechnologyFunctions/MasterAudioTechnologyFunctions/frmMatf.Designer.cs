@@ -28,63 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnMenu = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.pnlTopBar = new System.Windows.Forms.Panel();
             this.lblTimeElapsed = new System.Windows.Forms.Label();
-            this.pnlPlay = new System.Windows.Forms.Panel();
-            this.btnLoop = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
             this.pnlSideBar = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.volumeBar = new System.Windows.Forms.TrackBar();
             this.pnlVolume = new System.Windows.Forms.Panel();
-            this.pnlMenu = new System.Windows.Forms.Panel();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnImport = new System.Windows.Forms.Button();
-            this.btnSaveAs = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnOpen = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.pnlSong = new System.Windows.Forms.Panel();
-            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
-            this.trbVolume = new System.Windows.Forms.TrackBar();
             this.trbTime = new System.Windows.Forms.TrackBar();
+            this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.pnlPlay = new System.Windows.Forms.Panel();
+            this.btnLoop = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
+            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
-            this.pnlPlay.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).BeginInit();
             this.pnlVolume.SuspendLayout();
-            this.pnlMenu.SuspendLayout();
             this.pnlSong.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
+            this.pnlPlay.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMenu.Location = new System.Drawing.Point(0, 0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(30, 30);
-            this.btnMenu.TabIndex = 0;
-            this.btnMenu.Text = "≡";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
             // pnlTopBar
             // 
             this.pnlTopBar.BackColor = System.Drawing.Color.DarkGray;
             this.pnlTopBar.Controls.Add(this.lblTimeElapsed);
             this.pnlTopBar.Controls.Add(this.trbTime);
-            this.pnlTopBar.Controls.Add(this.pnlPlay);
-            this.pnlTopBar.Controls.Add(this.btnMenu);
             this.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTopBar.Location = new System.Drawing.Point(20, 60);
+            this.pnlTopBar.Location = new System.Drawing.Point(133, 60);
             this.pnlTopBar.Name = "pnlTopBar";
-            this.pnlTopBar.Size = new System.Drawing.Size(569, 30);
+            this.pnlTopBar.Size = new System.Drawing.Size(456, 30);
             this.pnlTopBar.TabIndex = 1;
             this.pnlTopBar.Leave += new System.EventHandler(this.pnlMenu_Leave);
             // 
@@ -92,23 +69,94 @@
             // 
             this.lblTimeElapsed.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblTimeElapsed.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimeElapsed.Location = new System.Drawing.Point(253, 0);
+            this.lblTimeElapsed.Location = new System.Drawing.Point(104, 0);
             this.lblTimeElapsed.Name = "lblTimeElapsed";
             this.lblTimeElapsed.Size = new System.Drawing.Size(203, 30);
             this.lblTimeElapsed.TabIndex = 4;
             this.lblTimeElapsed.Text = "00:00:000";
             this.lblTimeElapsed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pnlSideBar
+            // 
+            this.pnlSideBar.AutoScroll = true;
+            this.pnlSideBar.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlSideBar.Controls.Add(this.pnlVolume);
+            this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlSideBar.Location = new System.Drawing.Point(20, 60);
+            this.pnlSideBar.Name = "pnlSideBar";
+            this.pnlSideBar.Size = new System.Drawing.Size(113, 268);
+            this.pnlSideBar.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Master Volume";
+            // 
+            // volumeBar
+            // 
+            this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.volumeBar.Location = new System.Drawing.Point(0, 49);
+            this.volumeBar.Name = "volumeBar";
+            this.volumeBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.volumeBar.Size = new System.Drawing.Size(104, 45);
+            this.volumeBar.TabIndex = 5;
+            this.volumeBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.volumeBar.Value = 7;
+            this.volumeBar.Scroll += new System.EventHandler(this.volumeBar_Scroll);
+            // 
+            // pnlVolume
+            // 
+            this.pnlVolume.Controls.Add(this.volumeBar);
+            this.pnlVolume.Controls.Add(this.label1);
+            this.pnlVolume.Controls.Add(this.pnlPlay);
+            this.pnlVolume.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlVolume.Location = new System.Drawing.Point(0, 0);
+            this.pnlVolume.Name = "pnlVolume";
+            this.pnlVolume.Size = new System.Drawing.Size(113, 100);
+            this.pnlVolume.TabIndex = 4;
+            // 
+            // pnlSong
+            // 
+            this.pnlSong.AutoScroll = true;
+            this.pnlSong.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlSong.Controls.Add(this.timeLine);
+            this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSong.Location = new System.Drawing.Point(133, 90);
+            this.pnlSong.Name = "pnlSong";
+            this.pnlSong.Size = new System.Drawing.Size(456, 238);
+            this.pnlSong.TabIndex = 4;
+            // 
+            // trbTime
+            // 
+            this.trbTime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.trbTime.Location = new System.Drawing.Point(0, 0);
+            this.trbTime.Name = "trbTime";
+            this.trbTime.Size = new System.Drawing.Size(104, 45);
+            this.trbTime.TabIndex = 3;
+            this.trbTime.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trbTime.Scroll += new System.EventHandler(this.trbTime_Scroll);
+            this.trbTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseDown);
+            this.trbTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseUp);
+            // 
+            // metroStyleManager
+            // 
+            this.metroStyleManager.Owner = this;
+            this.metroStyleManager.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
             // pnlPlay
             // 
             this.pnlPlay.Controls.Add(this.btnLoop);
             this.pnlPlay.Controls.Add(this.btnStop);
             this.pnlPlay.Controls.Add(this.btnPlay);
-            this.pnlPlay.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlPlay.Location = new System.Drawing.Point(30, 0);
+            this.pnlPlay.Location = new System.Drawing.Point(-3, 0);
             this.pnlPlay.Name = "pnlPlay";
             this.pnlPlay.Size = new System.Drawing.Size(119, 30);
-            this.pnlPlay.TabIndex = 2;
+            this.pnlPlay.TabIndex = 3;
             // 
             // btnLoop
             // 
@@ -149,171 +197,6 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // pnlSideBar
-            // 
-            this.pnlSideBar.AutoScroll = true;
-            this.pnlSideBar.BackColor = System.Drawing.Color.DarkGray;
-            this.pnlSideBar.Controls.Add(this.label1);
-            this.pnlSideBar.Controls.Add(this.volumeBar);
-            this.pnlSideBar.Controls.Add(this.pnlVolume);
-            this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlSideBar.Location = new System.Drawing.Point(20, 90);
-            this.pnlSideBar.Name = "pnlSideBar";
-            this.pnlSideBar.Size = new System.Drawing.Size(113, 238);
-            this.pnlSideBar.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 177);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Master Volume";
-            // 
-            // volumeBar
-            // 
-            this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.volumeBar.Location = new System.Drawing.Point(3, 193);
-            this.volumeBar.Name = "volumeBar";
-            this.volumeBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.volumeBar.Size = new System.Drawing.Size(104, 45);
-            this.volumeBar.TabIndex = 5;
-            this.volumeBar.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.volumeBar.Value = 7;
-            this.volumeBar.Scroll += new System.EventHandler(this.volumeBar_Scroll);
-            // 
-            // pnlVolume
-            // 
-            this.pnlVolume.Controls.Add(this.trbVolume);
-            this.pnlVolume.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlVolume.Location = new System.Drawing.Point(0, 0);
-            this.pnlVolume.Name = "pnlVolume";
-            this.pnlVolume.Size = new System.Drawing.Size(113, 100);
-            this.pnlVolume.TabIndex = 4;
-            // 
-            // pnlMenu
-            // 
-            this.pnlMenu.Controls.Add(this.btnExit);
-            this.pnlMenu.Controls.Add(this.btnExport);
-            this.pnlMenu.Controls.Add(this.btnImport);
-            this.pnlMenu.Controls.Add(this.btnSaveAs);
-            this.pnlMenu.Controls.Add(this.btnSave);
-            this.pnlMenu.Controls.Add(this.btnOpen);
-            this.pnlMenu.Controls.Add(this.btnNew);
-            this.pnlMenu.Location = new System.Drawing.Point(0, 30);
-            this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(230, 163);
-            this.pnlMenu.TabIndex = 3;
-            this.pnlMenu.Leave += new System.EventHandler(this.pnlMenu_Leave);
-            // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.DarkGray;
-            this.btnExit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExit.Location = new System.Drawing.Point(0, 138);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(230, 23);
-            this.btnExit.TabIndex = 10;
-            this.btnExit.Text = "Exit";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.BackColor = System.Drawing.Color.DarkGray;
-            this.btnExport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExport.Location = new System.Drawing.Point(0, 115);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(230, 23);
-            this.btnExport.TabIndex = 9;
-            this.btnExport.Text = "Export as WAV/MP3";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnExport.UseVisualStyleBackColor = false;
-            // 
-            // btnImport
-            // 
-            this.btnImport.BackColor = System.Drawing.Color.DarkGray;
-            this.btnImport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnImport.Location = new System.Drawing.Point(0, 92);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(230, 23);
-            this.btnImport.TabIndex = 8;
-            this.btnImport.Text = "Import WAV/MP3";
-            this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnImport.UseVisualStyleBackColor = false;
-            // 
-            // btnSaveAs
-            // 
-            this.btnSaveAs.BackColor = System.Drawing.Color.DarkGray;
-            this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSaveAs.Location = new System.Drawing.Point(0, 69);
-            this.btnSaveAs.Name = "btnSaveAs";
-            this.btnSaveAs.Size = new System.Drawing.Size(230, 23);
-            this.btnSaveAs.TabIndex = 7;
-            this.btnSaveAs.Text = "Save Project as";
-            this.btnSaveAs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveAs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSaveAs.UseVisualStyleBackColor = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.DarkGray;
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnSave.Location = new System.Drawing.Point(0, 46);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(230, 23);
-            this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "Save Project";
-            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = false;
-            // 
-            // btnOpen
-            // 
-            this.btnOpen.BackColor = System.Drawing.Color.DarkGray;
-            this.btnOpen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnOpen.Location = new System.Drawing.Point(0, 23);
-            this.btnOpen.Margin = new System.Windows.Forms.Padding(0);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(230, 23);
-            this.btnOpen.TabIndex = 5;
-            this.btnOpen.Text = "Open";
-            this.btnOpen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOpen.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOpen.UseVisualStyleBackColor = false;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.BackColor = System.Drawing.Color.DarkGray;
-            this.btnNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnNew.Location = new System.Drawing.Point(0, 0);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(0);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(230, 23);
-            this.btnNew.TabIndex = 4;
-            this.btnNew.Text = "New Project";
-            this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNew.UseVisualStyleBackColor = false;
-            // 
-            // pnlSong
-            // 
-            this.pnlSong.AutoScroll = true;
-            this.pnlSong.BackColor = System.Drawing.Color.DarkGray;
-            this.pnlSong.Controls.Add(this.timeLine);
-            this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSong.Location = new System.Drawing.Point(133, 90);
-            this.pnlSong.Name = "pnlSong";
-            this.pnlSong.Size = new System.Drawing.Size(456, 238);
-            this.pnlSong.TabIndex = 4;
-            // 
             // timeLine
             // 
             this.timeLine.BackColor = System.Drawing.Color.DarkGray;
@@ -323,70 +206,33 @@
             this.timeLine.Size = new System.Drawing.Size(456, 31);
             this.timeLine.TabIndex = 0;
             // 
-            // trbVolume
-            // 
-            this.trbVolume.Location = new System.Drawing.Point(0, 0);
-            this.trbVolume.Name = "trbVolume";
-            this.trbVolume.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trbVolume.Size = new System.Drawing.Size(45, 100);
-            this.trbVolume.TabIndex = 4;
-            // 
-            // trbTime
-            // 
-            this.trbTime.Dock = System.Windows.Forms.DockStyle.Left;
-            this.trbTime.Location = new System.Drawing.Point(149, 0);
-            this.trbTime.Name = "trbTime";
-            this.trbTime.Size = new System.Drawing.Size(104, 30);
-            this.trbTime.TabIndex = 3;
-            this.trbTime.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trbTime.Scroll += new System.EventHandler(this.trbTime_Scroll);
-            this.trbTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseDown);
-            this.trbTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseUp);
-            // 
             // frmMatf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 348);
-            this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.pnlSong);
-            this.Controls.Add(this.pnlSideBar);
             this.Controls.Add(this.pnlTopBar);
+            this.Controls.Add(this.pnlSideBar);
             this.Name = "frmMatf";
             this.Text = "Master Audio Technology Functions";
             this.pnlTopBar.ResumeLayout(false);
             this.pnlTopBar.PerformLayout();
-            this.pnlPlay.ResumeLayout(false);
             this.pnlSideBar.ResumeLayout(false);
-            this.pnlSideBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).EndInit();
             this.pnlVolume.ResumeLayout(false);
             this.pnlVolume.PerformLayout();
-            this.pnlMenu.ResumeLayout(false);
             this.pnlSong.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trbVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
+            this.pnlPlay.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Panel pnlTopBar;
-        private System.Windows.Forms.Panel pnlPlay;
-        private System.Windows.Forms.Button btnLoop;
-        private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Panel pnlSideBar;
-        private System.Windows.Forms.Panel pnlMenu;
-        private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btnImport;
-        private System.Windows.Forms.Button btnSaveAs;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnOpen;
-        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label lblTimeElapsed;
         private System.Windows.Forms.Panel pnlVolume;
         private System.Windows.Forms.Panel pnlSong;
@@ -394,7 +240,11 @@
         private System.Windows.Forms.TrackBar volumeBar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TrackBar trbTime;
-        private System.Windows.Forms.TrackBar trbVolume;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager;
+        private System.Windows.Forms.Panel pnlPlay;
+        private System.Windows.Forms.Button btnLoop;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnPlay;
     }
 }
 
