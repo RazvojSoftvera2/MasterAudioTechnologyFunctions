@@ -42,7 +42,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblName.Location = new System.Drawing.Point(12, 9);
+            this.lblName.Location = new System.Drawing.Point(9, 62);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(41, 15);
             this.lblName.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             this.tbName.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbName.Location = new System.Drawing.Point(59, 9);
+            this.tbName.Location = new System.Drawing.Point(56, 62);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(100, 20);
             this.tbName.TabIndex = 1;
@@ -60,7 +60,7 @@
             // 
             // btnColor
             // 
-            this.btnColor.Location = new System.Drawing.Point(15, 64);
+            this.btnColor.Location = new System.Drawing.Point(12, 117);
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(144, 23);
             this.btnColor.TabIndex = 3;
@@ -71,7 +71,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(15, 93);
+            this.btnCancel.Location = new System.Drawing.Point(12, 146);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(71, 23);
             this.btnCancel.TabIndex = 4;
@@ -81,7 +81,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(88, 93);
+            this.btnOk.Location = new System.Drawing.Point(85, 146);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(71, 23);
             this.btnOk.TabIndex = 5;
@@ -91,7 +91,7 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(15, 35);
+            this.btnOpen.Location = new System.Drawing.Point(12, 88);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(144, 23);
             this.btnOpen.TabIndex = 2;
@@ -104,9 +104,8 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkGray;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(177, 128);
+            this.ClientSize = new System.Drawing.Size(166, 190);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);

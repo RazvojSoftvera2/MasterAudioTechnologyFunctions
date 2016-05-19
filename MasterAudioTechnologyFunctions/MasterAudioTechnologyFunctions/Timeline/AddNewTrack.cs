@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
-    public partial class AddNewTrack : Form
+    public partial class AddNewTrack : MetroForm
     {
         public string TrackName { get; set; }
         public string TrackFileName { get; set; }
@@ -19,6 +20,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public AddNewTrack()
         {
             InitializeComponent();
+            this.MinimizeBox = false;
+            this.MaximizeBox = false;
+            this.Resizable = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             cdColorPicker.Color = Color.White;
         }
 

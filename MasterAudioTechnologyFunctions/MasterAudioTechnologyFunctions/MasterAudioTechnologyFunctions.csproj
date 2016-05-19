@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework">
+      <HintPath>..\MetroStyleGUI\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\MetroStyleGUI\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\MetroStyleGUI\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio">
       <HintPath>..\NAudio\NAudio.dll</HintPath>
     </Reference>

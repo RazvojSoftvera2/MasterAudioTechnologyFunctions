@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 using MasterAudioTechnologyFunctions.Timeline;
+using MetroFramework.Forms;
 
 namespace MasterAudioTechnologyFunctions
 {
-    public partial class frmMatf : Form
+    public partial class frmMatf : MetroForm
     {
         
         public static string SoftwareName = "Master Audio Technology Functions";
