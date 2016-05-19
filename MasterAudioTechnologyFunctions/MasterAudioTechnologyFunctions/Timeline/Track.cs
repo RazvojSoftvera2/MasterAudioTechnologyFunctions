@@ -127,6 +127,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveOut == null)
                 return;
 
+            WaveOut.Volume = TrackVolume;
+
             //Playing = true;
             //btnPlay.Text = "Pa";
             //tmrSong.Enabled = true;
