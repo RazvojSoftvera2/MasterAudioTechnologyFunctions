@@ -141,9 +141,9 @@ namespace MasterAudioTechnologyFunctions
             //Play();
         }
 
-        private void volumeBar_Scroll(object sender, EventArgs e)
+        private void volumeBar_Scroll(object sender, ScrollEventArgs e)
         {
-            timeLine.ChangeVolume((float)volumeBar.Value/10);
+            timeLine.ChangeVolume((float)volumeBar.Value / 100);
         }
     }
 }

@@ -30,26 +30,25 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlTopBar = new System.Windows.Forms.Panel();
+            this.progressBar = new MetroFramework.Controls.MetroScrollBar();
             this.lblTimeElapsed = new System.Windows.Forms.Label();
             this.pnlSideBar = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.volumeBar = new System.Windows.Forms.TrackBar();
             this.pnlVolume = new System.Windows.Forms.Panel();
-            this.pnlSong = new System.Windows.Forms.Panel();
-            this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlPlay = new System.Windows.Forms.Panel();
             this.btnLoop = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
+            this.pnlSong = new System.Windows.Forms.Panel();
+            this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.volumeBar = new MetroFramework.Controls.MetroTrackBar();
             this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
-            this.progressBar = new MetroFramework.Controls.MetroScrollBar();
             this.pnlTopBar.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).BeginInit();
             this.pnlVolume.SuspendLayout();
+            this.pnlPlay.SuspendLayout();
             this.pnlSong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
-            this.pnlPlay.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopBar
@@ -63,6 +62,20 @@
             this.pnlTopBar.Size = new System.Drawing.Size(687, 30);
             this.pnlTopBar.TabIndex = 1;
             this.pnlTopBar.Leave += new System.EventHandler(this.pnlMenu_Leave);
+            // 
+            // progressBar
+            // 
+            this.progressBar.LargeChange = 10;
+            this.progressBar.Location = new System.Drawing.Point(209, 14);
+            this.progressBar.Maximum = 100;
+            this.progressBar.Minimum = 0;
+            this.progressBar.MouseWheelBarPartitions = 10;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Orientation = MetroFramework.Controls.MetroScrollOrientation.Horizontal;
+            this.progressBar.ScrollbarSize = 10;
+            this.progressBar.Size = new System.Drawing.Size(475, 10);
+            this.progressBar.TabIndex = 5;
+            this.progressBar.UseSelectable = true;
             // 
             // lblTimeElapsed
             // 
@@ -79,8 +92,8 @@
             // 
             this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSideBar.Controls.Add(this.label1);
             this.pnlSideBar.Controls.Add(this.volumeBar);
+            this.pnlSideBar.Controls.Add(this.label1);
             this.pnlSideBar.Controls.Add(this.pnlVolume);
             this.pnlSideBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -98,18 +111,6 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Master Volume";
             // 
-            // volumeBar
-            // 
-            this.volumeBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.volumeBar.Location = new System.Drawing.Point(3, 119);
-            this.volumeBar.Name = "volumeBar";
-            this.volumeBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.volumeBar.Size = new System.Drawing.Size(104, 45);
-            this.volumeBar.TabIndex = 5;
-            this.volumeBar.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.volumeBar.Value = 7;
-            this.volumeBar.Scroll += new System.EventHandler(this.volumeBar_Scroll);
-            // 
             // pnlVolume
             // 
             this.pnlVolume.Controls.Add(this.pnlPlay);
@@ -119,28 +120,12 @@
             this.pnlVolume.Size = new System.Drawing.Size(117, 100);
             this.pnlVolume.TabIndex = 4;
             // 
-            // pnlSong
-            // 
-            this.pnlSong.AutoScroll = true;
-            this.pnlSong.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSong.Controls.Add(this.timeLine);
-            this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSong.Location = new System.Drawing.Point(137, 90);
-            this.pnlSong.Name = "pnlSong";
-            this.pnlSong.Size = new System.Drawing.Size(687, 338);
-            this.pnlSong.TabIndex = 4;
-            // 
-            // metroStyleManager
-            // 
-            this.metroStyleManager.Owner = this;
-            this.metroStyleManager.Theme = MetroFramework.MetroThemeStyle.Dark;
-            // 
             // pnlPlay
             // 
             this.pnlPlay.Controls.Add(this.btnLoop);
             this.pnlPlay.Controls.Add(this.btnStop);
             this.pnlPlay.Controls.Add(this.btnPlay);
-            this.pnlPlay.Location = new System.Drawing.Point(0, 0);
+            this.pnlPlay.Location = new System.Drawing.Point(1, 67);
             this.pnlPlay.Name = "pnlPlay";
             this.pnlPlay.Size = new System.Drawing.Size(113, 30);
             this.pnlPlay.TabIndex = 3;
@@ -184,6 +169,32 @@
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
+            // pnlSong
+            // 
+            this.pnlSong.AutoScroll = true;
+            this.pnlSong.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSong.Controls.Add(this.timeLine);
+            this.pnlSong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSong.Location = new System.Drawing.Point(137, 90);
+            this.pnlSong.Name = "pnlSong";
+            this.pnlSong.Size = new System.Drawing.Size(687, 338);
+            this.pnlSong.TabIndex = 4;
+            // 
+            // metroStyleManager
+            // 
+            this.metroStyleManager.Owner = this;
+            this.metroStyleManager.Theme = MetroFramework.MetroThemeStyle.Dark;
+            // 
+            // volumeBar
+            // 
+            this.volumeBar.BackColor = System.Drawing.Color.Transparent;
+            this.volumeBar.Location = new System.Drawing.Point(3, 120);
+            this.volumeBar.Name = "volumeBar";
+            this.volumeBar.Size = new System.Drawing.Size(108, 23);
+            this.volumeBar.TabIndex = 7;
+            this.volumeBar.Text = "volumeBar";
+            this.volumeBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.volumeBar_Scroll);
+            // 
             // timeLine
             // 
             this.timeLine.BackColor = System.Drawing.Color.Transparent;
@@ -192,20 +203,6 @@
             this.timeLine.Name = "timeLine";
             this.timeLine.Size = new System.Drawing.Size(687, 31);
             this.timeLine.TabIndex = 0;
-            // 
-            // progressBar
-            // 
-            this.progressBar.LargeChange = 10;
-            this.progressBar.Location = new System.Drawing.Point(209, 14);
-            this.progressBar.Maximum = 100;
-            this.progressBar.Minimum = 0;
-            this.progressBar.MouseWheelBarPartitions = 10;
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Orientation = MetroFramework.Controls.MetroScrollOrientation.Horizontal;
-            this.progressBar.ScrollbarSize = 10;
-            this.progressBar.Size = new System.Drawing.Size(475, 10);
-            this.progressBar.TabIndex = 5;
-            this.progressBar.UseSelectable = true;
             // 
             // frmMatf
             // 
@@ -220,11 +217,10 @@
             this.pnlTopBar.ResumeLayout(false);
             this.pnlSideBar.ResumeLayout(false);
             this.pnlSideBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.volumeBar)).EndInit();
             this.pnlVolume.ResumeLayout(false);
+            this.pnlPlay.ResumeLayout(false);
             this.pnlSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
-            this.pnlPlay.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -236,7 +232,6 @@
         private System.Windows.Forms.Panel pnlVolume;
         private System.Windows.Forms.Panel pnlSong;
         private Timeline.Timeline timeLine;
-        private System.Windows.Forms.TrackBar volumeBar;
         private System.Windows.Forms.Label label1;
         private MetroFramework.Components.MetroStyleManager metroStyleManager;
         private System.Windows.Forms.Panel pnlPlay;
@@ -244,6 +239,7 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnPlay;
         private MetroFramework.Controls.MetroScrollBar progressBar;
+        private MetroFramework.Controls.MetroTrackBar volumeBar;
     }
 }
 
