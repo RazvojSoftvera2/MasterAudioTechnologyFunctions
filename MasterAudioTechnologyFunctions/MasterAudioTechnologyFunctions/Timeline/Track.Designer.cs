@@ -117,12 +117,12 @@
             // 
             // pnlWaveViewer
             // 
+            this.pnlWaveViewer.BackColor = System.Drawing.Color.LightGray;
             this.pnlWaveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlWaveViewer.Location = new System.Drawing.Point(92, 0);
             this.pnlWaveViewer.Name = "pnlWaveViewer";
             this.pnlWaveViewer.Size = new System.Drawing.Size(557, 61);
             this.pnlWaveViewer.TabIndex = 2;
-          
             this.pnlWaveViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlWaveViewer_MouseUp);
             // 
             // Track

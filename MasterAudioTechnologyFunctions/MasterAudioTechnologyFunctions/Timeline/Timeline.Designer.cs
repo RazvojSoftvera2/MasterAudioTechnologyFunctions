@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlTracks = new System.Windows.Forms.Panel();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
-            this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,6 +44,17 @@
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(477, 30);
             this.pnlBottom.TabIndex = 1;
+            // 
+            // btnAddTrack
+            // 
+            this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.plus;
+            this.btnAddTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddTrack.Location = new System.Drawing.Point(3, 3);
+            this.btnAddTrack.Name = "btnAddTrack";
+            this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
+            this.btnAddTrack.TabIndex = 0;
+            this.btnAddTrack.UseVisualStyleBackColor = true;
+            this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
             // 
             // pnlTracks
             // 
@@ -58,22 +69,11 @@
             this.tmrSong.Interval = 10;
             this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
             // 
-            // btnAddTrack
-            // 
-            this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.plus;
-            this.btnAddTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddTrack.Location = new System.Drawing.Point(3, 3);
-            this.btnAddTrack.Name = "btnAddTrack";
-            this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
-            this.btnAddTrack.TabIndex = 0;
-            this.btnAddTrack.UseVisualStyleBackColor = true;
-            this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
-            // 
             // Timeline
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkGray;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pnlTracks);
             this.Controls.Add(this.pnlBottom);
             this.Name = "Timeline";
