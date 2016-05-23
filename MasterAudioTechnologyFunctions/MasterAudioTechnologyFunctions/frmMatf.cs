@@ -75,7 +75,6 @@ namespace MasterAudioTechnologyFunctions
         #endregion Menu
 
         #region PlayButtons
-
         private void btnPlay_Click(object sender, EventArgs e)
         {
             //  if (_playing)
@@ -97,6 +96,7 @@ namespace MasterAudioTechnologyFunctions
         {
             // TODO: Stop all tracks
             timeLine.Stop();
+
         }
 
         private void btnLoop_Click(object sender, EventArgs e)
@@ -114,10 +114,6 @@ namespace MasterAudioTechnologyFunctions
             }*/
         }
         #endregion PlayButtons
-
-
-
-
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {

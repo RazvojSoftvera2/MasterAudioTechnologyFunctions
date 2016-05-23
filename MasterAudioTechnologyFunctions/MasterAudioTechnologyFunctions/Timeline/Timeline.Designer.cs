@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnAddTrack = new System.Windows.Forms.Button();
+            this.btnAddTrack = new MetroFramework.Controls.MetroButton();
             this.pnlTracks = new System.Windows.Forms.Panel();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlBottom.SuspendLayout();
@@ -47,13 +47,17 @@
             // 
             // btnAddTrack
             // 
-            this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.plus;
-            this.btnAddTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddTrack.Location = new System.Drawing.Point(3, 3);
+            this.btnAddTrack.BackColor = System.Drawing.Color.White;
+            this.btnAddTrack.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btnAddTrack.Location = new System.Drawing.Point(4, 4);
             this.btnAddTrack.Name = "btnAddTrack";
-            this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
+            this.btnAddTrack.Size = new System.Drawing.Size(27, 23);
             this.btnAddTrack.TabIndex = 0;
-            this.btnAddTrack.UseVisualStyleBackColor = true;
+            this.btnAddTrack.Text = "+";
+            this.btnAddTrack.UseCustomBackColor = true;
+            this.btnAddTrack.UseCustomForeColor = true;
+            this.btnAddTrack.UseSelectable = true;
+            this.btnAddTrack.UseStyleColors = true;
             this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
             // 
             // pnlTracks
@@ -84,10 +88,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAddTrack;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Panel pnlTracks;
         private System.Windows.Forms.Timer tmrSong;
+        private MetroFramework.Controls.MetroButton btnAddTrack;
     }
 }
