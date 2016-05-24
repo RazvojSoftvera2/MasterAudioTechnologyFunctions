@@ -25,7 +25,9 @@ namespace MasterAudioTechnologyFunctions
         public frmMatf()
         {
             InitializeComponent();
-            metroStyleManager.Theme = MetroThemeStyle.Dark;
+            this.StyleManager = metroStyleManager;
+            this.timeLine.Parent = this.pnlSong;
+            this.pnlSong.Parent = this;
         }
 
         public void SetTime(long time)
@@ -84,9 +86,83 @@ namespace MasterAudioTechnologyFunctions
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MetroMessageBox.Show(this, "This is a sample audio App" +
+            MetroMessageBox.Show(this, "This is a sample audio App " +
                                        "for audio manipulation and mixing.", 
                                 "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = MetroThemeStyle.Dark;
+        }
+
+        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = MetroThemeStyle.Light;
+        }
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Green;
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Blue;
+        }
+
+        private void silverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Silver;
+        }
+
+        private void limeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Lime;
+        }
+
+        private void magentaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Magenta;
+        }
+
+        private void brownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Brown;
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Orange;
+        }
+
+        private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Pink;
+        }
+
+        private void purpleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Purple;
+        }
+
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Red;
+        }
+
+        private void tealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Teal;
+        }
+
+        private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.White;
+        }
+
+        private void yelowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Yellow;
         }
         #endregion Menu
 
@@ -157,6 +233,5 @@ namespace MasterAudioTechnologyFunctions
         {
             timeLine.ChangeVolume((float)volumeBar.Value / 100);
         }
-        
     }
 }

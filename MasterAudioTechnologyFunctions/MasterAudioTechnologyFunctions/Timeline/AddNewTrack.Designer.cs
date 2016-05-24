@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblName = new System.Windows.Forms.Label();
             this.tbName = new MetroFramework.Controls.MetroTextBox();
             this.btnColor = new MetroFramework.Controls.MetroButton();
@@ -35,6 +36,8 @@
             this.btnCancel = new MetroFramework.Controls.MetroButton();
             this.btnOk = new MetroFramework.Controls.MetroButton();
             this.btnOpen = new MetroFramework.Controls.MetroButton();
+            this.addTrackDesigner = new MetroFramework.Components.MetroStyleManager(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.addTrackDesigner)).BeginInit();
             this.SuspendLayout();
             // 
             // lblName
@@ -42,7 +45,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblName.Location = new System.Drawing.Point(9, 62);
+            this.lblName.Location = new System.Drawing.Point(14, 66);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(41, 15);
             this.lblName.TabIndex = 0;
@@ -65,7 +68,7 @@
             this.tbName.CustomButton.Visible = false;
             this.tbName.Lines = new string[] {
         "New Track"};
-            this.tbName.Location = new System.Drawing.Point(56, 62);
+            this.tbName.Location = new System.Drawing.Point(61, 66);
             this.tbName.MaxLength = 32767;
             this.tbName.Name = "tbName";
             this.tbName.PasswordChar = '\0';
@@ -83,7 +86,7 @@
             // 
             // btnColor
             // 
-            this.btnColor.Location = new System.Drawing.Point(12, 117);
+            this.btnColor.Location = new System.Drawing.Point(17, 121);
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(144, 23);
             this.btnColor.TabIndex = 3;
@@ -94,7 +97,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(12, 146);
+            this.btnCancel.Location = new System.Drawing.Point(17, 150);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(71, 23);
             this.btnCancel.TabIndex = 4;
@@ -104,7 +107,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(85, 146);
+            this.btnOk.Location = new System.Drawing.Point(90, 150);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(71, 23);
             this.btnOk.TabIndex = 5;
@@ -114,7 +117,7 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(12, 88);
+            this.btnOpen.Location = new System.Drawing.Point(17, 92);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(144, 23);
             this.btnOpen.TabIndex = 2;
@@ -122,13 +125,17 @@
             this.btnOpen.UseSelectable = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
+            // addTrackDesigner
+            // 
+            this.addTrackDesigner.Owner = this;
+            // 
             // AddNewTrack
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(164, 212);
+            this.ClientSize = new System.Drawing.Size(180, 195);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
@@ -139,6 +146,7 @@
             this.Name = "AddNewTrack";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Track";
+            ((System.ComponentModel.ISupportInitialize)(this.addTrackDesigner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +161,6 @@
         private MetroFramework.Controls.MetroTextBox tbName;
         private System.Windows.Forms.Label lblName;
         private MetroFramework.Controls.MetroButton btnOpen;
+        private MetroFramework.Components.MetroStyleManager addTrackDesigner;
     }
 }

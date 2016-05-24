@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using MetroFramework;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public AddNewTrack()
         {
             InitializeComponent();
+            this.StyleManager = addTrackDesigner;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
