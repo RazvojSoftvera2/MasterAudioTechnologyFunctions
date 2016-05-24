@@ -29,21 +29,43 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pnlTopBar = new System.Windows.Forms.Panel();
+            this.pnlTopBar = new MetroFramework.Controls.MetroPanel();
             this.lblTimeElapsed = new MetroFramework.Controls.MetroLabel();
             this.progressBar = new MetroFramework.Controls.MetroScrollBar();
-            this.pnlSideBar = new System.Windows.Forms.Panel();
+            this.pnlSideBar = new MetroFramework.Controls.MetroPanel();
+            this.volumeLabel = new MetroFramework.Controls.MetroLabel();
             this.volumeBar = new MetroFramework.Controls.MetroTrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pnlVolume = new System.Windows.Forms.Panel();
-            this.pnlPlay = new System.Windows.Forms.Panel();
-            this.pnlSong = new System.Windows.Forms.Panel();
+            this.pnlVolume = new MetroFramework.Controls.MetroPanel();
+            this.pnlPlay = new MetroFramework.Controls.MetroPanel();
+            this.btnLoop = new MetroFramework.Controls.MetroButton();
+            this.btnStop = new MetroFramework.Controls.MetroButton();
+            this.btnPlay = new MetroFramework.Controls.MetroButton();
+            this.pnlSong = new MetroFramework.Controls.MetroPanel();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlMenu = new MetroFramework.Controls.MetroPanel();
+            this.btnAbout = new MetroFramework.Controls.MetroButton();
+            this.btnView = new MetroFramework.Controls.MetroButton();
             this.btnFile = new MetroFramework.Controls.MetroButton();
-            this.btnPlay = new MetroFramework.Controls.MetroButton();
-            this.btnStop = new MetroFramework.Controls.MetroButton();
-            this.btnLoop = new MetroFramework.Controls.MetroButton();
+            this.menuFile = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importWAVMP3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportWAVMP3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuView = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.themesStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.themesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.greyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAbout = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
@@ -52,31 +74,41 @@
             this.pnlSong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlMenu.SuspendLayout();
+            this.menuFile.SuspendLayout();
+            this.menuView.SuspendLayout();
+            this.menuAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTopBar
             // 
             this.pnlTopBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTopBar.BackColor = System.Drawing.Color.Transparent;
+            this.pnlTopBar.BackColor = System.Drawing.Color.White;
             this.pnlTopBar.Controls.Add(this.lblTimeElapsed);
             this.pnlTopBar.Controls.Add(this.progressBar);
+            this.pnlTopBar.HorizontalScrollbarBarColor = true;
+            this.pnlTopBar.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlTopBar.HorizontalScrollbarSize = 10;
             this.pnlTopBar.Location = new System.Drawing.Point(139, 91);
             this.pnlTopBar.Name = "pnlTopBar";
             this.pnlTopBar.Size = new System.Drawing.Size(687, 30);
             this.pnlTopBar.TabIndex = 1;
-            this.pnlTopBar.Leave += new System.EventHandler(this.pnlMenu_Leave);
+            this.pnlTopBar.UseStyleColors = true;
+            this.pnlTopBar.VerticalScrollbarBarColor = true;
+            this.pnlTopBar.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlTopBar.VerticalScrollbarSize = 10;
             // 
             // lblTimeElapsed
             // 
             this.lblTimeElapsed.AutoSize = true;
+            this.lblTimeElapsed.BackColor = System.Drawing.SystemColors.Control;
             this.lblTimeElapsed.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.lblTimeElapsed.Location = new System.Drawing.Point(6, 5);
             this.lblTimeElapsed.Name = "lblTimeElapsed";
             this.lblTimeElapsed.Size = new System.Drawing.Size(73, 19);
-            this.lblTimeElapsed.TabIndex = 6;
+            this.lblTimeElapsed.TabIndex = 8;
             this.lblTimeElapsed.Text = "00:00:000";
-            this.lblTimeElapsed.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.lblTimeElapsed.UseStyleColors = true;
             // 
             // progressBar
             // 
@@ -98,14 +130,33 @@
             // 
             this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.White;
+            this.pnlSideBar.Controls.Add(this.volumeLabel);
             this.pnlSideBar.Controls.Add(this.volumeBar);
-            this.pnlSideBar.Controls.Add(this.label1);
             this.pnlSideBar.Controls.Add(this.pnlVolume);
             this.pnlSideBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlSideBar.HorizontalScrollbar = true;
+            this.pnlSideBar.HorizontalScrollbarBarColor = true;
+            this.pnlSideBar.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlSideBar.HorizontalScrollbarSize = 10;
             this.pnlSideBar.Location = new System.Drawing.Point(20, 91);
             this.pnlSideBar.Name = "pnlSideBar";
             this.pnlSideBar.Size = new System.Drawing.Size(117, 334);
             this.pnlSideBar.TabIndex = 2;
+            this.pnlSideBar.VerticalScrollbar = true;
+            this.pnlSideBar.VerticalScrollbarBarColor = true;
+            this.pnlSideBar.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlSideBar.VerticalScrollbarSize = 10;
+            // 
+            // volumeLabel
+            // 
+            this.volumeLabel.AutoSize = true;
+            this.volumeLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.volumeLabel.Location = new System.Drawing.Point(3, 103);
+            this.volumeLabel.Name = "volumeLabel";
+            this.volumeLabel.Size = new System.Drawing.Size(109, 19);
+            this.volumeLabel.TabIndex = 8;
+            this.volumeLabel.Text = "Master Volume";
+            this.volumeLabel.UseStyleColors = true;
             // 
             // volumeBar
             // 
@@ -117,25 +168,23 @@
             this.volumeBar.TabIndex = 7;
             this.volumeBar.Text = "volumeBar";
             this.volumeBar.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.volumeBar.UseCustomBackColor = true;
             this.volumeBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.volumeBar_Scroll);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 103);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Master Volume";
             // 
             // pnlVolume
             // 
             this.pnlVolume.Controls.Add(this.pnlPlay);
             this.pnlVolume.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlVolume.HorizontalScrollbarBarColor = true;
+            this.pnlVolume.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlVolume.HorizontalScrollbarSize = 10;
             this.pnlVolume.Location = new System.Drawing.Point(0, 0);
             this.pnlVolume.Name = "pnlVolume";
             this.pnlVolume.Size = new System.Drawing.Size(117, 100);
             this.pnlVolume.TabIndex = 4;
+            this.pnlVolume.VerticalScrollbarBarColor = true;
+            this.pnlVolume.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlVolume.VerticalScrollbarSize = 10;
             // 
             // pnlPlay
             // 
@@ -144,10 +193,61 @@
             this.pnlPlay.Controls.Add(this.btnStop);
             this.pnlPlay.Controls.Add(this.btnPlay);
             this.pnlPlay.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlPlay.HorizontalScrollbarBarColor = true;
+            this.pnlPlay.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlPlay.HorizontalScrollbarSize = 10;
             this.pnlPlay.Location = new System.Drawing.Point(0, 0);
             this.pnlPlay.Name = "pnlPlay";
             this.pnlPlay.Size = new System.Drawing.Size(117, 100);
             this.pnlPlay.TabIndex = 3;
+            this.pnlPlay.VerticalScrollbarBarColor = true;
+            this.pnlPlay.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlPlay.VerticalScrollbarSize = 10;
+            // 
+            // btnLoop
+            // 
+            this.btnLoop.BackColor = System.Drawing.SystemColors.Control;
+            this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnLoop.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btnLoop.Location = new System.Drawing.Point(60, 0);
+            this.btnLoop.Name = "btnLoop";
+            this.btnLoop.Size = new System.Drawing.Size(30, 100);
+            this.btnLoop.TabIndex = 7;
+            this.btnLoop.Text = "L";
+            this.btnLoop.UseSelectable = true;
+            this.btnLoop.UseStyleColors = true;
+            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.SystemColors.Control;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnStop.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btnStop.Location = new System.Drawing.Point(30, 0);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(30, 100);
+            this.btnStop.TabIndex = 6;
+            this.btnStop.Text = "S";
+            this.btnStop.UseSelectable = true;
+            this.btnStop.UseStyleColors = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnPlay.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.btnPlay.Location = new System.Drawing.Point(0, 0);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(30, 100);
+            this.btnPlay.TabIndex = 5;
+            this.btnPlay.Text = "PL";
+            this.btnPlay.UseSelectable = true;
+            this.btnPlay.UseStyleColors = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // pnlSong
             // 
@@ -155,13 +255,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSong.AutoScroll = true;
-            this.pnlSong.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSong.BackColor = System.Drawing.Color.White;
             this.pnlSong.Controls.Add(this.timeLine);
+            this.pnlSong.HorizontalScrollbar = true;
+            this.pnlSong.HorizontalScrollbarBarColor = true;
+            this.pnlSong.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlSong.HorizontalScrollbarSize = 10;
             this.pnlSong.Location = new System.Drawing.Point(139, 125);
             this.pnlSong.MinimumSize = new System.Drawing.Size(30, 30);
             this.pnlSong.Name = "pnlSong";
             this.pnlSong.Size = new System.Drawing.Size(687, 300);
             this.pnlSong.TabIndex = 4;
+            this.pnlSong.VerticalScrollbar = true;
+            this.pnlSong.VerticalScrollbarBarColor = true;
+            this.pnlSong.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlSong.VerticalScrollbarSize = 10;
             // 
             // metroStyleManager
             // 
@@ -170,6 +278,9 @@
             // 
             // pnlMenu
             // 
+            this.pnlMenu.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMenu.Controls.Add(this.btnAbout);
+            this.pnlMenu.Controls.Add(this.btnView);
             this.pnlMenu.Controls.Add(this.btnFile);
             this.pnlMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenu.HorizontalScrollbarBarColor = true;
@@ -178,70 +289,192 @@
             this.pnlMenu.Location = new System.Drawing.Point(20, 60);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(804, 25);
-            this.pnlMenu.TabIndex = 1;
-            this.pnlMenu.UseCustomBackColor = true;
-            this.pnlMenu.UseCustomForeColor = true;
+            this.pnlMenu.TabIndex = 8;
+            this.pnlMenu.VerticalScrollbar = true;
             this.pnlMenu.VerticalScrollbarBarColor = true;
             this.pnlMenu.VerticalScrollbarHighlightOnWheel = false;
             this.pnlMenu.VerticalScrollbarSize = 10;
             // 
+            // btnAbout
+            // 
+            this.btnAbout.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAbout.Location = new System.Drawing.Point(146, 0);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(75, 25);
+            this.btnAbout.TabIndex = 4;
+            this.btnAbout.Text = "About";
+            this.btnAbout.UseSelectable = true;
+            this.btnAbout.UseStyleColors = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
+            // btnView
+            // 
+            this.btnView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnView.Location = new System.Drawing.Point(73, 0);
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(73, 25);
+            this.btnView.TabIndex = 3;
+            this.btnView.Text = "View";
+            this.btnView.UseSelectable = true;
+            this.btnView.UseStyleColors = true;
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            // 
             // btnFile
             // 
-            this.btnFile.BackColor = System.Drawing.Color.White;
+            this.btnFile.BackColor = System.Drawing.SystemColors.Control;
+            this.btnFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFile.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnFile.Location = new System.Drawing.Point(0, 0);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(73, 25);
             this.btnFile.TabIndex = 2;
             this.btnFile.Text = "File";
-            this.btnFile.UseCustomBackColor = true;
-            this.btnFile.UseCustomForeColor = true;
             this.btnFile.UseSelectable = true;
             this.btnFile.UseStyleColors = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
-            // btnPlay
+            // menuFile
             // 
-            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPlay.Location = new System.Drawing.Point(0, 0);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(30, 100);
-            this.btnPlay.TabIndex = 5;
-            this.btnPlay.Text = "PL";
-            this.btnPlay.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.btnPlay.UseCustomBackColor = true;
-            this.btnPlay.UseCustomForeColor = true;
-            this.btnPlay.UseSelectable = true;
-            this.btnPlay.UseStyleColors = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.menuFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.newProjectToolStripMenuItem,
+            this.saveProjectToolStripMenuItem,
+            this.saveProjectAsToolStripMenuItem,
+            this.importWAVMP3ToolStripMenuItem,
+            this.exportWAVMP3ToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.menuFile.Name = "menuFile";
+            this.menuFile.Size = new System.Drawing.Size(168, 158);
             // 
-            // btnStop
+            // openToolStripMenuItem
             // 
-            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnStop.Location = new System.Drawing.Point(30, 0);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(30, 100);
-            this.btnStop.TabIndex = 6;
-            this.btnStop.Text = "S";
-            this.btnStop.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.btnStop.UseCustomBackColor = true;
-            this.btnStop.UseCustomForeColor = true;
-            this.btnStop.UseSelectable = true;
-            this.btnStop.UseStyleColors = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // btnLoop
+            // newProjectToolStripMenuItem
             // 
-            this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLoop.Location = new System.Drawing.Point(60, 0);
-            this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(30, 100);
-            this.btnLoop.TabIndex = 7;
-            this.btnLoop.Text = "L";
-            this.btnLoop.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.btnLoop.UseCustomBackColor = true;
-            this.btnLoop.UseCustomForeColor = true;
-            this.btnLoop.UseSelectable = true;
-            this.btnLoop.UseStyleColors = true;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
+            this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newProjectToolStripMenuItem.Text = "New project";
+            // 
+            // saveProjectToolStripMenuItem
+            // 
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.saveProjectToolStripMenuItem.Text = "Save project";
+            // 
+            // saveProjectAsToolStripMenuItem
+            // 
+            this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
+            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.saveProjectAsToolStripMenuItem.Text = "Save project as";
+            // 
+            // importWAVMP3ToolStripMenuItem
+            // 
+            this.importWAVMP3ToolStripMenuItem.Name = "importWAVMP3ToolStripMenuItem";
+            this.importWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.importWAVMP3ToolStripMenuItem.Text = "Import WAV/MP3";
+            // 
+            // exportWAVMP3ToolStripMenuItem
+            // 
+            this.exportWAVMP3ToolStripMenuItem.Name = "exportWAVMP3ToolStripMenuItem";
+            this.exportWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.exportWAVMP3ToolStripMenuItem.Text = "Export WAV/MP3";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // menuView
+            // 
+            this.menuView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.themesStylesToolStripMenuItem});
+            this.menuView.Name = "menuView";
+            this.menuView.Size = new System.Drawing.Size(152, 26);
+            // 
+            // themesStylesToolStripMenuItem
+            // 
+            this.themesStylesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.themesToolStripMenuItem,
+            this.stylesToolStripMenuItem});
+            this.themesStylesToolStripMenuItem.Name = "themesStylesToolStripMenuItem";
+            this.themesStylesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.themesStylesToolStripMenuItem.Text = "Themes & styles";
+            // 
+            // themesToolStripMenuItem
+            // 
+            this.themesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.darkToolStripMenuItem,
+            this.lightToolStripMenuItem});
+            this.themesToolStripMenuItem.Name = "themesToolStripMenuItem";
+            this.themesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.themesToolStripMenuItem.Text = "Themes";
+            // 
+            // darkToolStripMenuItem
+            // 
+            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.darkToolStripMenuItem.Text = "Dark";
+            // 
+            // lightToolStripMenuItem
+            // 
+            this.lightToolStripMenuItem.Name = "lightToolStripMenuItem";
+            this.lightToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.lightToolStripMenuItem.Text = "Light";
+            // 
+            // stylesToolStripMenuItem
+            // 
+            this.stylesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.greenToolStripMenuItem,
+            this.blueToolStripMenuItem,
+            this.greyToolStripMenuItem});
+            this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.stylesToolStripMenuItem.Text = "Styles";
+            // 
+            // greenToolStripMenuItem
+            // 
+            this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.greenToolStripMenuItem.Text = "Green";
+            // 
+            // blueToolStripMenuItem
+            // 
+            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.blueToolStripMenuItem.Text = "Blue";
+            // 
+            // greyToolStripMenuItem
+            // 
+            this.greyToolStripMenuItem.Name = "greyToolStripMenuItem";
+            this.greyToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.greyToolStripMenuItem.Text = "Grey";
+            // 
+            // menuAbout
+            // 
+            this.menuAbout.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuAbout.Name = "menuAbout";
+            this.menuAbout.Size = new System.Drawing.Size(108, 48);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // timeLine
             // 
@@ -255,6 +488,7 @@
             // 
             // frmMatf
             // 
+            this.ApplyImageInvert = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 448);
@@ -273,19 +507,16 @@
             this.pnlSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.pnlMenu.ResumeLayout(false);
+            this.menuFile.ResumeLayout(false);
+            this.menuView.ResumeLayout(false);
+            this.menuAbout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel pnlTopBar;
-        private System.Windows.Forms.Panel pnlSideBar;
-        private System.Windows.Forms.Panel pnlVolume;
-        private System.Windows.Forms.Panel pnlSong;
         private Timeline.Timeline timeLine;
-        private System.Windows.Forms.Label label1;
         private MetroFramework.Components.MetroStyleManager metroStyleManager;
-        private System.Windows.Forms.Panel pnlPlay;
         private MetroFramework.Controls.MetroScrollBar progressBar;
         private MetroFramework.Controls.MetroTrackBar volumeBar;
         private MetroFramework.Controls.MetroLabel lblTimeElapsed;
@@ -294,6 +525,34 @@
         private MetroFramework.Controls.MetroButton btnPlay;
         private MetroFramework.Controls.MetroButton btnStop;
         private MetroFramework.Controls.MetroButton btnLoop;
+        private MetroFramework.Controls.MetroLabel volumeLabel;
+        private MetroFramework.Controls.MetroPanel pnlTopBar;
+        private MetroFramework.Controls.MetroPanel pnlSideBar;
+        private MetroFramework.Controls.MetroPanel pnlVolume;
+        private MetroFramework.Controls.MetroPanel pnlSong;
+        private MetroFramework.Controls.MetroPanel pnlPlay;
+        private MetroFramework.Controls.MetroButton btnView;
+        private MetroFramework.Controls.MetroButton btnAbout;
+        private MetroFramework.Controls.MetroContextMenu menuFile;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importWAVMP3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportWAVMP3ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private MetroFramework.Controls.MetroContextMenu menuView;
+        private System.Windows.Forms.ToolStripMenuItem themesStylesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem themesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem lightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stylesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem greyToolStripMenuItem;
+        private MetroFramework.Controls.MetroContextMenu menuAbout;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

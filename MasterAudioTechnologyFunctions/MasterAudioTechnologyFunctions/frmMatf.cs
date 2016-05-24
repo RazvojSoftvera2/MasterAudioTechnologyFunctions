@@ -25,7 +25,7 @@ namespace MasterAudioTechnologyFunctions
         public frmMatf()
         {
             InitializeComponent();
-            //metroStyleManager.Theme = MetroThemeStyle.Dark;
+            metroStyleManager.Theme = MetroThemeStyle.Dark;
         }
 
         public void SetTime(long time)
@@ -37,12 +37,27 @@ namespace MasterAudioTechnologyFunctions
 
         #region Menu
 
-        private void pnlMenu_Leave(object sender, EventArgs e)
+        private void btnFile_Click(object sender, EventArgs e)
         {
-            // pnlMenu.Hide();
+            menuFile.Show(btnFile, new Point(0, btnFile.Height));
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            menuView.Show(btnView, new Point(0, btnView.Height));
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            menuAbout.Show(btnAbout, new Point(0, btnAbout.Height));
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO: Stop current play
             //_playing = false;
@@ -52,7 +67,7 @@ namespace MasterAudioTechnologyFunctions
             //    _waveOut.Stop();
             //    _waveOut.Dispose();
             //}
-            
+
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "MATF projects (.matf)|*.matf";
 
@@ -63,14 +78,15 @@ namespace MasterAudioTechnologyFunctions
             // TODO: Load project
 
             //trbTime.Maximum = (int) _waveOffsetStream.Length;
-            
+
             Text = SoftwareName + " - " + _openedFile;
-            
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            MetroMessageBox.Show(this, "This is a sample audio App" +
+                                       "for audio manipulation and mixing.", 
+                                "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion Menu
 
@@ -141,5 +157,6 @@ namespace MasterAudioTechnologyFunctions
         {
             timeLine.ChangeVolume((float)volumeBar.Value / 100);
         }
+        
     }
 }
