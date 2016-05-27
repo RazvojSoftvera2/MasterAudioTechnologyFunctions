@@ -21,7 +21,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public AddNewTrack()
         {
             InitializeComponent();
-            this.StyleManager = addTrackDesigner;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
@@ -32,6 +31,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public AddNewTrack(string name, string fileName, Color color)
         {
             InitializeComponent();
+            this.MinimizeBox = false;
+            this.MaximizeBox = false;
+            this.Resizable = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
             TrackName = name;
             TrackFileName = fileName;

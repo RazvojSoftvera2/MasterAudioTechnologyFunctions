@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lblName = new System.Windows.Forms.Label();
             this.tbName = new MetroFramework.Controls.MetroTextBox();
             this.btnColor = new MetroFramework.Controls.MetroButton();
@@ -36,8 +35,6 @@
             this.btnCancel = new MetroFramework.Controls.MetroButton();
             this.btnOk = new MetroFramework.Controls.MetroButton();
             this.btnOpen = new MetroFramework.Controls.MetroButton();
-            this.addTrackDesigner = new MetroFramework.Components.MetroStyleManager(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.addTrackDesigner)).BeginInit();
             this.SuspendLayout();
             // 
             // lblName
@@ -125,10 +122,6 @@
             this.btnOpen.UseSelectable = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
-            // addTrackDesigner
-            // 
-            this.addTrackDesigner.Owner = this;
-            // 
             // AddNewTrack
             // 
             this.AcceptButton = this.btnOk;
@@ -146,7 +139,6 @@
             this.Name = "AddNewTrack";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Track";
-            ((System.ComponentModel.ISupportInitialize)(this.addTrackDesigner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,6 +153,5 @@
         private MetroFramework.Controls.MetroTextBox tbName;
         private System.Windows.Forms.Label lblName;
         private MetroFramework.Controls.MetroButton btnOpen;
-        private MetroFramework.Components.MetroStyleManager addTrackDesigner;
     }
 }
