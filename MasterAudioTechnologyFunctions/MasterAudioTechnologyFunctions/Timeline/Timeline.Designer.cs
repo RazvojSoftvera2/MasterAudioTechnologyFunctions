@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnAddTrack = new System.Windows.Forms.Button();
+            this.btnAddTrack = new MetroFramework.Controls.MetroButton();
             this.pnlTracks = new System.Windows.Forms.Panel();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlBottom.SuspendLayout();
@@ -38,22 +38,25 @@
             // 
             // pnlBottom
             // 
+            this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
             this.pnlBottom.Controls.Add(this.btnAddTrack);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 1);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 3);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(477, 30);
+            this.pnlBottom.Size = new System.Drawing.Size(477, 28);
             this.pnlBottom.TabIndex = 1;
             // 
             // btnAddTrack
             // 
-            this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.plus;
-            this.btnAddTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnAddTrack.Location = new System.Drawing.Point(3, 3);
+            this.btnAddTrack.BackColor = System.Drawing.Color.White;
+            this.btnAddTrack.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnAddTrack.Location = new System.Drawing.Point(0, 2);
             this.btnAddTrack.Name = "btnAddTrack";
-            this.btnAddTrack.Size = new System.Drawing.Size(25, 23);
+            this.btnAddTrack.Size = new System.Drawing.Size(27, 23);
             this.btnAddTrack.TabIndex = 0;
-            this.btnAddTrack.UseVisualStyleBackColor = true;
+            this.btnAddTrack.Text = "+";
+            this.btnAddTrack.UseSelectable = true;
+            this.btnAddTrack.UseStyleColors = true;
             this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
             // 
             // pnlTracks
@@ -61,7 +64,7 @@
             this.pnlTracks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTracks.Location = new System.Drawing.Point(0, 0);
             this.pnlTracks.Name = "pnlTracks";
-            this.pnlTracks.Size = new System.Drawing.Size(477, 1);
+            this.pnlTracks.Size = new System.Drawing.Size(477, 3);
             this.pnlTracks.TabIndex = 0;
             // 
             // tmrSong
@@ -73,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkGray;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pnlTracks);
             this.Controls.Add(this.pnlBottom);
             this.Name = "Timeline";
@@ -84,10 +87,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnAddTrack;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Panel pnlTracks;
         private System.Windows.Forms.Timer tmrSong;
+        private MetroFramework.Controls.MetroButton btnAddTrack;
     }
 }

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 using MasterAudioTechnologyFunctions.Timeline;
+using MetroFramework.Forms;
+using MetroFramework;
 
 namespace MasterAudioTechnologyFunctions
 {
-    public partial class frmMatf : Form
+    public partial class frmMatf : MetroForm
     {
-        
+
         public static string SoftwareName = "Master Audio Technology Functions";
         private string _openedFile;
         private bool _playing = false;
@@ -24,7 +26,9 @@ namespace MasterAudioTechnologyFunctions
         public frmMatf()
         {
             InitializeComponent();
-            pnlMenu.Hide();
+            this.StyleManager = metroStyleManager;
+            this.timeLine.Parent = this.pnlSong;
+            this.pnlSong.Parent = this;
         }
 
         public void SetTime(long time)
@@ -48,20 +52,28 @@ namespace MasterAudioTechnologyFunctions
         }
 
         #region Menu
-        private void btnMenu_Click(object sender, EventArgs e)
+
+        private void btnFile_Click(object sender, EventArgs e)
         {
-            if (pnlMenu.Visible)
-                pnlMenu.Hide();
-            else
-                pnlMenu.Show();
+            menuFile.Show(btnFile, new Point(0, btnFile.Height));
         }
 
-        private void pnlMenu_Leave(object sender, EventArgs e)
+        private void btnView_Click(object sender, EventArgs e)
         {
-            // pnlMenu.Hide();
+            menuView.Show(btnView, new Point(0, btnView.Height));
         }
 
-        private void btnOpen_Click(object sender, EventArgs e)
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            menuAbout.Show(btnAbout, new Point(0, btnAbout.Height));
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO: Stop current play
             //_playing = false;
@@ -71,7 +83,7 @@ namespace MasterAudioTechnologyFunctions
             //    _waveOut.Stop();
             //    _waveOut.Dispose();
             //}
-            
+
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "MATF projects (.matf)|*.matf";
 
@@ -82,44 +94,117 @@ namespace MasterAudioTechnologyFunctions
             // TODO: Load project
 
             //trbTime.Maximum = (int) _waveOffsetStream.Length;
-            
+
             Text = SoftwareName + " - " + _openedFile;
-            
-            pnlMenu.Hide();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Close();
+            MetroMessageBox.Show(this, "This is a sample audio App " +
+                                       "for audio manipulation and mixing.",
+                                "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = MetroThemeStyle.Dark;
+        }
+
+        private void lightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Theme = MetroThemeStyle.Light;
+        }
+        private void greenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Green;
+        }
+
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Blue;
+        }
+
+        private void silverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Silver;
+        }
+
+        private void limeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Lime;
+        }
+
+        private void magentaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Magenta;
+        }
+
+        private void brownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Brown;
+        }
+
+        private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Orange;
+        }
+
+        private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Pink;
+        }
+
+        private void purpleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Purple;
+        }
+
+        private void redToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Red;
+        }
+
+        private void tealToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Teal;
+        }
+
+        private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.White;
+        }
+
+        private void yelowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            metroStyleManager.Style = MetroColorStyle.Yellow;
         }
         #endregion Menu
 
         #region PlayButtons
         private void btnPlay_Click(object sender, EventArgs e)
         {
-          //  if (_playing)
-          //  {
-                // TODO: Pause all tracks
-                //Pause();
-          //      _playing = false;
-         //   }
-        //    else
-        //    {
-                // TODO: Play all tracks
-                //Play();
-         //       _playing = true;
-                timeLine.Play();
-        //    }
+            //  if (_playing)
+            //  {
+            // TODO: Pause all tracks
+            //Pause();
+            //      _playing = false;
+            //   }
+            //    else
+            //    {
+            // TODO: Play all tracks
+            //Play();
+            //       _playing = true;
+            timeLine.Play();
+            //    }
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             // TODO: Stop all tracks
             timeLine.Stop();
-            
 
         }
-        
+
         private void btnLoop_Click(object sender, EventArgs e)
         {
             /* TODO: Refactor for Timeline
@@ -137,9 +222,6 @@ namespace MasterAudioTechnologyFunctions
 
 
         #endregion PlayButtons
-
-
-
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {
@@ -163,9 +245,9 @@ namespace MasterAudioTechnologyFunctions
             //Play();
         }
 
-        private void volumeBar_Scroll(object sender, EventArgs e)
+        private void volumeBar_Scroll(object sender, ScrollEventArgs e)
         {
-            timeLine.ChangeVolume((float)volumeBar.Value/10);
+            timeLine.ChangeVolume((float)volumeBar.Value / 100);
         }
 
         private void tmrMain_Tick(object sender, EventArgs e)
