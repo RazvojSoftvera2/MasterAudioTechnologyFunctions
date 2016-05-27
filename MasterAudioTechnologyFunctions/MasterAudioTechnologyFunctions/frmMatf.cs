@@ -18,7 +18,8 @@ namespace MasterAudioTechnologyFunctions
         public static string SoftwareName = "Master Audio Technology Functions";
         private string _openedFile;
         private bool _playing = false;
-        public long Timer = 0;
+        //public long Timer = 0;
+        public TimeSpan Timer = new TimeSpan();
 
         public frmMatf()
         {
@@ -31,6 +32,19 @@ namespace MasterAudioTechnologyFunctions
             // TODO: Convert time to hh:mm:ss:fff
             // Curently presented in number of miliseconds elapsed
             lblTimeElapsed.Text = time + "";
+        }
+
+        public void SetTime(string time)
+        {
+
+            lblTimeElapsed.Text = time;
+        }
+
+        internal void SetTime(TimeSpan timer)
+        {
+
+            lblTimeElapsed.Text = timer.Minutes.ToString("D2") + ":" + timer.Seconds.ToString("D2")
+                + ":" + timer.Milliseconds.ToString("D3");
         }
 
         #region Menu
@@ -120,11 +134,12 @@ namespace MasterAudioTechnologyFunctions
                 //btnLoop.Text = "L";
             }*/
         }
+
+
         #endregion PlayButtons
 
-   
-            
- 
+
+
 
         private void trbTime_Scroll(object sender, EventArgs e)
         {
@@ -152,5 +167,30 @@ namespace MasterAudioTechnologyFunctions
         {
             timeLine.ChangeVolume((float)volumeBar.Value/10);
         }
+
+        private void tmrMain_Tick(object sender, EventArgs e)
+        {
+            Timer = Timer.Add(new TimeSpan(0, 0, 0, 0, tmrMain.Interval));
+            SetTime(Timer);
+        }
+
+        public void resetTimer()
+        {
+            Timer = new TimeSpan(0);
+            SetTime(Timer);
+        }
+
+        public void enableTmrMain()
+        {
+            tmrMain.Enabled = true;
+        }
+
+        public void disableTmrMain()
+        {
+            tmrMain.Enabled = false;
+        }
     }
+
+
+
 }

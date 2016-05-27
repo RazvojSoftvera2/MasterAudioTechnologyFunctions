@@ -66,6 +66,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 if (t.WaveOut == null)
                 {
                     tmrSong.Enabled = false;
+                    parent.disableTmrMain();
                     return;
                 }
 
@@ -75,13 +76,13 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     {
                         long time = t.Times.ElementAt(i);
 
-                        if (!t.Playing[i] && parent.Timer >= time && parent.Timer <= time + t.TrackLen)
+                        if (!t.Playing[i] && parent.Timer.TotalMilliseconds >= time && parent.Timer.TotalMilliseconds <= time + t.TrackLen)
                         {
                             t.Playing[i] = true;
                             t.Play();
                         }
 
-                        if (t.Playing[i] && parent.Timer > time + t.TrackLen)
+                        if (t.Playing[i] && parent.Timer.TotalMilliseconds > time + t.TrackLen)
                         {
                             t.Stop();
                             t.Playing[i] = false;
@@ -91,25 +92,30 @@ namespace MasterAudioTechnologyFunctions.Timeline
             }
 
             // Remove previous line
-            DrawVerticalLine((int)parent.Timer + 92);
+           // DrawVerticalLine((int)parent.Timer.TotalMilliseconds + 92);
 
-            parent.Timer += tmrSong.Interval;
-            parent.SetTime(parent.Timer);
+            //parent.Timer += tmrSong.Interval;
+            //parent.Timer = parent.Timer.Add(new TimeSpan(0, 0, 0, 0, tmrSong.Interval));
+            //parent.SetTime(parent.Timer);
 
             // Draw new line
             // TODO: Remove hardcoding of pnlWaveViewer X position
             // 92: X position of pnlWaveViewer
-            DrawVerticalLine((int)parent.Timer + 92);
+         //   DrawVerticalLine((int)parent.Timer.TotalMilliseconds + 92);
         }
 
         public void Stop()
         {
 
             tmrSong.Enabled = false;
+            
 
             frmMatf parent = (frmMatf)Parent.Parent;
-            parent.Timer = 0;
-            parent.SetTime(parent.Timer);
+            parent.disableTmrMain();
+           
+           // parent.Timer = new TimeSpan(0);
+           // parent.SetTime(parent.Timer);
+            parent.resetTimer();
 
             foreach (Track t in _tracks)
             {
@@ -135,6 +141,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             }
 
             tmrSong.Enabled = true;
+            frmMatf parent = (frmMatf)this.Parent.Parent;
+            parent.enableTmrMain();
         }
 
         private void DrawVerticalLine(int x)

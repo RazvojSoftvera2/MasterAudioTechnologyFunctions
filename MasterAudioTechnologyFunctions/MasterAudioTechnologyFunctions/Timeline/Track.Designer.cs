@@ -122,7 +122,6 @@
             this.pnlWaveViewer.Name = "pnlWaveViewer";
             this.pnlWaveViewer.Size = new System.Drawing.Size(557, 61);
             this.pnlWaveViewer.TabIndex = 2;
-          
             this.pnlWaveViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlWaveViewer_MouseUp);
             // 
             // Track

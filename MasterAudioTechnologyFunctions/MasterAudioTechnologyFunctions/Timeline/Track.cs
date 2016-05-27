@@ -76,7 +76,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             lblTrackName.Text = TrackName;
 
-            TrackLen = (int)WaveOffsetStream.Length / 10000;
+            TrackLen = (int)WaveFileReader.TotalTime.TotalMilliseconds;
+        //    MessageBox.Show(WaveFileReader.TotalTime.TotalMilliseconds + "");
+        //    MessageBox.Show(WaveOffsetStream.Length / 10000 + "");
 
             //inicijalizovanje jacine zvuka
             WaveOut.Volume = TrackVolume;
@@ -133,7 +135,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             if (WaveOut.GetPosition() == 0)
             {
-                WaveOut.Play();
+                try
+                {
+                    WaveOut.Play();
+                }
+                catch
+                {
+
+                }
+                
             }
             else
             {

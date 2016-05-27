@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlTracks = new System.Windows.Forms.Panel();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
-            this.btnAddTrack = new System.Windows.Forms.Button();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,19 +45,6 @@
             this.pnlBottom.Size = new System.Drawing.Size(477, 30);
             this.pnlBottom.TabIndex = 1;
             // 
-            // pnlTracks
-            // 
-            this.pnlTracks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTracks.Location = new System.Drawing.Point(0, 0);
-            this.pnlTracks.Name = "pnlTracks";
-            this.pnlTracks.Size = new System.Drawing.Size(477, 1);
-            this.pnlTracks.TabIndex = 0;
-            // 
-            // tmrSong
-            // 
-            this.tmrSong.Interval = 10;
-            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
-            // 
             // btnAddTrack
             // 
             this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.plus;
@@ -68,6 +55,19 @@
             this.btnAddTrack.TabIndex = 0;
             this.btnAddTrack.UseVisualStyleBackColor = true;
             this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
+            // 
+            // pnlTracks
+            // 
+            this.pnlTracks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTracks.Location = new System.Drawing.Point(0, 0);
+            this.pnlTracks.Name = "pnlTracks";
+            this.pnlTracks.Size = new System.Drawing.Size(477, 1);
+            this.pnlTracks.TabIndex = 0;
+            // 
+            // tmrSong
+            // 
+            this.tmrSong.Interval = 1000;
+            this.tmrSong.Tick += new System.EventHandler(this.tmrSong_Tick);
             // 
             // Timeline
             // 
