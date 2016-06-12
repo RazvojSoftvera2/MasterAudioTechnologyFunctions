@@ -42,7 +42,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
 
             _tracks.Add(newTrack);
-            newTrack.Dock = DockStyle.Top;
+            newTrack.Dock = DockStyle.Bottom;
             pnlTracks.Controls.Add(newTrack);
 
             Height += newTrack.Height;
@@ -77,14 +77,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     for (int i = 0; i < t.Tracks.Count; i++)
                     {
                         long time = t.Times.ElementAt(i);
+                        var totalMilliseconds = parent.Timer.TotalMilliseconds;
 
-                        if (!t.Playing[i] && parent.Timer.TotalMilliseconds >= time && parent.Timer.TotalMilliseconds <= time + t.TrackLen)
+                        if (!t.Playing[i] && totalMilliseconds >= time && totalMilliseconds <= time + t.TrackLen)
                         {
                             t.Playing[i] = true;
                             t.Play();
                         }
 
-                        if (t.Playing[i] && parent.Timer.TotalMilliseconds > time + t.TrackLen)
+                        if (t.Playing[i] && totalMilliseconds > time + t.TrackLen)
                         {
                             t.Stop();
                             t.Playing[i] = false;

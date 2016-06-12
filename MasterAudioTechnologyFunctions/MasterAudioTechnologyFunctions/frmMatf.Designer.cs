@@ -29,16 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            //this.btnMenu = new System.Windows.Forms.Button();
-            //this.trbTime = new System.Windows.Forms.TrackBar();
-            //this.trbVolume = new System.Windows.Forms.TrackBar();
-            //this.btnExit = new System.Windows.Forms.Button();
-            //this.btnExport = new System.Windows.Forms.Button();
-            //this.btnImport = new System.Windows.Forms.Button();
-            //this.btnSaveAs = new System.Windows.Forms.Button();
-            //this.btnSave = new System.Windows.Forms.Button();
-            //this.btnOpen = new System.Windows.Forms.Button();
-            //this.btnNew = new System.Windows.Forms.Button();
             this.tmrMain = new System.Windows.Forms.Timer(this.components);
             this.pnlTopBar = new MetroFramework.Controls.MetroPanel();
             this.lblTimeElapsed = new MetroFramework.Controls.MetroLabel();
@@ -52,6 +42,7 @@
             this.btnStop = new MetroFramework.Controls.MetroButton();
             this.btnPlay = new MetroFramework.Controls.MetroButton();
             this.pnlSong = new MetroFramework.Controls.MetroPanel();
+            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlMenu = new MetroFramework.Controls.MetroPanel();
             this.btnAbout = new MetroFramework.Controls.MetroButton();
@@ -73,9 +64,6 @@
             this.stylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAbout = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.silverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.magentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +75,9 @@
             this.tealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yelowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
+            this.menuAbout = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlTopBar.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlVolume.SuspendLayout();
@@ -99,6 +89,11 @@
             this.menuView.SuspendLayout();
             this.menuAbout.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tmrMain
+            // 
+            this.tmrMain.Interval = 1000;
+            this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
             // 
             // pnlTopBar
             // 
@@ -130,29 +125,6 @@
             this.lblTimeElapsed.TabIndex = 8;
             this.lblTimeElapsed.Text = "00:00:000";
             this.lblTimeElapsed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // trbTime
-            // 
-            //this.trbTime.Dock = System.Windows.Forms.DockStyle.Left;
-            //this.trbTime.Location = new System.Drawing.Point(149, 0);
-            //this.trbTime.Name = "trbTime";
-            //this.trbTime.Size = new System.Drawing.Size(104, 45);
-            //this.trbTime.TabIndex = 3;
-            //this.trbTime.TickStyle = System.Windows.Forms.TickStyle.None;
-            //this.trbTime.Scroll += new System.EventHandler(this.trbTime_Scroll);
-            //this.trbTime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseDown);
-            //this.trbTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trbTime_MouseUp);
-            // 
-            // pnlPlay
-            // 
-            this.pnlPlay.Controls.Add(this.btnLoop);
-            this.pnlPlay.Controls.Add(this.btnStop);
-            this.pnlPlay.Controls.Add(this.btnPlay);
-            this.pnlPlay.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlPlay.Location = new System.Drawing.Point(30, 0);
-            this.pnlPlay.Name = "pnlPlay";
-            this.pnlPlay.Size = new System.Drawing.Size(119, 30);
-            this.pnlPlay.TabIndex = 2;
             this.lblTimeElapsed.UseStyleColors = true;
             // 
             // progressBar
@@ -160,7 +132,7 @@
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.LargeChange = 10;
-            this.progressBar.Location = new System.Drawing.Point(85, 14);
+            this.progressBar.Location = new System.Drawing.Point(81, 10);
             this.progressBar.Maximum = 100;
             this.progressBar.Minimum = 0;
             this.progressBar.MouseWheelBarPartitions = 10;
@@ -171,41 +143,10 @@
             this.progressBar.TabIndex = 5;
             this.progressBar.UseSelectable = true;
             // 
-            // btnLoop
-            // 
-            this.btnLoop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.loop1;
-            this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLoop.Location = new System.Drawing.Point(60, 0);
-            this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(30, 30);
-            this.btnLoop.TabIndex = 1;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
-            // 
-            // btnStop
-            // 
-            this.btnStop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.stop;
-            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnStop.Location = new System.Drawing.Point(30, 0);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(30, 30);
-            this.btnStop.TabIndex = 3;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.play;
-            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnPlay.Location = new System.Drawing.Point(0, 0);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(30, 30);
-            this.btnPlay.TabIndex = 2;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-            // 
             // pnlSideBar
             // 
+            this.pnlSideBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.White;
             this.pnlSideBar.Controls.Add(this.volumeLabel);
@@ -229,7 +170,7 @@
             // 
             this.volumeLabel.AutoSize = true;
             this.volumeLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.volumeLabel.Location = new System.Drawing.Point(3, 103);
+            this.volumeLabel.Location = new System.Drawing.Point(5, 34);
             this.volumeLabel.Name = "volumeLabel";
             this.volumeLabel.Size = new System.Drawing.Size(109, 19);
             this.volumeLabel.TabIndex = 8;
@@ -240,7 +181,7 @@
             // 
             this.volumeBar.BackColor = System.Drawing.Color.Transparent;
             this.volumeBar.ForeColor = System.Drawing.Color.Transparent;
-            this.volumeBar.Location = new System.Drawing.Point(3, 120);
+            this.volumeBar.Location = new System.Drawing.Point(5, 51);
             this.volumeBar.Name = "volumeBar";
             this.volumeBar.Size = new System.Drawing.Size(108, 23);
             this.volumeBar.TabIndex = 7;
@@ -258,7 +199,7 @@
             this.pnlVolume.HorizontalScrollbarSize = 10;
             this.pnlVolume.Location = new System.Drawing.Point(0, 0);
             this.pnlVolume.Name = "pnlVolume";
-            this.pnlVolume.Size = new System.Drawing.Size(117, 100);
+            this.pnlVolume.Size = new System.Drawing.Size(117, 30);
             this.pnlVolume.TabIndex = 4;
             this.pnlVolume.VerticalScrollbarBarColor = true;
             this.pnlVolume.VerticalScrollbarHighlightOnWheel = false;
@@ -270,29 +211,28 @@
             this.pnlPlay.Controls.Add(this.btnLoop);
             this.pnlPlay.Controls.Add(this.btnStop);
             this.pnlPlay.Controls.Add(this.btnPlay);
-            this.pnlPlay.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlPlay.HorizontalScrollbarBarColor = true;
             this.pnlPlay.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlPlay.HorizontalScrollbarSize = 10;
             this.pnlPlay.Location = new System.Drawing.Point(0, 0);
             this.pnlPlay.Name = "pnlPlay";
-            this.pnlPlay.Size = new System.Drawing.Size(117, 100);
+            this.pnlPlay.Size = new System.Drawing.Size(117, 30);
             this.pnlPlay.TabIndex = 3;
             this.pnlPlay.VerticalScrollbarBarColor = true;
             this.pnlPlay.VerticalScrollbarHighlightOnWheel = false;
             this.pnlPlay.VerticalScrollbarSize = 10;
             // 
-            // tmrMain
+            // btnLoop
             // 
-            this.tmrMain.Interval = 1000;
-            this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
+            this.btnLoop.AutoSize = true;
             this.btnLoop.BackColor = System.Drawing.SystemColors.Control;
-            this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnLoop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.loop1;
+            this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLoop.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.btnLoop.Location = new System.Drawing.Point(60, 0);
+            this.btnLoop.Location = new System.Drawing.Point(62, 0);
             this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(30, 100);
+            this.btnLoop.Size = new System.Drawing.Size(30, 30);
             this.btnLoop.TabIndex = 7;
             this.btnLoop.Text = "L";
             this.btnLoop.UseSelectable = true;
@@ -301,13 +241,15 @@
             // 
             // btnStop
             // 
+            this.btnStop.AutoSize = true;
             this.btnStop.BackColor = System.Drawing.SystemColors.Control;
-            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnStop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.stop;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnStop.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.btnStop.Location = new System.Drawing.Point(30, 0);
+            this.btnStop.Location = new System.Drawing.Point(32, 0);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(30, 100);
+            this.btnStop.Size = new System.Drawing.Size(30, 30);
             this.btnStop.TabIndex = 6;
             this.btnStop.Text = "S";
             this.btnStop.UseSelectable = true;
@@ -316,13 +258,15 @@
             // 
             // btnPlay
             // 
+            this.btnPlay.AutoSize = true;
             this.btnPlay.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnPlay.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.play;
+            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnPlay.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btnPlay.Location = new System.Drawing.Point(0, 0);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(30, 100);
+            this.btnPlay.Size = new System.Drawing.Size(32, 30);
             this.btnPlay.TabIndex = 5;
             this.btnPlay.Text = "PL";
             this.btnPlay.UseSelectable = true;
@@ -350,6 +294,16 @@
             this.pnlSong.VerticalScrollbarBarColor = true;
             this.pnlSong.VerticalScrollbarHighlightOnWheel = false;
             this.pnlSong.VerticalScrollbarSize = 10;
+            // 
+            // timeLine
+            // 
+            this.timeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeLine.BackColor = System.Drawing.SystemColors.Control;
+            this.timeLine.Location = new System.Drawing.Point(0, 0);
+            this.timeLine.Name = "timeLine";
+            this.timeLine.Size = new System.Drawing.Size(684, 31);
+            this.timeLine.TabIndex = 0;
             // 
             // metroStyleManager
             // 
@@ -542,27 +496,6 @@
             this.blueToolStripMenuItem.Text = "Blue";
             this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
             // 
-            // menuAbout
-            // 
-            this.menuAbout.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.menuAbout.Name = "menuAbout";
-            this.menuAbout.Size = new System.Drawing.Size(108, 48);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // silverToolStripMenuItem
             // 
             this.silverToolStripMenuItem.Name = "silverToolStripMenuItem";
@@ -640,15 +573,26 @@
             this.yelowToolStripMenuItem.Text = "Yellow";
             this.yelowToolStripMenuItem.Click += new System.EventHandler(this.yelowToolStripMenuItem_Click);
             // 
-            // timeLine
+            // menuAbout
             // 
-            this.timeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.timeLine.BackColor = System.Drawing.SystemColors.Control;
-            this.timeLine.Location = new System.Drawing.Point(0, 0);
-            this.timeLine.Name = "timeLine";
-            this.timeLine.Size = new System.Drawing.Size(684, 31);
-            this.timeLine.TabIndex = 0;
+            this.menuAbout.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.menuAbout.Name = "menuAbout";
+            this.menuAbout.Size = new System.Drawing.Size(108, 48);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // frmMatf
             // 
@@ -671,6 +615,7 @@
             this.pnlSideBar.PerformLayout();
             this.pnlVolume.ResumeLayout(false);
             this.pnlPlay.ResumeLayout(false);
+            this.pnlPlay.PerformLayout();
             this.pnlSong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.pnlMenu.ResumeLayout(false);
@@ -683,7 +628,6 @@
 
         #endregion
         private Timeline.Timeline timeLine;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer tmrMain;
         private MetroFramework.Components.MetroStyleManager metroStyleManager;
         private MetroFramework.Controls.MetroScrollBar progressBar;

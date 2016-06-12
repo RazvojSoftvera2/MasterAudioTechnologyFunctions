@@ -19,7 +19,7 @@ namespace MasterAudioTechnologyFunctions
 
         public static string SoftwareName = "Master Audio Technology Functions";
         private string _openedFile;
-        private bool _playing = false;
+        private bool _playing = false; //TODO: Do we need _playing at this scope? Are we using only _playing in Timeline?
         //public long Timer = 0;
         public TimeSpan Timer = new TimeSpan();
 
@@ -27,7 +27,7 @@ namespace MasterAudioTechnologyFunctions
         {
             InitializeComponent();
             this.StyleManager = metroStyleManager;
-            this.timeLine.Parent = this.pnlSong;
+            //this.timeLine.Parent = this.pnlSong;
             this.pnlSong.Parent = this;
         }
 
@@ -40,13 +40,11 @@ namespace MasterAudioTechnologyFunctions
 
         public void SetTime(string time)
         {
-
             lblTimeElapsed.Text = time;
         }
 
         internal void SetTime(TimeSpan timer)
         {
-
             lblTimeElapsed.Text = timer.Minutes.ToString("D2") + ":" + timer.Seconds.ToString("D2")
                 + ":" + timer.Milliseconds.ToString("D3");
         }
@@ -272,7 +270,4 @@ namespace MasterAudioTechnologyFunctions
             tmrMain.Enabled = false;
         }
     }
-
-
-
 }
