@@ -44,9 +44,10 @@
             this.lblTrackName.AutoSize = true;
             this.lblTrackName.BackColor = System.Drawing.SystemColors.Control;
             this.lblTrackName.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblTrackName.Location = new System.Drawing.Point(-2, -1);
+            this.lblTrackName.Location = new System.Drawing.Point(-3, -1);
+            this.lblTrackName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTrackName.Name = "lblTrackName";
-            this.lblTrackName.Size = new System.Drawing.Size(68, 19);
+            this.lblTrackName.Size = new System.Drawing.Size(74, 20);
             this.lblTrackName.TabIndex = 1;
             this.lblTrackName.Text = "New Track";
             this.lblTrackName.UseStyleColors = true;
@@ -63,20 +64,22 @@
             this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlInfo.HorizontalScrollbarBarColor = true;
             this.pnlInfo.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlInfo.HorizontalScrollbarSize = 10;
+            this.pnlInfo.HorizontalScrollbarSize = 12;
             this.pnlInfo.Location = new System.Drawing.Point(0, 0);
+            this.pnlInfo.Margin = new System.Windows.Forms.Padding(4);
             this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Size = new System.Drawing.Size(92, 61);
+            this.pnlInfo.Size = new System.Drawing.Size(122, 75);
             this.pnlInfo.TabIndex = 0;
             this.pnlInfo.VerticalScrollbarBarColor = true;
             this.pnlInfo.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlInfo.VerticalScrollbarSize = 10;
+            this.pnlInfo.VerticalScrollbarSize = 13;
             // 
             // BtnX
             // 
-            this.BtnX.Location = new System.Drawing.Point(66, -1);
+            this.BtnX.Location = new System.Drawing.Point(88, -1);
+            this.BtnX.Margin = new System.Windows.Forms.Padding(4);
             this.BtnX.Name = "BtnX";
-            this.BtnX.Size = new System.Drawing.Size(26, 19);
+            this.BtnX.Size = new System.Drawing.Size(35, 23);
             this.BtnX.TabIndex = 5;
             this.BtnX.Text = "X";
             this.BtnX.UseSelectable = true;
@@ -86,9 +89,10 @@
             // BtnDelete
             // 
             this.BtnDelete.BackColor = System.Drawing.SystemColors.Control;
-            this.BtnDelete.Location = new System.Drawing.Point(57, 17);
+            this.BtnDelete.Location = new System.Drawing.Point(76, 21);
+            this.BtnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(29, 23);
+            this.BtnDelete.Size = new System.Drawing.Size(39, 28);
             this.BtnDelete.TabIndex = 4;
             this.BtnDelete.Text = "Delete";
             this.BtnDelete.UseSelectable = true;
@@ -98,9 +102,10 @@
             // EditBtn
             // 
             this.EditBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.EditBtn.Location = new System.Drawing.Point(30, 17);
+            this.EditBtn.Location = new System.Drawing.Point(40, 21);
+            this.EditBtn.Margin = new System.Windows.Forms.Padding(4);
             this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(27, 23);
+            this.EditBtn.Size = new System.Drawing.Size(36, 28);
             this.EditBtn.TabIndex = 3;
             this.EditBtn.Text = "Edit";
             this.EditBtn.UseSelectable = true;
@@ -110,9 +115,10 @@
             // BtnSelect
             // 
             this.BtnSelect.BackColor = System.Drawing.SystemColors.Control;
-            this.BtnSelect.Location = new System.Drawing.Point(3, 17);
+            this.BtnSelect.Location = new System.Drawing.Point(4, 21);
+            this.BtnSelect.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSelect.Name = "BtnSelect";
-            this.BtnSelect.Size = new System.Drawing.Size(27, 23);
+            this.BtnSelect.Size = new System.Drawing.Size(36, 28);
             this.BtnSelect.TabIndex = 2;
             this.BtnSelect.Text = "Select";
             this.BtnSelect.UseSelectable = true;
@@ -122,9 +128,10 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.SystemColors.Control;
-            this.btnEdit.Location = new System.Drawing.Point(3, 39);
+            this.btnEdit.Location = new System.Drawing.Point(4, 48);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(83, 19);
+            this.btnEdit.Size = new System.Drawing.Size(111, 23);
             this.btnEdit.TabIndex = 0;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseSelectable = true;
@@ -137,26 +144,28 @@
             this.pnlWaveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlWaveViewer.HorizontalScrollbarBarColor = true;
             this.pnlWaveViewer.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlWaveViewer.HorizontalScrollbarSize = 10;
-            this.pnlWaveViewer.Location = new System.Drawing.Point(92, 0);
+            this.pnlWaveViewer.HorizontalScrollbarSize = 12;
+            this.pnlWaveViewer.Location = new System.Drawing.Point(122, 0);
+            this.pnlWaveViewer.Margin = new System.Windows.Forms.Padding(4);
             this.pnlWaveViewer.Name = "pnlWaveViewer";
-            this.pnlWaveViewer.Size = new System.Drawing.Size(557, 61);
+            this.pnlWaveViewer.Size = new System.Drawing.Size(743, 75);
             this.pnlWaveViewer.TabIndex = 2;
             this.pnlWaveViewer.VerticalScrollbarBarColor = true;
             this.pnlWaveViewer.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlWaveViewer.VerticalScrollbarSize = 10;
+            this.pnlWaveViewer.VerticalScrollbarSize = 13;
             this.pnlWaveViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlWaveViewer_MouseUp);
             // 
             // Track
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.pnlWaveViewer);
             this.Controls.Add(this.pnlInfo);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Track";
-            this.Size = new System.Drawing.Size(649, 61);
+            this.Size = new System.Drawing.Size(865, 75);
             this.pnlInfo.ResumeLayout(false);
             this.pnlInfo.PerformLayout();
             this.ResumeLayout(false);

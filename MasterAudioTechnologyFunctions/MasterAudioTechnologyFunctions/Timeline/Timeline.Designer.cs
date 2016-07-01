@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.pnlBottom = new MetroFramework.Controls.MetroPanel();
             this.btnAddTrack = new MetroFramework.Controls.MetroButton();
-            this.pnlTracks = new System.Windows.Forms.Panel();
+            this.pnlTracks = new MetroFramework.Controls.MetroPanel();
             this.tmrSong = new System.Windows.Forms.Timer(this.components);
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
@@ -87,8 +87,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel pnlBottom;
-        private System.Windows.Forms.Panel pnlTracks;
+        private MetroFramework.Controls.MetroPanel pnlBottom;
+        private MetroFramework.Controls.MetroPanel pnlTracks;
         private System.Windows.Forms.Timer tmrSong;
         private MetroFramework.Controls.MetroButton btnAddTrack;
     }

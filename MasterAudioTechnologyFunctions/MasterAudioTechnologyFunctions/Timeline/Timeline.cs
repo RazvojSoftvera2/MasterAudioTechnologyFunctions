@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Forms;
+using System.Xml;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -31,6 +32,28 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             InitializeComponent();
             _tracks = new List<Track>();
+            setStyle();
+        }
+
+        public void setStyle()
+        {
+            XmlDocument doc = new XmlDocument();
+            string dir = System.IO.Directory.GetCurrentDirectory();
+            doc.Load("..\\..\\settings.xml");
+            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+
+            this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
+            foreach (var track in _tracks)
+                track.setStyle();
+
+            this.UpdateStyles();
         }
 
         private void btnAddTrack_Click(object sender, EventArgs e)

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
+using System.Xml;
+using MetroFramework;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -39,6 +41,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
+            setStyle();
         }
 
         public Track(string name, string fileName, Color color, Timeline tl)
@@ -48,6 +51,35 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
+            setStyle();
+        }
+
+        public void setStyle()
+        {
+            XmlDocument doc = new XmlDocument();
+            string dir = System.IO.Directory.GetCurrentDirectory();
+            doc.Load("..\\..\\settings.xml");
+            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+
+            this.BtnX.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.BtnX.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.BtnDelete.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.BtnDelete.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.btnEdit.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.btnEdit.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.BtnSelect.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.BtnSelect.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.EditBtn.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.EditBtn.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.lblTrackName.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.lblTrackName.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlInfo.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlInfo.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlWaveViewer.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlWaveViewer.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
+            this.UpdateStyles();
         }
 
         //TODO: Where and for what is this used?

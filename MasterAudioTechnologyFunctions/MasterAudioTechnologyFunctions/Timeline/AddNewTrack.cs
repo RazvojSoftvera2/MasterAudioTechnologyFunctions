@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -21,16 +22,21 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public AddNewTrack()
         {
             InitializeComponent();
+            this.StyleManager = metroStyleManagerAddTrack;
+
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             cdColorPicker.Color = Color.White;
+
+            setStyle();
         }
 
         public AddNewTrack(string name, string fileName, Color color)
         {
             InitializeComponent();
+            this.StyleManager = metroStyleManagerAddTrack;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             this.Resizable = false;
@@ -43,6 +49,20 @@ namespace MasterAudioTechnologyFunctions.Timeline
             cdColorPicker.Color = TrackColor;
             tbName.Text = TrackName;
             Text = "Edit Track";
+
+            setStyle();
+        }
+
+        public void setStyle()
+        {
+            //settings loading
+            XmlDocument doc = new XmlDocument();
+            string dir = System.IO.Directory.GetCurrentDirectory();
+            doc.Load("..\\..\\settings.xml");
+            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            metroStyleManagerAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            metroStyleManagerAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
