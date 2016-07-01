@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MetroFramework;
 using MetroFramework.Forms;
 using System.Xml;
+using System.IO;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -37,9 +38,37 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         public void setStyle()
         {
+            string path = "..\\..\\settings.xml";
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            try
+            {
+                doc.Load(path);
+            }
+            catch (FileNotFoundException e)
+            {
+                XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
+                doc.AppendChild(settings);
+
+                XmlElement visual = doc.CreateElement(string.Empty, "visual", string.Empty);
+                settings.AppendChild(visual);
+
+                XmlElement themeNode = doc.CreateElement(string.Empty, "theme", string.Empty);
+                XmlText themeColor = doc.CreateTextNode("" + (Int32)MetroThemeStyle.Light);
+                themeNode.AppendChild(themeColor);
+                visual.AppendChild(themeNode);
+
+                XmlElement styleNode = doc.CreateElement(string.Empty, "style", string.Empty);
+                XmlText styleColor = doc.CreateTextNode(""+(Int32)MetroColorStyle.Blue);
+                styleNode.AppendChild(styleColor);
+                visual.AppendChild(styleNode);
+
+                doc.Save(path);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
 

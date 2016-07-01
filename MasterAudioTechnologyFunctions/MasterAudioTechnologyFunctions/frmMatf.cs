@@ -37,15 +37,46 @@ namespace MasterAudioTechnologyFunctions
 
         public void setStyle()
         {
+            string path = "..\\..\\settings.xml";
             //settings loading
             XmlDocument doc = new XmlDocument();
             //TODO: do a refactoring to a relative path: and to a childrens also!
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
-            metroStyleManager.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
+            try
+            {
+                doc.Load(path);
+            }
+            catch (FileNotFoundException)
+            {
+                XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
+                doc.AppendChild(settings);
+
+                XmlElement visual = doc.CreateElement(string.Empty, "visual", string.Empty);
+                settings.AppendChild(visual);
+
+                XmlElement theme = doc.CreateElement(string.Empty, "theme", string.Empty);
+                XmlText themeColor = doc.CreateTextNode("" + (Int32)MetroThemeStyle.Light);
+                theme.AppendChild(themeColor);
+                visual.AppendChild(theme);
+
+                XmlElement style = doc.CreateElement(string.Empty, "style", string.Empty);
+                XmlText styleColor = doc.CreateTextNode("" + (Int32)MetroColorStyle.Blue);
+                style.AppendChild(styleColor);
+                visual.AppendChild(style);
+
+                doc.Save(path);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            XmlNode styleNode = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode themeNode = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            metroStyleManager.Style = (MetroColorStyle)Int32.Parse(styleNode.InnerText);
+            metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(themeNode.InnerText);
         }
 
         public void SetTime(long time)
