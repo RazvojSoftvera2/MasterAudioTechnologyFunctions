@@ -69,9 +69,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
             {
                 throw;
             }
+
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
-
             this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
             this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
             this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
