@@ -78,29 +78,11 @@ namespace MasterAudioTechnologyFunctions
 
             //za slucaj da ne moze da procita kako valja: corrupted file 
 
-            //if (styleN == null || themeN == null)
-            //{
-            //    System.IO.FileInfo file = new System.IO.FileInfo(path);
-            //    file.Delete();
-
-            //    XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
-            //    doc.AppendChild(settings);
-
-            //    XmlElement visual = doc.CreateElement(string.Empty, "visual", string.Empty);
-            //    settings.AppendChild(visual);
-
-            //    XmlElement themeNode = doc.CreateElement(string.Empty, "theme", string.Empty);
-            //    XmlText themeColor = doc.CreateTextNode("" + (Int32)MetroThemeStyle.Light);
-            //    themeNode.AppendChild(themeColor);
-            //    visual.AppendChild(themeNode);
-
-            //    XmlElement styleNode = doc.CreateElement(string.Empty, "style", string.Empty);
-            //    XmlText styleColor = doc.CreateTextNode("" + (Int32)MetroColorStyle.Blue);
-            //    styleNode.AppendChild(styleColor);
-            //    visual.AppendChild(styleNode);
-
-            //    doc.Save(path);
-            //}
+            if (styleN == null || themeN == null)
+            {
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                file.Delete();
+            }
 
             metroStyleManager.Style = (MetroColorStyle)Int32.Parse(styleN.InnerText);
             metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(themeN.InnerText);

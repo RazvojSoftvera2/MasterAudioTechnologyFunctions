@@ -72,17 +72,26 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
-            this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
 
-            foreach (var track in _tracks)
-                track.setStyle();
+            if (style == null || theme == null)
+            {
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                file.Delete();
+            }
+            else
+            {
+                this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+                this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+                this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+                this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+                this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+                this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
 
-            this.UpdateStyles();
+                foreach (var track in _tracks)
+                    track.setStyle();
+
+                this.UpdateStyles();
+            }
         }
 
         private void btnAddTrack_Click(object sender, EventArgs e)
