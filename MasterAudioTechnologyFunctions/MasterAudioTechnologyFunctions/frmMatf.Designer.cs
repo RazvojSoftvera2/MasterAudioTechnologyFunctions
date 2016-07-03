@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMatf));
             this.tmrMain = new System.Windows.Forms.Timer(this.components);
             this.pnlTopBar = new MetroFramework.Controls.MetroPanel();
             this.lblTimeElapsed = new MetroFramework.Controls.MetroLabel();
@@ -42,7 +43,6 @@
             this.btnStop = new MetroFramework.Controls.MetroButton();
             this.btnPlay = new MetroFramework.Controls.MetroButton();
             this.pnlSong = new MetroFramework.Controls.MetroPanel();
-            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlMenu = new MetroFramework.Controls.MetroPanel();
             this.btnAbout = new MetroFramework.Controls.MetroButton();
@@ -78,6 +78,7 @@
             this.menuAbout = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
             this.pnlVolume.SuspendLayout();
@@ -303,17 +304,6 @@
             this.pnlSong.VerticalScrollbarBarColor = true;
             this.pnlSong.VerticalScrollbarHighlightOnWheel = false;
             this.pnlSong.VerticalScrollbarSize = 13;
-            // 
-            // timeLine
-            // 
-            this.timeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.timeLine.BackColor = System.Drawing.SystemColors.Control;
-            this.timeLine.Location = new System.Drawing.Point(0, 0);
-            this.timeLine.Margin = new System.Windows.Forms.Padding(5);
-            this.timeLine.Name = "timeLine";
-            this.timeLine.Size = new System.Drawing.Size(912, 38);
-            this.timeLine.TabIndex = 0;
             // 
             // metroStyleManager
             // 
@@ -611,6 +601,17 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // timeLine
+            // 
+            this.timeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeLine.BackColor = System.Drawing.SystemColors.Control;
+            this.timeLine.Location = new System.Drawing.Point(0, 0);
+            this.timeLine.Margin = new System.Windows.Forms.Padding(5);
+            this.timeLine.Name = "timeLine";
+            this.timeLine.Size = new System.Drawing.Size(912, 38);
+            this.timeLine.TabIndex = 0;
+            // 
             // frmMatf
             // 
             this.ApplyImageInvert = true;
@@ -624,10 +625,12 @@
             this.Controls.Add(this.pnlSideBar);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmMatf";
             this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Text = "Master Audio Technology Functions";
+            this.TransparencyKey = System.Drawing.Color.Empty;
             this.pnlTopBar.ResumeLayout(false);
             this.pnlTopBar.PerformLayout();
             this.pnlSideBar.ResumeLayout(false);

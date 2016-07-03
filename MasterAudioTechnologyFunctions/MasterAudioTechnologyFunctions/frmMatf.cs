@@ -83,9 +83,11 @@ namespace MasterAudioTechnologyFunctions
                 System.IO.FileInfo file = new System.IO.FileInfo(path);
                 file.Delete();
             }
-
-            metroStyleManager.Style = (MetroColorStyle)Int32.Parse(styleN.InnerText);
-            metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(themeN.InnerText);
+            else
+            {
+                metroStyleManager.Style = (MetroColorStyle)Int32.Parse(styleN.InnerText);
+                metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(themeN.InnerText);
+            }
         }
 
         public void SetTime(long time)
