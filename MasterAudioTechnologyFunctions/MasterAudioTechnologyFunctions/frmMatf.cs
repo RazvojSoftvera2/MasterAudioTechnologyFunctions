@@ -68,8 +68,10 @@ namespace MasterAudioTechnologyFunctions
             }
             catch (Exception)
             {
-
-                throw;
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                file.Delete();
+                MessageBox.Show("The settings.xml file is corrupted! Please restart the application.", "File corrupted!");
+                this.Close();
             }
 
             XmlNode styleN = doc.DocumentElement.SelectSingleNode("/settings/visual/style");

@@ -67,7 +67,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
             }
             catch (Exception)
             {
-                throw;
+                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                file.Delete();
+                MessageBox.Show("The settings.xml file is corrupted! App can behave unexpectedly.", "File corrupted!");
+                return;
             }
 
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
