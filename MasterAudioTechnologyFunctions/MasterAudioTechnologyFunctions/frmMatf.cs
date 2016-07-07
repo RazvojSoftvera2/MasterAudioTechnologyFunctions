@@ -32,6 +32,7 @@ namespace MasterAudioTechnologyFunctions
             this.StyleManager = metroStyleManager;
             this.pnlSong.Parent = this;
             setStyle();
+            //this.timeLine.setStyle();
         }
 
         public void setStyle()
@@ -49,8 +50,10 @@ namespace MasterAudioTechnologyFunctions
             catch (FileNotFoundException)
             {
                 XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
+                //doc. = settings;
                 doc.AppendChild(settings);
 
+                //visual settings
                 XmlElement visual = doc.CreateElement(string.Empty, "visual", string.Empty);
                 settings.AppendChild(visual);
 
@@ -64,6 +67,20 @@ namespace MasterAudioTechnologyFunctions
                 style.AppendChild(styleColor);
                 visual.AppendChild(style);
 
+                //size settings
+                XmlElement size = doc.CreateElement(string.Empty, "size", string.Empty);
+                settings.AppendChild(size);
+
+                XmlElement width = doc.CreateElement(string.Empty, "width", string.Empty);
+                XmlText widthSize = doc.CreateTextNode("1125");
+                width.AppendChild(widthSize);
+                size.AppendChild(width);
+
+                XmlElement height = doc.CreateElement(string.Empty, "height", string.Empty);
+                XmlText heightSize = doc.CreateTextNode("550");
+                height.AppendChild(heightSize);
+                size.AppendChild(height);
+
                 doc.Save(path);
             }
             catch (Exception)
@@ -76,18 +93,24 @@ namespace MasterAudioTechnologyFunctions
 
             XmlNode styleN = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             XmlNode themeN = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            XmlNode widthN = doc.DocumentElement.SelectSingleNode("/settings/size/width");
+            XmlNode heightN = doc.DocumentElement.SelectSingleNode("/settings/size/height");
 
             //za slucaj da ne moze da procita kako valja: corrupted file 
 
-            if (styleN == null || themeN == null)
+            if (styleN == null || themeN == null || heightN == null || widthN == null)
             {
                 System.IO.FileInfo file = new System.IO.FileInfo(path);
                 file.Delete();
+                MessageBox.Show("The settings.xml file is corrupted! Please restart the application.", "File corrupted!");
+                this.Close();
             }
             else
             {
                 metroStyleManager.Style = (MetroColorStyle)Int32.Parse(styleN.InnerText);
                 metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(themeN.InnerText);
+                this.Width = Int32.Parse(widthN.InnerText);
+                this.Height = Int32.Parse(heightN.InnerText);
             }
         }
 
@@ -433,6 +456,20 @@ namespace MasterAudioTechnologyFunctions
         public void disableTmrMain()
         {
             tmrMain.Enabled = false;
+        }
+
+        private void frmMatf_ResizeEnd(object sender, EventArgs e)
+        {
+            XmlDocument doc = new XmlDocument();
+            string dir = System.IO.Directory.GetCurrentDirectory();
+            doc.Load("..\\..\\settings.xml");
+
+            XmlNode width = doc.DocumentElement.SelectSingleNode("/settings/size/width");
+            XmlNode height = doc.DocumentElement.SelectSingleNode("/settings/size/height");
+            width.InnerText = "" + (Int32)this.Width;
+            height.InnerText = "" + (Int32)this.Height;
+
+            doc.Save("..\\..\\settings.xml");
         }
     }
 }

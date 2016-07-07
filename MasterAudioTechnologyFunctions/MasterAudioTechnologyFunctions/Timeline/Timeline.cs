@@ -33,7 +33,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             InitializeComponent();
             _tracks = new List<Track>();
-            setStyle();
         }
 
         public void setStyle()
@@ -45,7 +44,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             {
                 doc.Load(path);
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
                 doc.AppendChild(settings);

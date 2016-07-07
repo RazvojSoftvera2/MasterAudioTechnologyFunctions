@@ -109,7 +109,7 @@
             this.pnlTopBar.Location = new System.Drawing.Point(185, 112);
             this.pnlTopBar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTopBar.Name = "pnlTopBar";
-            this.pnlTopBar.Size = new System.Drawing.Size(916, 37);
+            this.pnlTopBar.Size = new System.Drawing.Size(966, 37);
             this.pnlTopBar.TabIndex = 1;
             this.pnlTopBar.UseStyleColors = true;
             this.pnlTopBar.VerticalScrollbarBarColor = true;
@@ -143,7 +143,7 @@
             this.progressBar.Name = "progressBar";
             this.progressBar.Orientation = MetroFramework.Controls.MetroScrollOrientation.Horizontal;
             this.progressBar.ScrollbarSize = 12;
-            this.progressBar.Size = new System.Drawing.Size(799, 12);
+            this.progressBar.Size = new System.Drawing.Size(849, 12);
             this.progressBar.TabIndex = 5;
             this.progressBar.UseSelectable = true;
             // 
@@ -164,7 +164,7 @@
             this.pnlSideBar.Location = new System.Drawing.Point(27, 112);
             this.pnlSideBar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSideBar.Name = "pnlSideBar";
-            this.pnlSideBar.Size = new System.Drawing.Size(156, 411);
+            this.pnlSideBar.Size = new System.Drawing.Size(156, 455);
             this.pnlSideBar.TabIndex = 2;
             this.pnlSideBar.VerticalScrollbar = true;
             this.pnlSideBar.VerticalScrollbarBarColor = true;
@@ -298,7 +298,7 @@
             this.pnlSong.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSong.MinimumSize = new System.Drawing.Size(40, 37);
             this.pnlSong.Name = "pnlSong";
-            this.pnlSong.Size = new System.Drawing.Size(916, 369);
+            this.pnlSong.Size = new System.Drawing.Size(966, 413);
             this.pnlSong.TabIndex = 4;
             this.pnlSong.VerticalScrollbar = true;
             this.pnlSong.VerticalScrollbarBarColor = true;
@@ -322,7 +322,7 @@
             this.pnlMenu.Location = new System.Drawing.Point(27, 74);
             this.pnlMenu.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMenu.Name = "pnlMenu";
-            this.pnlMenu.Size = new System.Drawing.Size(1071, 31);
+            this.pnlMenu.Size = new System.Drawing.Size(1121, 31);
             this.pnlMenu.TabIndex = 8;
             this.pnlMenu.VerticalScrollbar = true;
             this.pnlMenu.VerticalScrollbarBarColor = true;
@@ -609,7 +609,7 @@
             this.timeLine.Location = new System.Drawing.Point(0, 0);
             this.timeLine.Margin = new System.Windows.Forms.Padding(5);
             this.timeLine.Name = "timeLine";
-            this.timeLine.Size = new System.Drawing.Size(912, 38);
+            this.timeLine.Size = new System.Drawing.Size(962, 38);
             this.timeLine.TabIndex = 0;
             // 
             // frmMatf
@@ -618,7 +618,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1125, 551);
+            this.ClientSize = new System.Drawing.Size(1175, 595);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.pnlTopBar);
             this.Controls.Add(this.pnlSong);
@@ -627,10 +627,12 @@
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(600, 460);
             this.Name = "frmMatf";
             this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.Text = "Master Audio Technology Functions";
             this.TransparencyKey = System.Drawing.Color.Empty;
+            this.ResizeEnd += new System.EventHandler(this.frmMatf_ResizeEnd);
             this.pnlTopBar.ResumeLayout(false);
             this.pnlTopBar.PerformLayout();
             this.pnlSideBar.ResumeLayout(false);
