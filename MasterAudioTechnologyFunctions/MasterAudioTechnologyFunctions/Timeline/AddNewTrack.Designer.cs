@@ -96,6 +96,7 @@
             this.btnColor.Size = new System.Drawing.Size(192, 28);
             this.btnColor.TabIndex = 3;
             this.btnColor.Text = "Choose color";
+            this.btnColor.UseCustomBackColor = true;
             this.btnColor.UseSelectable = true;
             this.btnColor.UseStyleColors = true;
             this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
@@ -109,6 +110,7 @@
             this.btnCancel.Size = new System.Drawing.Size(95, 28);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseCustomBackColor = true;
             this.btnCancel.UseSelectable = true;
             this.btnCancel.UseStyleColors = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -121,6 +123,7 @@
             this.btnOk.Size = new System.Drawing.Size(95, 28);
             this.btnOk.TabIndex = 5;
             this.btnOk.Text = "OK";
+            this.btnOk.UseCustomBackColor = true;
             this.btnOk.UseSelectable = true;
             this.btnOk.UseStyleColors = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
