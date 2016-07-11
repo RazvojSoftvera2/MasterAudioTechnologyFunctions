@@ -11,6 +11,7 @@ using MetroFramework;
 using MetroFramework.Forms;
 using System.Xml;
 using System.IO;
+using NAudio.Wave;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -65,13 +66,24 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 return;
 
             //mp3 file conversion
-            if (/*addTrack.TrackFileName.EndsWith(".mp3")*/true)
+            if (addTrack.TrackFileName.EndsWith(".mp3"))
             {
                 //do a conversion and asserts
-                string[] temp = { "MasterAudioTechnologyFunctions" };
-                string dir = System.IO.Directory.GetCurrentDirectory();
-                temp = dir.Split(temp, StringSplitOptions.RemoveEmptyEntries);
-                string databasePath = temp[0]+ "MasterAudioTechnologyFunctions"+"\\"+"wav_database"+"\\"+"Custom";
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "WAV files (.wav)|*.wav";
+                dialog.Title = "Choose where to save converted file...";
+
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string newFileName = dialog.FileName;
+
+                using (Mp3FileReader reader = new Mp3FileReader(addTrack.TrackFileName))
+                {
+                    WaveFileWriter.CreateWaveFile(newFileName, reader);
+                }
+
+                addTrack.TrackFileName = newFileName;
             }
 
             Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
