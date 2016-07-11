@@ -85,7 +85,8 @@ namespace MasterAudioTechnologyFunctions
             {
                 System.IO.FileInfo file = new System.IO.FileInfo(_settingsPath);
                 file.Delete();
-                MessageBox.Show("The settings.xml file is corrupted! Please restart the application.", "File corrupted!");
+                MetroMessageBox.Show(this, "The settings.xml file is corrupted! Please restart the application.",
+                                "File corrupted!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
 
@@ -100,7 +101,8 @@ namespace MasterAudioTechnologyFunctions
             {
                 System.IO.FileInfo file = new System.IO.FileInfo(_settingsPath);
                 file.Delete();
-                MessageBox.Show("The settings.xml file is corrupted! Please restart the application.", "File corrupted!");
+                MetroMessageBox.Show(this, "The settings.xml file is corrupted! Please restart the application.",
+                                "File corrupted!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
             else
@@ -460,14 +462,14 @@ namespace MasterAudioTechnologyFunctions
         {
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
 
             XmlNode width = doc.DocumentElement.SelectSingleNode("/settings/size/width");
             XmlNode height = doc.DocumentElement.SelectSingleNode("/settings/size/height");
             width.InnerText = "" + (Int32)this.Width;
             height.InnerText = "" + (Int32)this.Height;
 
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
         }
     }
 }

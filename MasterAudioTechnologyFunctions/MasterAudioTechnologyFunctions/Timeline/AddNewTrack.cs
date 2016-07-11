@@ -85,7 +85,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (String.IsNullOrEmpty(TrackFileName))
             {
                 MetroMessageBox.Show(this, "You must open a sound file for the track.",
-                                "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

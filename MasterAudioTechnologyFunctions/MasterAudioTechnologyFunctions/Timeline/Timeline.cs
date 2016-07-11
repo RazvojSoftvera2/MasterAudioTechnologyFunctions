@@ -34,6 +34,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             InitializeComponent();
             _tracks = new List<Track>();
+            this.changeProgressBar.Visible = false;
         }
 
         public void setStyle()
@@ -52,6 +53,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
             this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
             this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.changeProgressBar.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.changeProgressBar.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
 
             foreach (var track in _tracks)
                 track.setStyle();
@@ -82,10 +85,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
                 string newFileName = dialog.FileName;
 
+                this.changeProgressBar.Visible = true;
+                this.Update();
                 using (Mp3FileReader reader = new Mp3FileReader(addTrack.TrackFileName))
                 {
                     WaveFileWriter.CreateWaveFile(newFileName, reader);
                 }
+                this.changeProgressBar.Visible = false;
+                this.Update();
 
                 addTrack.TrackFileName = newFileName;
             }
