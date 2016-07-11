@@ -25,6 +25,7 @@ namespace MasterAudioTechnologyFunctions
         private bool _playing = false; //TODO: Do we need _playing at this scope? Are we using only _playing in Timeline?
         //public long Timer = 0;
         public TimeSpan Timer = new TimeSpan();
+        private string _settingsPath = "..\\..\\settings.xml";
 
         public frmMatf()
         {
@@ -32,12 +33,10 @@ namespace MasterAudioTechnologyFunctions
             this.StyleManager = metroStyleManager;
             this.pnlSong.Parent = this;
             setStyle();
-            //this.timeLine.setStyle();
         }
 
         public void setStyle()
         {
-            string path = "..\\..\\settings.xml";
             //settings loading
             XmlDocument doc = new XmlDocument();
             //TODO: do a refactoring to a relative path: and to a childrens also!
@@ -45,7 +44,7 @@ namespace MasterAudioTechnologyFunctions
 
             try
             {
-                doc.Load(path);
+                doc.Load(_settingsPath);
             }
             catch (FileNotFoundException)
             {
@@ -80,11 +79,11 @@ namespace MasterAudioTechnologyFunctions
                 height.AppendChild(heightSize);
                 size.AppendChild(height);
 
-                doc.Save(path);
+                doc.Save(_settingsPath);
             }
             catch (Exception)
             {
-                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                System.IO.FileInfo file = new System.IO.FileInfo(_settingsPath);
                 file.Delete();
                 MessageBox.Show("The settings.xml file is corrupted! Please restart the application.", "File corrupted!");
                 this.Close();
@@ -99,7 +98,7 @@ namespace MasterAudioTechnologyFunctions
 
             if (styleN == null || themeN == null || heightN == null || widthN == null)
             {
-                System.IO.FileInfo file = new System.IO.FileInfo(path);
+                System.IO.FileInfo file = new System.IO.FileInfo(_settingsPath);
                 file.Delete();
                 MessageBox.Show("The settings.xml file is corrupted! Please restart the application.", "File corrupted!");
                 this.Close();
@@ -190,10 +189,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Theme = MetroThemeStyle.Dark;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
             theme.InnerText = "" + (Int32)MetroThemeStyle.Dark;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -202,10 +201,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Theme = MetroThemeStyle.Light;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
             theme.InnerText = "" + (Int32)MetroThemeStyle.Light;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -213,10 +212,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Green;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Green;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -225,10 +224,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Blue;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Blue;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -237,10 +236,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Silver;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Silver;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -249,10 +248,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Lime;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Lime;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -261,10 +260,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Magenta;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Magenta;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -273,10 +272,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Brown;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Brown;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -285,10 +284,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Orange;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Orange;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -297,10 +296,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Pink;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Pink;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -309,10 +308,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Purple;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Purple;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -321,10 +320,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Red;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Red;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -333,10 +332,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Teal;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Teal;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -345,10 +344,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.White;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.White;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
 
@@ -357,10 +356,10 @@ namespace MasterAudioTechnologyFunctions
             metroStyleManager.Style = MetroColorStyle.Yellow;
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(_settingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             style.InnerText = "" + (Int32)MetroColorStyle.Yellow;
-            doc.Save("..\\..\\settings.xml");
+            doc.Save(_settingsPath);
             this.timeLine.setStyle();
         }
         #endregion Menu

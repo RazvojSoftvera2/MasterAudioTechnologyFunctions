@@ -19,7 +19,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public string TrackFileName { get; set; }
         public Color TrackColor { get; set; }
         private string SettingsPath = "..\\..\\settings.xml";
-        private string DatabasePath = "..\\..\\settings.xml";
 
         public AddNewTrack()
         {
@@ -77,7 +76,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (String.IsNullOrEmpty(tbName.Text.Trim()))
             {
-                MessageBox.Show("Track name cannot be empty.", frmMatf.SoftwareName);
+                MetroMessageBox.Show(this, "Track name cannot be empty.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbName.Focus();
                 return;
             }

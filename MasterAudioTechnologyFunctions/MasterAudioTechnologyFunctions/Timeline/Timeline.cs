@@ -74,7 +74,11 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 dialog.Title = "Choose where to save converted file...";
 
                 if (dialog.ShowDialog() != DialogResult.OK)
+                {
+                    MetroMessageBox.Show(this, "Please choose file, write it's name, and select location.", 
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+                }
 
                 string newFileName = dialog.FileName;
 
