@@ -40,60 +40,22 @@ namespace MasterAudioTechnologyFunctions.Timeline
             string path = "..\\..\\settings.xml";
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            try
-            {
-                doc.Load(path);
-            }
-            catch (FileNotFoundException)
-            {
-                XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
-                doc.AppendChild(settings);
 
-                XmlElement visual = doc.CreateElement(string.Empty, "visual", string.Empty);
-                settings.AppendChild(visual);
-
-                XmlElement themeNode = doc.CreateElement(string.Empty, "theme", string.Empty);
-                XmlText themeColor = doc.CreateTextNode("" + (Int32)MetroThemeStyle.Light);
-                themeNode.AppendChild(themeColor);
-                visual.AppendChild(themeNode);
-
-                XmlElement styleNode = doc.CreateElement(string.Empty, "style", string.Empty);
-                XmlText styleColor = doc.CreateTextNode(""+(Int32)MetroColorStyle.Blue);
-                styleNode.AppendChild(styleColor);
-                visual.AppendChild(styleNode);
-
-                doc.Save(path);
-            }
-            catch (Exception)
-            {
-                System.IO.FileInfo file = new System.IO.FileInfo(path);
-                file.Delete();
-                MessageBox.Show("The settings.xml file is corrupted! App can behave unexpectedly.", "File corrupted!");
-                return;
-            }
-
+            doc.Load(path);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
 
-            if (style == null || theme == null)
-            {
-                System.IO.FileInfo file = new System.IO.FileInfo(path);
-                file.Delete();
-            }
-            else
-            {
-                this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-                this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-                this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-                this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-                this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-                this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
 
-                foreach (var track in _tracks)
-                    track.setStyle();
+            foreach (var track in _tracks)
+                track.setStyle();
 
-                this.UpdateStyles();
-            }
+            this.UpdateStyles();
         }
 
         private void btnAddTrack_Click(object sender, EventArgs e)
@@ -101,6 +63,16 @@ namespace MasterAudioTechnologyFunctions.Timeline
             AddNewTrack addTrack = new AddNewTrack();
             if (addTrack.ShowDialog() != DialogResult.OK)
                 return;
+
+            //mp3 file conversion
+            if (/*addTrack.TrackFileName.EndsWith(".mp3")*/true)
+            {
+                //do a conversion and asserts
+                string[] temp = { "MasterAudioTechnologyFunctions" };
+                string dir = System.IO.Directory.GetCurrentDirectory();
+                temp = dir.Split(temp, StringSplitOptions.RemoveEmptyEntries);
+                string databasePath = temp[0]+ "MasterAudioTechnologyFunctions"+"\\"+"wav_database"+"\\"+"Custom";
+            }
 
             Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
 

@@ -18,6 +18,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public string TrackName { get; set; }
         public string TrackFileName { get; set; }
         public Color TrackColor { get; set; }
+        private string SettingsPath = "..\\..\\settings.xml";
+        private string DatabasePath = "..\\..\\settings.xml";
 
         public AddNewTrack()
         {
@@ -58,7 +60,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             //settings loading
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
-            doc.Load("..\\..\\settings.xml");
+            doc.Load(SettingsPath);
             XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
             metroStyleManagerAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
@@ -105,7 +107,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Waveform audio files (.wav)|*.wav";
+            dialog.Filter = "Waveform audio files (.wav)|*.wav|MP3 files (.mp3)|*.mp3";
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;

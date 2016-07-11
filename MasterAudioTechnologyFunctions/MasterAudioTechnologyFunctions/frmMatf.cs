@@ -50,7 +50,6 @@ namespace MasterAudioTechnologyFunctions
             catch (FileNotFoundException)
             {
                 XmlElement settings = doc.CreateElement(string.Empty, "settings", string.Empty);
-                //doc. = settings;
                 doc.AppendChild(settings);
 
                 //visual settings
