@@ -34,7 +34,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             InitializeComponent();
             _tracks = new List<Track>();
-            this.changeProgressBar.Visible = false;
         }
 
         public void setStyle()
