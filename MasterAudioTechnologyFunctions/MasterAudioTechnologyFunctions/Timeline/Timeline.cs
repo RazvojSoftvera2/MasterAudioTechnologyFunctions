@@ -135,14 +135,16 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     {
                         long time = t.Times.ElementAt(i);
                         var totalMilliseconds = parent.Timer.TotalMilliseconds;
+                        long trackSize =(long) t.WaveFileReader.TotalTime.TotalMilliseconds;
 
-                        if (!t.Playing[i] && totalMilliseconds >= time && totalMilliseconds <= time + t.TrackLen)
+
+                        if (!t.Playing[i] && totalMilliseconds >= time && totalMilliseconds <= time + trackSize)
                         {
                             t.Playing[i] = true;
                             t.Play();
                         }
 
-                        if (t.Playing[i] && totalMilliseconds > time + t.TrackLen)
+                        if (t.Playing[i] && totalMilliseconds > time + trackSize)
                         {
                             t.Stop();
                             t.Playing[i] = false;

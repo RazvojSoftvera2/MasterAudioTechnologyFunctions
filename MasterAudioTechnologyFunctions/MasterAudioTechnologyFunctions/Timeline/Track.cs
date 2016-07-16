@@ -107,7 +107,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             WaveOut.Init(WaveOffsetStream);
             WaveOut.Volume = TrackVolume;
 
-            TrackLen = (int)WaveFileReader.TotalTime.TotalMilliseconds;
+            //TrackLen = (int)WaveFileReader.TotalTime.TotalSeconds*10;
+            TrackLen = (int)WaveOffsetStream.Length/10000;
             //MessageBox.Show(WaveFileReader.TotalTime.TotalMilliseconds + "");
             //TODO: Replace 10000 with something concrete 
             //MessageBox.Show(WaveOffsetStream.Length / 10000 + "");
@@ -124,9 +125,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             pnlWaveViewer.Controls.Add(wvTrack);
             wvTrack.Location = new Point(startPosition, 0);
-            
+
+            int startPositionTime = startPosition * 55; //lenght in millsec/graphical lenght is about 55
             Tracks.Add(wvTrack);
-            Times.Add(startPosition);
+            Times.Add(startPositionTime);
             Playing.Add(false);
         }
 
@@ -254,7 +256,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     addSound(start);
                     break;
                 case Timeline.TrackEditMode.Select:
-
+                    Console.WriteLine(e.X);
                     break;
             }
         }

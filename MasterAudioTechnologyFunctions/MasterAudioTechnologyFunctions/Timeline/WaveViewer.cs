@@ -25,6 +25,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         private int samplesPerPixel = 128;
         private long startPosition;
         private int bytesPerSample;
+        private int bytesPerSecond;
         /// <summary>
         /// Creates a new WaveViewer control
         /// </summary>
@@ -54,6 +55,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 if (waveStream != null)
                 {
                     bytesPerSample = (waveStream.WaveFormat.BitsPerSample / 8) * waveStream.WaveFormat.Channels;
+                    bytesPerSecond = (waveStream.WaveFormat.AverageBytesPerSecond);
                 }
                 this.Invalidate();
             }
@@ -116,7 +118,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
                 waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
-        
+                //byte[] waveData = new byte[bytesPerSecond];
+                //waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSecond);
                 using (Pen linePen = new Pen(PenColor, PenWidth))
                 {
                     for (float x = e.ClipRectangle.X; x < e.ClipRectangle.Right; x += 1)
@@ -124,6 +127,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                         short low = 0;
                         short high = 0;
                         bytesRead = waveStream.Read(waveData, 0, samplesPerPixel * bytesPerSample);
+                       // bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
                         if (bytesRead == 0)
                             break;
                         for (int n = 0; n < bytesRead; n += 2)
