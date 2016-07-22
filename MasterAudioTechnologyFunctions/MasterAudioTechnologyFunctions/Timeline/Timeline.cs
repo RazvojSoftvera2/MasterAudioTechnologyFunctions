@@ -233,5 +233,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     track.WaveOut.Volume = track.TrackVolume;
             }
         }
+
+        public int GetNumberOfTracks()
+        {
+            return _tracks.Count;
+        }
     }
 }

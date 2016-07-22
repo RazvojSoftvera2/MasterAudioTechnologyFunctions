@@ -126,7 +126,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             pnlWaveViewer.Controls.Add(wvTrack);
             wvTrack.Location = new Point(startPosition, 0);
 
-            int startPositionTime = startPosition * 55; //lenght in millsec/graphical lenght is about 55
+            //TODO: we should definitely replace this with non-constant value
+            int startPositionTime = startPosition * 55; //length in millsec/graphical lenght is about 55
             Tracks.Add(wvTrack);
             Times.Add(startPositionTime);
             Playing.Add(false);
@@ -179,7 +180,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 }
                 catch
                 {
-
+                    //TODO: handle this empty catch
                 }
             }
             else
@@ -192,7 +193,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (WaveOut == null)
                 return;
-
             //Playing = false;
             //btnPlay.Text = "Pl";
             //tmrSong.Enabled = false;
@@ -211,6 +211,22 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void BtnX_Click(object sender, EventArgs e)
         {
+            if (WaveOut != null)
+            {
+                WaveOut.Stop();
+                WaveOffsetStream.CurrentTime = new TimeSpan(0);
+            }
+
+            if (_timeline.GetNumberOfTracks() == 1)
+            {
+                //TODO: reset timer to 0 (problematic method of doing that)
+                frmMatf parent = (frmMatf)(Parent.Parent).Parent.Parent;
+                parent.disableTmrMain();
+                // parent.Timer = new TimeSpan(0);
+                // parent.SetTime(parent.Timer);
+                parent.resetTimer();
+            }
+
             _timeline.removeTrack(this);
         }
 
