@@ -238,6 +238,16 @@ namespace MasterAudioTechnologyFunctions.Timeline
             base.OnMouseDown(e);
         }
 
+        private void WaveViewer_Click(object sender, EventArgs e)
+        {
+            Track track = (Track)Parent.Parent;
+            if (track.WaveOut != null)
+            {
+                track.WaveOut.Stop();
+                track.WaveOffsetStream.CurrentTime = new TimeSpan(0);
+            }
+        }
+
         #region Component Designer generated code
         /// <summary> 
         /// Required method for Designer support - do not modify 
@@ -245,7 +255,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // WaveViewer
+            // 
+            this.Name = "WaveViewer";
+            this.Click += new System.EventHandler(this.WaveViewer_Click);
+            this.ResumeLayout(false);
+
         }
         #endregion
     }
