@@ -348,10 +348,17 @@ namespace MasterAudioTechnologyFunctions
         {
             if (timeLine.GetNumberOfTracks() > 0)
                 timeLine.Play();
+
+            //disabling all editing buttons in track
+            timeLine.DisableEditingOptionInTracks();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            //enabling all editing buttons in track
+            timeLine.EnableEditingOptionInTracks();
+            // TODO: Stop all tracks
+
             timeLine.Stop();
         }
 
