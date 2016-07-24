@@ -240,12 +240,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void WaveViewer_Click(object sender, EventArgs e)
         {
-            Track track = (Track)Parent.Parent;
-            if (track.WaveOut != null)
-            {
-                track.WaveOut.Stop();
-                track.WaveOffsetStream.CurrentTime = new TimeSpan(0);
-            }
+
         }
 
         #region Component Designer generated code
@@ -260,7 +255,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             // WaveViewer
             // 
             this.Name = "WaveViewer";
-            this.Click += new System.EventHandler(this.WaveViewer_Click);
             this.ResumeLayout(false);
 
         }

@@ -276,5 +276,23 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     break;
             }
         }
+
+        public void DisableEditButtons()
+        {
+            this.BtnDelete.Enabled = false;
+            this.btnEdit.Enabled = false;
+            this.BtnSelect.Enabled = false;
+            this.EditBtn.Enabled = false;
+            this.Update();
+        }
+
+        public void EnableEditButtons()
+        {
+            this.BtnDelete.Enabled = true;
+            this.btnEdit.Enabled = true;
+            this.BtnSelect.Enabled = true;
+            this.EditBtn.Enabled = true;
+            this.Update();
+        }
     }
 }

@@ -238,5 +238,21 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             return _tracks.Count;
         }
+
+        public void DisableEditingOptionInTracks()
+        {
+            foreach (var track in _tracks)
+            {
+                track.DisableEditButtons();
+            }
+        }
+
+        public void EnableEditingOptionInTracks()
+        {
+            foreach (var track in _tracks)
+            {
+                track.EnableEditButtons();
+            }
+        }
     }
 }

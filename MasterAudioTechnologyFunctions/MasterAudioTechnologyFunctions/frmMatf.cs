@@ -354,6 +354,9 @@ namespace MasterAudioTechnologyFunctions
         #region PlayButtons
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            //disabling all editing buttons in track
+            timeLine.DisableEditingOptionInTracks();
+
             //  if (_playing)
             //  {
             // TODO: Pause all tracks
@@ -371,6 +374,8 @@ namespace MasterAudioTechnologyFunctions
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            //enabling all editing buttons in track
+            timeLine.EnableEditingOptionInTracks();
             // TODO: Stop all tracks
             timeLine.Stop();
 
