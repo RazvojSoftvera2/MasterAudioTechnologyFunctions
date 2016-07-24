@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlBottom = new MetroFramework.Controls.MetroPanel();
+            this.timelineCursor = new MasterAudioTechnologyFunctions.Timeline.TimelineCursor();
             this.changeProgressBar = new MetroFramework.Controls.MetroProgressBar();
             this.btnAddTrack = new MetroFramework.Controls.MetroButton();
             this.pnlTracks = new MetroFramework.Controls.MetroPanel();
@@ -40,6 +41,7 @@
             // pnlBottom
             // 
             this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlBottom.Controls.Add(this.timelineCursor);
             this.pnlBottom.Controls.Add(this.changeProgressBar);
             this.pnlBottom.Controls.Add(this.btnAddTrack);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -54,11 +56,21 @@
             this.pnlBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBottom.VerticalScrollbarSize = 10;
             // 
+            // timelineCursor
+            // 
+            this.timelineCursor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.timelineCursor.Location = new System.Drawing.Point(92, 0);
+            this.timelineCursor.Name = "timelineCursor";
+            this.timelineCursor.Size = new System.Drawing.Size(2, 10);
+            this.timelineCursor.TabIndex = 3;
+            this.timelineCursor.UseSelectable = true;
+            this.timelineCursor.Visible = false;
+            // 
             // changeProgressBar
             // 
             this.changeProgressBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.changeProgressBar.Location = new System.Drawing.Point(0, 0);
-            this.changeProgressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.changeProgressBar.Margin = new System.Windows.Forms.Padding(2);
             this.changeProgressBar.Name = "changeProgressBar";
             this.changeProgressBar.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.changeProgressBar.Size = new System.Drawing.Size(477, 28);
@@ -116,5 +128,6 @@
         private System.Windows.Forms.Timer tmrSong;
         private MetroFramework.Controls.MetroButton btnAddTrack;
         private MetroFramework.Controls.MetroProgressBar changeProgressBar;
+        private TimelineCursor timelineCursor;
     }
 }

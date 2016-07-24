@@ -67,6 +67,12 @@
     <Compile Include="Timeline\Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
     </Compile>
+    <Compile Include="Timeline\TimelineCursor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\TimelineCursor.Designer.cs">
+      <DependentUpon>TimelineCursor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Timeline\Track.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     </Compile>
     <EmbeddedResource Include="Timeline\Timeline.resx">
       <DependentUpon>Timeline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Timeline\TimelineCursor.resx">
+      <DependentUpon>TimelineCursor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Timeline\Track.resx">
       <DependentUpon>Track.cs</DependentUpon>

@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using NAudio.Wave;
-using MasterAudioTechnologyFunctions.Timeline;
 using MetroFramework.Forms;
 using MetroFramework;
 using System.Xml;
 using System.IO;
-using System.IO.IsolatedStorage;
 
 namespace MasterAudioTechnologyFunctions
 {
@@ -26,7 +17,7 @@ namespace MasterAudioTechnologyFunctions
         //public long Timer = 0;
         public TimeSpan Timer = new TimeSpan();
         //TODO: do a refactoring to a relative path: and to a childrens also!
-        string dir = System.IO.Directory.GetCurrentDirectory();
+        string dir = Directory.GetCurrentDirectory();
         private string _settingsPath = "..\\..\\settings.xml";
 
         public frmMatf()
@@ -126,10 +117,12 @@ namespace MasterAudioTechnologyFunctions
             lblTimeElapsed.Text = time;
         }
 
+        // TODO: Place label inside Timeline
         internal void SetTime(TimeSpan timer)
         {
-            lblTimeElapsed.Text = timer.Minutes.ToString("D2") + ":" + timer.Seconds.ToString("D2")
-                + ":" + timer.Milliseconds.ToString("D3");
+            lblTimeElapsed.Text = timer.Minutes.ToString("D2") + ":" + 
+                                  timer.Seconds.ToString("D2") + ":" + 
+                                  timer.Milliseconds.ToString("D3");
         }
 
         #region Menu
@@ -181,9 +174,8 @@ namespace MasterAudioTechnologyFunctions
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MetroMessageBox.Show(this, "This is a sample audio App " +
-                                       "for audio manipulation and mixing.",
-                                "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MetroMessageBox.Show(this, "This is a sample audio App for audio manipulation and mixing.",
+                                 "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -354,41 +346,27 @@ namespace MasterAudioTechnologyFunctions
         #region PlayButtons
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            //  if (_playing)
-            //  {
-            // TODO: Pause all tracks
-            //Pause();
-            //      _playing = false;
-            //   }
-            //    else
-            //    {
-            // TODO: Play all tracks
-            //Play();
-            //       _playing = true;
-            timeLine.Play();
-            //    }
+            if (timeLine.GetNumberOfTracks() > 0)
+                timeLine.Play();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            // TODO: Stop all tracks
             timeLine.Stop();
-
         }
 
         private void btnLoop_Click(object sender, EventArgs e)
         {
-            /* TODO: Refactor for Timeline
-            if (_looping)
+            if (timeLine.Looping)
             {
-                _looping = false;
-                //btnLoop.Text = "l";
+                timeLine.Looping = false;
+                btnLoop.Text = "l";
             }
             else
             {
-                _looping = true;
-                //btnLoop.Text = "L";
-            }*/
+                timeLine.Looping = true;
+                btnLoop.Text = "L";
+            }
         }
 
 
