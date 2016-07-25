@@ -151,11 +151,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 }
             }
 
-            // TODO: Pitaj Pedju kako se racuna pozicija i izmeni 92 + (int)totalMilliseconds/50
             // TODO: Remove hardcoding of pnlWaveViewer X position
             // 92: X position of pnlWaveViewer
             Point cursorPreviousLocation = timelineCursor.Location;
-            timelineCursor.Location = new Point(92 + (int)totalMilliseconds/50, cursorPreviousLocation.Y);
+            timelineCursor.Location = new Point(92 + (int)totalMilliseconds/55, cursorPreviousLocation.Y);
             
             // TODO: Change Location.X + Size.Width with duration of the song
             if (totalMilliseconds > _songDuration)
