@@ -21,14 +21,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         private bool _looping = false;
         private float _masterVolume = (float)0.7;
 
-        public enum TrackEditMode
-        {
-            Select,
-            Edit,
-            Delete
-        };
 
-        public static TrackEditMode TrackMode = TrackEditMode.Select;
 
         public Timeline()
         {
@@ -233,5 +226,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     track.WaveOut.Volume = track.TrackVolume;
             }
         }
+
+
     }
 }

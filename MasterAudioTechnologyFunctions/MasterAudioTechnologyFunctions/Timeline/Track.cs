@@ -34,6 +34,108 @@ namespace MasterAudioTechnologyFunctions.Timeline
         
         private Timeline _timeline; //TODO: Refactor so we use the parent of track instead of a private field.
 
+        public List<string> Notes = new List<string>()
+        {
+            "C1 " ,
+            "C#1" ,
+            "D1 " ,
+            "D#1" ,
+            "E1 " ,
+            "F1 " ,
+            "F#1" ,
+            "G1 " ,
+            "G#1" ,
+            "A1 " ,
+            "A#1" ,
+            "B1 " ,
+            "C2 " ,
+            "C#2" ,
+            "D2 " ,
+            "D#2" ,
+            "E2 " ,
+            "F2 " ,
+            "F#2" ,
+            "G2 " ,
+            "G#2" ,
+            "A2 " ,
+            "A#2" ,
+            "B2 " ,
+            "C3 " ,
+            "C#3" ,
+            "D3 " ,
+            "D#3" ,
+            "E3 " ,
+            "F3 " ,
+            "F#3" ,
+            "G3 " ,
+            "G#3" ,
+            "A3 " ,
+            "A#3" ,
+            "B3 " ,
+            "C4 " ,
+            "C#4" ,
+            "D4 " ,
+            "D#4" ,
+            "E4 " ,
+            "F4 " ,
+            "F#4" ,
+            "G4 " ,
+            "G# " ,
+            "A4 " ,
+            "A#4" ,
+            "B4 " ,
+            "C5 " ,
+            "C#5" ,
+            "D5 " ,
+            "D#5" ,
+            "E5 " ,
+            "F5 " ,
+            "F#5" ,
+            "G5 " ,
+            "G#5" ,
+            "A5 " ,
+            "A#5" ,
+            "B5 " ,
+            "C6 " ,
+            "C#6" ,
+            "D6 " ,
+            "D#6" ,
+            "E6 " ,
+            "F6 " ,
+            "F#6" ,
+            "G6 " ,
+            "G#6" ,
+            "A6 " ,
+            "A#6" ,
+            "B6 " ,
+            "C7 " ,
+            "C#7" ,
+            "D7 " ,
+            "D#7" ,
+            "E7 " ,
+            "F7 " ,
+            "F#7" ,
+            "G7 " ,
+            "G#7" ,
+            "A7 " ,
+            "A#7" ,
+            "B7 " ,
+            "C8 " ,
+            "C#8" ,
+            "D8 " ,
+            "D#8" ,
+            "E8 " ,
+            "F8 " ,
+            "F#8" ,
+            "G8 " ,
+            "G#8" ,
+            "A8 " ,
+            "A#8" ,
+            "B8 " ,
+            "C9 " ,
+        };
+
+        
         public Track(Timeline tl)
         {
             InitializeComponent();
@@ -42,6 +144,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Times = new List<long>();
             Playing = new List<bool>();
             setStyle();
+            cmbbNotes.Items.AddRange(Notes.ToArray());
         }
 
         public Track(string name, string fileName, Color color, Timeline tl)
@@ -52,6 +155,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Times = new List<long>();
             Playing = new List<bool>();
             setStyle();
+            cmbbNotes.Items.AddRange(Notes.ToArray());
         }
 
         public void setStyle()
@@ -64,14 +168,11 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             this.BtnX.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
             this.BtnX.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.BtnDelete.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.BtnDelete.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
             this.btnEdit.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
             this.btnEdit.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.BtnSelect.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.BtnSelect.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.EditBtn.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.EditBtn.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
+
             this.lblTrackName.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
             this.lblTrackName.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
             this.pnlInfo.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
@@ -214,20 +315,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _timeline.removeTrack(this);
         }
 
-        private void BtnSelect_Click(object sender, EventArgs e)
-        {
-            Timeline.TrackMode = Timeline.TrackEditMode.Select;
-        }
-
-        private void EditBtn_Click(object sender, EventArgs e)
-        {
-            Timeline.TrackMode = Timeline.TrackEditMode.Edit;
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            Timeline.TrackMode = Timeline.TrackEditMode.Delete;
-        }
 
         public void RemoveWave(WaveViewer wv)
         {
@@ -249,16 +336,19 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (e.Button != MouseButtons.Left)
                 return;
             
-            switch (Timeline.TrackMode)
+            switch (frmMatf.TrackMode)
             {
-                case Timeline.TrackEditMode.Edit:
+                case frmMatf.TrackEditMode.Edit:
                     int start = e.X;
                     addSound(start);
                     break;
-                case Timeline.TrackEditMode.Select:
-                    Console.WriteLine(e.X);
-                    break;
+    
             }
+        }
+
+        private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

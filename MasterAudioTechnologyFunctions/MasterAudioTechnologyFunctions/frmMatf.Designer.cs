@@ -78,6 +78,8 @@
             this.menuAbout = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEdit = new MetroFramework.Controls.MetroButton();
+            this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.timeLine = new MasterAudioTechnologyFunctions.Timeline.Timeline();
             this.pnlTopBar.SuspendLayout();
             this.pnlSideBar.SuspendLayout();
@@ -149,6 +151,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlSideBar.AutoScroll = true;
             this.pnlSideBar.BackColor = System.Drawing.Color.White;
+            this.pnlSideBar.Controls.Add(this.btnDelete);
+            this.pnlSideBar.Controls.Add(this.btnEdit);
             this.pnlSideBar.Controls.Add(this.volumeLabel);
             this.pnlSideBar.Controls.Add(this.volumeBar);
             this.pnlSideBar.Controls.Add(this.pnlVolume);
@@ -170,7 +174,7 @@
             // 
             this.volumeLabel.AutoSize = true;
             this.volumeLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.volumeLabel.Location = new System.Drawing.Point(5, 34);
+            this.volumeLabel.Location = new System.Drawing.Point(3, 66);
             this.volumeLabel.Name = "volumeLabel";
             this.volumeLabel.Size = new System.Drawing.Size(110, 19);
             this.volumeLabel.TabIndex = 8;
@@ -181,7 +185,7 @@
             // 
             this.volumeBar.BackColor = System.Drawing.Color.Transparent;
             this.volumeBar.ForeColor = System.Drawing.Color.Transparent;
-            this.volumeBar.Location = new System.Drawing.Point(5, 51);
+            this.volumeBar.Location = new System.Drawing.Point(5, 88);
             this.volumeBar.Name = "volumeBar";
             this.volumeBar.Size = new System.Drawing.Size(108, 23);
             this.volumeBar.TabIndex = 7;
@@ -584,6 +588,28 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(0, 34);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(50, 31);
+            this.btnEdit.TabIndex = 9;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseSelectable = true;
+            this.btnEdit.UseStyleColors = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(56, 34);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(56, 31);
+            this.btnDelete.TabIndex = 10;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseSelectable = true;
+            this.btnDelete.UseStyleColors = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // timeLine
             // 
             this.timeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -681,6 +707,8 @@
         private System.Windows.Forms.ToolStripMenuItem tealToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem yelowToolStripMenuItem;
+        private MetroFramework.Controls.MetroButton btnDelete;
+        private MetroFramework.Controls.MetroButton btnEdit;
     }
 }
 

@@ -189,15 +189,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             Track p = (Track)Parent.Parent;
 
-            switch (Timeline.TrackMode)
+            switch (frmMatf.TrackMode)
             {
-                case Timeline.TrackEditMode.Delete:
+                case frmMatf.TrackEditMode.Delete:
                     if (e.Button == MouseButtons.Left)
                     {
                         p.RemoveWave(this);
                     }
                     break;
-                case Timeline.TrackEditMode.Select:
+                case frmMatf.TrackEditMode.Edit:
                     if (mouseDrag && e.Button == MouseButtons.Left)
                     {
                         mouseDrag = false;
@@ -221,7 +221,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveStream == null)
                 return;
 
-            if (mouseDrag && Timeline.TrackMode == Timeline.TrackEditMode.Select)
+            if (mouseDrag && frmMatf.TrackMode == frmMatf.TrackEditMode.Edit)
             {
                 Point oldLocation = Location;
 

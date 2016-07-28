@@ -58,12 +58,13 @@
             // 
             this.changeProgressBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.changeProgressBar.Location = new System.Drawing.Point(0, 0);
-            this.changeProgressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.changeProgressBar.Margin = new System.Windows.Forms.Padding(2);
             this.changeProgressBar.Name = "changeProgressBar";
             this.changeProgressBar.ProgressBarStyle = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.changeProgressBar.Size = new System.Drawing.Size(477, 28);
             this.changeProgressBar.TabIndex = 2;
             this.changeProgressBar.Visible = false;
+
             // 
             // btnAddTrack
             // 

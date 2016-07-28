@@ -29,6 +29,15 @@ namespace MasterAudioTechnologyFunctions
         string dir = System.IO.Directory.GetCurrentDirectory();
         private string _settingsPath = "..\\..\\settings.xml";
 
+
+        public enum TrackEditMode
+        {
+            Edit,
+            Delete
+        };
+
+        public static TrackEditMode TrackMode = TrackEditMode.Edit;
+
         public frmMatf()
         {
             InitializeComponent();
@@ -65,6 +74,13 @@ namespace MasterAudioTechnologyFunctions
                 style.AppendChild(styleColor);
                 visual.AppendChild(style);
 
+                //TODO: Style (color) for these buttons doesn't work properly //PD
+                btnDelete.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+                btnDelete.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
+                btnEdit.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+                btnEdit.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
                 //size settings
                 XmlElement size = doc.CreateElement(string.Empty, "size", string.Empty);
                 settings.AppendChild(size);
@@ -78,6 +94,9 @@ namespace MasterAudioTechnologyFunctions
                 XmlText heightSize = doc.CreateTextNode("550");
                 height.AppendChild(heightSize);
                 size.AppendChild(height);
+
+
+
 
                 doc.Save(_settingsPath);
             }
@@ -455,6 +474,16 @@ namespace MasterAudioTechnologyFunctions
             height.InnerText = "" + (Int32)this.Height;
 
             doc.Save(_settingsPath);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            frmMatf.TrackMode = frmMatf.TrackEditMode.Edit;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            frmMatf.TrackMode = frmMatf.TrackEditMode.Delete;
         }
     }
 }
