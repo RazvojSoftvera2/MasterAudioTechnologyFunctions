@@ -114,7 +114,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (waveStream != null)
             {
-                waveStream.Position =0;
+                waveStream.Position = 0;
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
                 waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
@@ -126,8 +126,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     {
                         short low = 0;
                         short high = 0;
+                        long tempWavePosition = WaveStream.Position;
                         bytesRead = waveStream.Read(waveData, 0, samplesPerPixel * bytesPerSample);
-                       // bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
+                        WaveStream.Position = tempWavePosition;
+                        // bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
                         if (bytesRead == 0)
                             break;
                         for (int n = 0; n < bytesRead; n += 2)
