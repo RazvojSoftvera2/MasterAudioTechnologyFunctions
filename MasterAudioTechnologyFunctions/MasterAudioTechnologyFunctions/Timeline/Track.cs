@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
+using System.Xml;
+using MetroFramework;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -29,10 +31,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public WaveOffsetStream WaveOffsetStream;
         public WaveFileReader WaveFileReader;
         public float TrackVolume = (float)0.7;
-
-
-
-        private Timeline _timeline;
+        
+        private Timeline _timeline; //TODO: Refactor so we use the parent of track instead of a private field.
 
         public Track(Timeline tl)
         {
@@ -41,6 +41,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
+            setStyle();
         }
 
         public Track(string name, string fileName, Color color, Timeline tl)
@@ -50,8 +51,38 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
+            setStyle();
         }
 
+        public void setStyle()
+        {
+            XmlDocument doc = new XmlDocument();
+            string dir = System.IO.Directory.GetCurrentDirectory();
+            doc.Load("..\\..\\settings.xml");
+            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+
+            this.BtnX.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.BtnX.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.BtnDelete.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.BtnDelete.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.btnEdit.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.btnEdit.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.BtnSelect.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.BtnSelect.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.EditBtn.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.EditBtn.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.lblTrackName.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.lblTrackName.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlInfo.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlInfo.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            this.pnlWaveViewer.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
+            this.pnlWaveViewer.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+
+            this.UpdateStyles();
+        }
+
+        //TODO: Where and for what is this used?
         public long getTrackLength()
         {
             return WaveOffsetStream.Length;
@@ -62,44 +93,53 @@ namespace MasterAudioTechnologyFunctions.Timeline
             TrackName = name;
             TrackFileName = fileName;
             TrackColor = color;
-
-
+            
             if (tl!=null)
             {
                 _timeline = tl;
             }
 
+            lblTrackName.Text = TrackName;
+
             WaveOut = new WaveOut();
             WaveFileReader = new WaveFileReader(TrackFileName);
             WaveOffsetStream = new WaveOffsetStream(WaveFileReader);
             WaveOut.Init(WaveOffsetStream);
-
-            lblTrackName.Text = TrackName;
-
-            TrackLen = (int)WaveOffsetStream.Length / 10000;
-
-            //inicijalizovanje jacine zvuka
             WaveOut.Volume = TrackVolume;
+
+            //TrackLen = (int)WaveFileReader.TotalTime.TotalSeconds*10;
+            TrackLen = (int)WaveOffsetStream.Length/10000;
+            //MessageBox.Show(WaveFileReader.TotalTime.TotalMilliseconds + "");
+            //TODO: Replace 10000 with something concrete 
+            //MessageBox.Show(WaveOffsetStream.Length / 10000 + "");
+
+            if (Tracks != null && Tracks.Count > 0)
+                foreach (var wvTrack in Tracks)
+                    InitializeWaveViewer(wvTrack);
         }
 
         public void addSound(int startPosition)
         {
             WaveViewer wvTrack = new WaveViewer();
-           
-            wvTrack.WaveStream = WaveFileReader;
-            wvTrack.PenColor = TrackColor;
-            //TODO: Replace 10000 with something concrete 
-            wvTrack.Height = pnlWaveViewer.Height;
-            wvTrack.Width = TrackLen;
-          //  wvTrack.FitToScreen();
+            InitializeWaveViewer(wvTrack);
 
             pnlWaveViewer.Controls.Add(wvTrack);
             wvTrack.Location = new Point(startPosition, 0);
-            
+
+            //TODO: we should definitely replace this with non-constant value
+            int startPositionTime = startPosition * 55; //length in millsec/graphical lenght is about 55
             Tracks.Add(wvTrack);
-            Times.Add(startPosition);
+            Times.Add(startPositionTime);
             Playing.Add(false);
-            
+        }
+
+        private void InitializeWaveViewer(WaveViewer wvTrack)
+        {
+            wvTrack.WaveStream = WaveFileReader;
+            wvTrack.PenColor = TrackColor;
+            wvTrack.Height = pnlWaveViewer.Height;
+            wvTrack.Width = TrackLen;
+            //wvTrack.FitToScreen();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -110,12 +150,13 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             InitializeTrack(editTrack.TrackName, editTrack.TrackFileName, editTrack.TrackColor, null);
         }
-        
+
+        //TODO: Where and for what is this used?
         public void Update(long globalTime)
         {
             foreach(long l in Times)
             {
-                if(l==globalTime)
+                if(l == globalTime)
                 {
                     Play();
                 }
@@ -133,7 +174,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             if (WaveOut.GetPosition() == 0)
             {
-                WaveOut.Play();
+                try
+                {
+                    WaveOut.Play();
+                }
+                catch
+                {
+                    //TODO: handle this empty catch
+                }
             }
             else
             {
@@ -145,7 +193,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (WaveOut == null)
                 return;
-
             //Playing = false;
             //btnPlay.Text = "Pl";
             //tmrSong.Enabled = false;
@@ -164,6 +211,22 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void BtnX_Click(object sender, EventArgs e)
         {
+            if (WaveOut != null)
+            {
+                WaveOut.Stop();
+                WaveOffsetStream.CurrentTime = new TimeSpan(0);
+            }
+
+            if (_timeline.GetNumberOfTracks() == 1)
+            {
+                //TODO: reset timer to 0 (problematic method of doing that)
+                frmMatf parent = (frmMatf)(Parent.Parent).Parent.Parent;
+                parent.disableTmrMain();
+                // parent.Timer = new TimeSpan(0);
+                // parent.SetTime(parent.Timer);
+                parent.resetTimer();
+            }
+
             _timeline.removeTrack(this);
         }
 
@@ -209,9 +272,27 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     addSound(start);
                     break;
                 case Timeline.TrackEditMode.Select:
-
+                    Console.WriteLine(e.X);
                     break;
             }
+        }
+
+        public void DisableEditButtons()
+        {
+            this.BtnDelete.Enabled = false;
+            this.btnEdit.Enabled = false;
+            this.BtnSelect.Enabled = false;
+            this.EditBtn.Enabled = false;
+            this.Update();
+        }
+
+        public void EnableEditButtons()
+        {
+            this.BtnDelete.Enabled = true;
+            this.btnEdit.Enabled = true;
+            this.BtnSelect.Enabled = true;
+            this.EditBtn.Enabled = true;
+            this.Update();
         }
     }
 }

@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework">
+      <HintPath>..\MetroStyleGUI\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\MetroStyleGUI\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\MetroStyleGUI\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio">
       <HintPath>..\NAudio\NAudio.dll</HintPath>
     </Reference>
@@ -57,6 +66,12 @@
     </Compile>
     <Compile Include="Timeline\Timeline.Designer.cs">
       <DependentUpon>Timeline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Timeline\TimelineCursor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\TimelineCursor.Designer.cs">
+      <DependentUpon>TimelineCursor.cs</DependentUpon>
     </Compile>
     <Compile Include="Timeline\Track.cs">
       <SubType>UserControl</SubType>
@@ -84,11 +99,15 @@
     <EmbeddedResource Include="Timeline\Timeline.resx">
       <DependentUpon>Timeline.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Timeline\TimelineCursor.resx">
+      <DependentUpon>TimelineCursor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Timeline\Track.resx">
       <DependentUpon>Track.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMatf.resx">
       <DependentUpon>frmMatf.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +121,9 @@
     </Compile>
     <EmbeddedResource Include="Timeline\AddNewTrack.resx">
       <DependentUpon>AddNewTrack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Timeline\WaveViewer.resx">
+      <DependentUpon>WaveViewer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
