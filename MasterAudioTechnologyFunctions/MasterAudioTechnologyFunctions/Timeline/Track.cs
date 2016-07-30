@@ -135,7 +135,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void InitializeWaveViewer(WaveViewer wvTrack)
         {
-            wvTrack.WaveStream = WaveFileReader;
+            wvTrack.WaveStream = new NAudio.Wave.WaveFileReader(TrackFileName);
             wvTrack.PenColor = TrackColor;
             wvTrack.Height = pnlWaveViewer.Height;
             wvTrack.Width = TrackLen;

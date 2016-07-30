@@ -112,18 +112,16 @@ namespace MasterAudioTechnologyFunctions.Timeline
         /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {
-            WaveStream waveStreamGraphic = waveStream;
-            if (waveStreamGraphic != null)
+            if (waveStream != null)
             {
-
-                waveStreamGraphic.Position = 0;
+                waveStream.Position = 0;
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
                 //byte[] waveData = new byte[bytesPerSecond];
 
-                //long tempWavePosition = waveStream.Position;
-                waveStreamGraphic.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
-                //waveStream.Position = tempWavePosition;
+                long tempWavePosition = waveStream.Position;
+                waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
+                waveStream.Position = tempWavePosition;
                 //waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSecond);
                 using (Pen linePen = new Pen(PenColor, PenWidth))
                 {
@@ -131,8 +129,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     {
                         short low = 0;
                         short high = 0;
-                        
-                        bytesRead = waveStreamGraphic.Read(waveData, 0, samplesPerPixel * bytesPerSample);
+
+                        bytesRead = waveStream.Read(waveData, 0, samplesPerPixel * bytesPerSample);
                         //bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
                         if (bytesRead == 0)
                             break;
