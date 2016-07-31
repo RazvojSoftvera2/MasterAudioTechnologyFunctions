@@ -37,6 +37,8 @@
             this.btnOk = new MetroFramework.Controls.MetroButton();
             this.btnOpen = new MetroFramework.Controls.MetroButton();
             this.metroStyleManagerAddTrack = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.cmbbNotes = new MetroFramework.Controls.MetroComboBox();
+            this.chkbProjectDefault = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManagerAddTrack)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,10 +46,9 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblName.Location = new System.Drawing.Point(19, 81);
-            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblName.Location = new System.Drawing.Point(14, 66);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(47, 20);
+            this.lblName.Size = new System.Drawing.Size(45, 19);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Name";
             this.lblName.UseStyleColors = true;
@@ -59,10 +60,9 @@
             // 
             // 
             this.tbName.CustomButton.Image = null;
-            this.tbName.CustomButton.Location = new System.Drawing.Point(109, 1);
-            this.tbName.CustomButton.Margin = new System.Windows.Forms.Padding(4);
+            this.tbName.CustomButton.Location = new System.Drawing.Point(138, 2);
             this.tbName.CustomButton.Name = "";
-            this.tbName.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.tbName.CustomButton.Size = new System.Drawing.Size(15, 15);
             this.tbName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.tbName.CustomButton.TabIndex = 1;
             this.tbName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -70,8 +70,7 @@
             this.tbName.CustomButton.Visible = false;
             this.tbName.Lines = new string[] {
         "New Track"};
-            this.tbName.Location = new System.Drawing.Point(81, 81);
-            this.tbName.Margin = new System.Windows.Forms.Padding(4);
+            this.tbName.Location = new System.Drawing.Point(65, 66);
             this.tbName.MaxLength = 32767;
             this.tbName.Name = "tbName";
             this.tbName.PasswordChar = '\0';
@@ -80,7 +79,7 @@
             this.tbName.SelectionLength = 0;
             this.tbName.SelectionStart = 0;
             this.tbName.ShortcutsEnabled = true;
-            this.tbName.Size = new System.Drawing.Size(133, 25);
+            this.tbName.Size = new System.Drawing.Size(156, 20);
             this.tbName.TabIndex = 1;
             this.tbName.Text = "New Track";
             this.tbName.UseSelectable = true;
@@ -90,10 +89,9 @@
             // 
             // btnColor
             // 
-            this.btnColor.Location = new System.Drawing.Point(23, 149);
-            this.btnColor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnColor.Location = new System.Drawing.Point(17, 121);
             this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(192, 28);
+            this.btnColor.Size = new System.Drawing.Size(204, 23);
             this.btnColor.TabIndex = 3;
             this.btnColor.Text = "Choose color";
             this.btnColor.UseCustomBackColor = true;
@@ -104,10 +102,9 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(23, 185);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(17, 186);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(95, 28);
+            this.btnCancel.Size = new System.Drawing.Size(98, 23);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseCustomBackColor = true;
@@ -117,10 +114,9 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(120, 185);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Location = new System.Drawing.Point(121, 186);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(95, 28);
+            this.btnOk.Size = new System.Drawing.Size(100, 23);
             this.btnOk.TabIndex = 5;
             this.btnOk.Text = "OK";
             this.btnOk.UseCustomBackColor = true;
@@ -130,10 +126,9 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(23, 113);
-            this.btnOpen.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOpen.Location = new System.Drawing.Point(17, 92);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(192, 28);
+            this.btnOpen.Size = new System.Drawing.Size(204, 23);
             this.btnOpen.TabIndex = 2;
             this.btnOpen.Text = "Choose sound file";
             this.btnOpen.UseCustomBackColor = true;
@@ -145,13 +140,40 @@
             // 
             this.metroStyleManagerAddTrack.Owner = this;
             // 
+            // cmbbNotes
+            // 
+            this.cmbbNotes.Enabled = false;
+            this.cmbbNotes.FormattingEnabled = true;
+            this.cmbbNotes.ItemHeight = 23;
+            this.cmbbNotes.Location = new System.Drawing.Point(121, 150);
+            this.cmbbNotes.Name = "cmbbNotes";
+            this.cmbbNotes.Size = new System.Drawing.Size(100, 29);
+            this.cmbbNotes.TabIndex = 6;
+            this.cmbbNotes.UseSelectable = true;
+            // 
+            // chkbProjectDefault
+            // 
+            this.chkbProjectDefault.AutoSize = true;
+            this.chkbProjectDefault.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.chkbProjectDefault.Checked = true;
+            this.chkbProjectDefault.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkbProjectDefault.Location = new System.Drawing.Point(14, 158);
+            this.chkbProjectDefault.Name = "chkbProjectDefault";
+            this.chkbProjectDefault.Size = new System.Drawing.Size(101, 15);
+            this.chkbProjectDefault.TabIndex = 7;
+            this.chkbProjectDefault.Text = "Project Default";
+            this.chkbProjectDefault.UseSelectable = true;
+            this.chkbProjectDefault.CheckedChanged += new System.EventHandler(this.chkbProjectDefault_CheckedChanged);
+            // 
             // AddNewTrack
             // 
             this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(240, 240);
+            this.ClientSize = new System.Drawing.Size(244, 229);
+            this.Controls.Add(this.chkbProjectDefault);
+            this.Controls.Add(this.cmbbNotes);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
@@ -159,9 +181,7 @@
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.lblName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddNewTrack";
-            this.Padding = new System.Windows.Forms.Padding(27, 74, 27, 25);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Track";
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManagerAddTrack)).EndInit();
@@ -180,5 +200,7 @@
         private MetroFramework.Controls.MetroLabel lblName;
         private MetroFramework.Controls.MetroButton btnOpen;
         private MetroFramework.Components.MetroStyleManager metroStyleManagerAddTrack;
+        private MetroFramework.Controls.MetroCheckBox chkbProjectDefault;
+        private MetroFramework.Controls.MetroComboBox cmbbNotes;
     }
 }

@@ -19,8 +19,12 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public string TrackFileName { get; set; }
         public Color TrackColor { get; set; }
         private string SettingsPath = "..\\..\\settings.xml";
+        private frmMatf aFrmMatf;
+        public string Note;
+        private string ProjectDefaultNote;
+        public List<string> Notes;
 
-        public AddNewTrack()
+        public AddNewTrack(frmMatf aFrmMatf)
         {
             InitializeComponent();
             this.StyleManager = metroStyleManagerAddTrack;
@@ -30,11 +34,16 @@ namespace MasterAudioTechnologyFunctions.Timeline
             this.Resizable = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             cdColorPicker.Color = Color.White;
-
+            this.aFrmMatf = aFrmMatf;
+            Notes = aFrmMatf.Notes;
+            cmbbNotes.Items.AddRange(Notes.ToArray());
+            cmbbNotes.SelectedItem = "C4 ";
+            //TODO: change to read from project file (.matf) once that is implemented //PD
+            ProjectDefaultNote = "C4 ";
             setStyle();
         }
 
-        public AddNewTrack(string name, string fileName, Color color)
+        public AddNewTrack(string name, string fileName, Color color, frmMatf aFrmMatf)
         {
             InitializeComponent();
             this.StyleManager = metroStyleManagerAddTrack;
@@ -50,7 +59,12 @@ namespace MasterAudioTechnologyFunctions.Timeline
             cdColorPicker.Color = TrackColor;
             tbName.Text = TrackName;
             Text = "Edit Track";
-
+            this.aFrmMatf = aFrmMatf;
+            Notes = aFrmMatf.Notes;
+            cmbbNotes.Items.AddRange(Notes.ToArray());
+            cmbbNotes.SelectedItem = "C4 ";
+            //TODO: change to read from project file (.matf) once that is implemented //PD
+            ProjectDefaultNote = "C4 ";
             setStyle();
         }
 
@@ -92,6 +106,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
             TrackName = tbName.Text.Trim();
             TrackColor = cdColorPicker.Color;
 
+            if(chkbProjectDefault.Checked)
+            {
+                Note = ProjectDefaultNote;
+            }
+            else
+            {
+                Note = (string)cmbbNotes.SelectedItem;
+            }
+
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -113,6 +136,18 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 return;
 
             TrackFileName = dialog.FileName;
+        }
+
+        private void chkbProjectDefault_CheckedChanged(object sender, EventArgs e)
+        {
+            if(chkbProjectDefault.Checked)
+            {
+                cmbbNotes.Enabled = false;
+            }
+            else
+            {
+                cmbbNotes.Enabled = true;
+            }
         }
     }
 }

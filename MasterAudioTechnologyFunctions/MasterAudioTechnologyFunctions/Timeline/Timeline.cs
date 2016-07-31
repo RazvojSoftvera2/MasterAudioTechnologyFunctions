@@ -56,7 +56,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void btnAddTrack_Click(object sender, EventArgs e)
         {
-            AddNewTrack addTrack = new AddNewTrack();
+            AddNewTrack addTrack = new AddNewTrack((frmMatf)Parent.Parent);
             if (addTrack.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -89,8 +89,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 addTrack.TrackFileName = newFileName;
             }
 
-            Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
-
+            Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this, addTrack.Note);
+            
             _tracks.Add(newTrack);
             newTrack.Dock = DockStyle.Bottom;
             pnlTracks.Controls.Add(newTrack);
