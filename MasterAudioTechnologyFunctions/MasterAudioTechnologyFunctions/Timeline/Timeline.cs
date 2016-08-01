@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using MetroFramework;
 using System.Xml;
 using NAudio.Wave;
+using System.Threading.Tasks;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -57,7 +58,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             this.UpdateStyles();
         }
 
-        private void btnAddTrack_Click(object sender, EventArgs e)
+        private async void btnAddTrack_Click(object sender, EventArgs e)
         {
             AddNewTrack addTrack = new AddNewTrack();
             if (addTrack.ShowDialog() != DialogResult.OK)
@@ -73,7 +74,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
                 if (dialog.ShowDialog() != DialogResult.OK)
                 {
-                    MetroMessageBox.Show(this, "Please choose file, write it's name, and select location.", 
+                    MetroMessageBox.Show(this, "Please choose file, write it's name, and select location.",
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -82,10 +83,13 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
                 this.changeProgressBar.Visible = true;
                 this.Update();
-                using (Mp3FileReader reader = new Mp3FileReader(addTrack.TrackFileName))
+                await Task.Run(() =>
                 {
-                    WaveFileWriter.CreateWaveFile(newFileName, reader);
-                }
+                    using (Mp3FileReader reader = new Mp3FileReader(addTrack.TrackFileName))
+                    {
+                        WaveFileWriter.CreateWaveFile(newFileName, reader);
+                    }
+                }).ConfigureAwait(true);
                 this.changeProgressBar.Visible = false;
                 this.Update();
 
