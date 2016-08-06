@@ -114,11 +114,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (waveStream != null)
             {
-                waveStream.Position =0;
+                waveStream.Position = 0;
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
-                waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
                 //byte[] waveData = new byte[bytesPerSecond];
+
+                long tempWavePosition = waveStream.Position;
+                waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
+                waveStream.Position = tempWavePosition;
                 //waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSecond);
                 using (Pen linePen = new Pen(PenColor, PenWidth))
                 {
@@ -126,8 +129,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     {
                         short low = 0;
                         short high = 0;
+
                         bytesRead = waveStream.Read(waveData, 0, samplesPerPixel * bytesPerSample);
-                       // bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
+                        //bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
                         if (bytesRead == 0)
                             break;
                         for (int n = 0; n < bytesRead; n += 2)

@@ -135,7 +135,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void InitializeWaveViewer(WaveViewer wvTrack)
         {
-            wvTrack.WaveStream = WaveFileReader;
+            wvTrack.WaveStream = new NAudio.Wave.WaveFileReader(TrackFileName);
             wvTrack.PenColor = TrackColor;
             wvTrack.Height = pnlWaveViewer.Height;
             wvTrack.Width = TrackLen;
@@ -257,7 +257,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public void MoveWave(WaveViewer wv)
         {
             int i = Tracks.IndexOf(wv);
-            Times[i] = wv.Location.X;
+            // TODO: Change hardcoding of 55
+            Times[i] = wv.Location.X * 55;
         }
 
         private void pnlWaveViewer_MouseUp(object sender, MouseEventArgs e)
