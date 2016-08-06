@@ -257,7 +257,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public void MoveWave(WaveViewer wv)
         {
             int i = Tracks.IndexOf(wv);
-            Times[i] = wv.Location.X;
+            // TODO: Change hardcoding of 55
+            Times[i] = wv.Location.X * 55;
         }
 
         private void pnlWaveViewer_MouseUp(object sender, MouseEventArgs e)
