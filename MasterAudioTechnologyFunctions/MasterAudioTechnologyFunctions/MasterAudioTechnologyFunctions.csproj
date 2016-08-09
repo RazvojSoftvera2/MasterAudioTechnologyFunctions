@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MetroFramework">
+      <HintPath>..\MetroStyleGUI\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\MetroStyleGUI\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\MetroStyleGUI\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio">
       <HintPath>..\NAudio\NAudio.dll</HintPath>
     </Reference>
@@ -52,6 +61,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Timeline\Timeline.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\Timeline.Designer.cs">
+      <DependentUpon>Timeline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Timeline\TimelineCursor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\TimelineCursor.Designer.cs">
+      <DependentUpon>TimelineCursor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Timeline\Track.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Timeline\Track.Designer.cs">
+      <DependentUpon>Track.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Timeline\WaveViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="frmMatf.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,8 +90,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timeline\AddNewTrack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Timeline\AddNewTrack.Designer.cs">
+      <DependentUpon>AddNewTrack.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Timeline\Timeline.resx">
+      <DependentUpon>Timeline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Timeline\TimelineCursor.resx">
+      <DependentUpon>TimelineCursor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Timeline\Track.resx">
+      <DependentUpon>Track.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMatf.resx">
       <DependentUpon>frmMatf.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -71,7 +117,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Timeline\AddNewTrack.resx">
+      <DependentUpon>AddNewTrack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Timeline\WaveViewer.resx">
+      <DependentUpon>WaveViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,6 +137,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loop1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
