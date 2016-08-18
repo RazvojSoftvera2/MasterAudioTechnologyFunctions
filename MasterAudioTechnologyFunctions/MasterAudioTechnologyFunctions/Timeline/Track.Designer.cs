@@ -30,10 +30,10 @@
         {
             this.lblTrackName = new MetroFramework.Controls.MetroLabel();
             this.pnlInfo = new MetroFramework.Controls.MetroPanel();
+            this.cmbbNotes = new MetroFramework.Controls.MetroComboBox();
             this.BtnX = new MetroFramework.Controls.MetroButton();
             this.btnEdit = new MetroFramework.Controls.MetroButton();
             this.pnlWaveViewer = new MetroFramework.Controls.MetroPanel();
-            this.cmbbNotes = new MetroFramework.Controls.MetroComboBox();
             this.pnlInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             this.lblTrackName.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblTrackName.Location = new System.Drawing.Point(-2, -1);
             this.lblTrackName.Name = "lblTrackName";
-            this.lblTrackName.Size = new System.Drawing.Size(70, 19);
+            this.lblTrackName.Size = new System.Drawing.Size(68, 19);
             this.lblTrackName.TabIndex = 1;
             this.lblTrackName.Text = "New Track";
             this.lblTrackName.UseStyleColors = true;
@@ -67,45 +67,6 @@
             this.pnlInfo.VerticalScrollbarBarColor = true;
             this.pnlInfo.VerticalScrollbarHighlightOnWheel = false;
             this.pnlInfo.VerticalScrollbarSize = 10;
-            // 
-            // BtnX
-            // 
-            this.BtnX.Location = new System.Drawing.Point(66, -1);
-            this.BtnX.Name = "BtnX";
-            this.BtnX.Size = new System.Drawing.Size(26, 19);
-            this.BtnX.TabIndex = 5;
-            this.BtnX.Text = "X";
-            this.BtnX.UseSelectable = true;
-            this.BtnX.UseStyleColors = true;
-            this.BtnX.Click += new System.EventHandler(this.BtnX_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.SystemColors.Control;
-            this.btnEdit.Location = new System.Drawing.Point(3, 39);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(83, 19);
-            this.btnEdit.TabIndex = 0;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseSelectable = true;
-            this.btnEdit.UseStyleColors = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // pnlWaveViewer
-            // 
-            this.pnlWaveViewer.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlWaveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlWaveViewer.HorizontalScrollbarBarColor = true;
-            this.pnlWaveViewer.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlWaveViewer.HorizontalScrollbarSize = 10;
-            this.pnlWaveViewer.Location = new System.Drawing.Point(92, 0);
-            this.pnlWaveViewer.Name = "pnlWaveViewer";
-            this.pnlWaveViewer.Size = new System.Drawing.Size(557, 61);
-            this.pnlWaveViewer.TabIndex = 2;
-            this.pnlWaveViewer.VerticalScrollbarBarColor = true;
-            this.pnlWaveViewer.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlWaveViewer.VerticalScrollbarSize = 10;
-            this.pnlWaveViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlWaveViewer_MouseUp);
             // 
             // cmbbNotes
             // 
@@ -215,7 +176,46 @@
             this.cmbbNotes.TabIndex = 2;
             this.cmbbNotes.UseSelectable = true;
             this.cmbbNotes.UseStyleColors = true;
-            this.cmbbNotes.SelectedIndexChanged += new System.EventHandler(this.metroComboBox1_SelectedIndexChanged);
+            this.cmbbNotes.SelectedIndexChanged += new System.EventHandler(this.cmbbNotes_SelectedIndexChanged);
+            // 
+            // BtnX
+            // 
+            this.BtnX.Location = new System.Drawing.Point(66, -1);
+            this.BtnX.Name = "BtnX";
+            this.BtnX.Size = new System.Drawing.Size(26, 19);
+            this.BtnX.TabIndex = 5;
+            this.BtnX.Text = "X";
+            this.BtnX.UseSelectable = true;
+            this.BtnX.UseStyleColors = true;
+            this.BtnX.Click += new System.EventHandler(this.BtnX_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.SystemColors.Control;
+            this.btnEdit.Location = new System.Drawing.Point(3, 39);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(83, 19);
+            this.btnEdit.TabIndex = 0;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseSelectable = true;
+            this.btnEdit.UseStyleColors = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // pnlWaveViewer
+            // 
+            this.pnlWaveViewer.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlWaveViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlWaveViewer.HorizontalScrollbarBarColor = true;
+            this.pnlWaveViewer.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlWaveViewer.HorizontalScrollbarSize = 10;
+            this.pnlWaveViewer.Location = new System.Drawing.Point(92, 0);
+            this.pnlWaveViewer.Name = "pnlWaveViewer";
+            this.pnlWaveViewer.Size = new System.Drawing.Size(557, 61);
+            this.pnlWaveViewer.TabIndex = 2;
+            this.pnlWaveViewer.VerticalScrollbarBarColor = true;
+            this.pnlWaveViewer.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlWaveViewer.VerticalScrollbarSize = 10;
+            this.pnlWaveViewer.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlWaveViewer_MouseUp);
             // 
             // Track
             // 

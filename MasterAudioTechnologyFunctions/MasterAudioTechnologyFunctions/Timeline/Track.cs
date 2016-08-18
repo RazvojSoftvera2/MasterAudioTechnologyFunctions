@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using NAudio.Wave;
 using System.Xml;
 using MetroFramework;
-
+using MasterAudioTechnologyFunctions.SoundTouchWrapper;
 
 namespace MasterAudioTechnologyFunctions.Timeline
 {
@@ -261,10 +261,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
     
             }
         }
-
-        private void metroComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void cmbbNotes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            SoundTouchSharp soundTouch = new SoundTouchSharp();
+
+            soundTouch.CreateInstance();
+            soundTouch.SetSampleRate((int)WaveFileReader.SampleCount);
+            soundTouch.SetPitch(15.0f);
+            soundTouch.SetSetting(SoundTouchSharp.SoundTouchSettings.SETTING_USE_QUICKSEEK, 0);
         }
     }
 }

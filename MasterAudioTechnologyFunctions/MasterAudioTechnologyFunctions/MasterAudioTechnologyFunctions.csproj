@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SoundTouchWrapper\SoundTouchSharp.cs" />
     <Compile Include="Timeline\Timeline.cs">
       <SubType>UserControl</SubType>
     </Compile>
