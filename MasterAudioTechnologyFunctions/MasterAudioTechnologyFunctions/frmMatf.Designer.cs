@@ -172,7 +172,7 @@
             this.volumeLabel.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.volumeLabel.Location = new System.Drawing.Point(5, 34);
             this.volumeLabel.Name = "volumeLabel";
-            this.volumeLabel.Size = new System.Drawing.Size(110, 19);
+            this.volumeLabel.Size = new System.Drawing.Size(109, 19);
             this.volumeLabel.TabIndex = 8;
             this.volumeLabel.Text = "Master Volume";
             this.volumeLabel.UseStyleColors = true;
@@ -365,49 +365,49 @@
             this.exportWAVMP3ToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(169, 158);
+            this.menuFile.Size = new System.Drawing.Size(168, 158);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.newProjectToolStripMenuItem.Text = "New project";
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.saveProjectToolStripMenuItem.Text = "Save project";
             // 
             // saveProjectAsToolStripMenuItem
             // 
             this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
-            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.saveProjectAsToolStripMenuItem.Text = "Save project as";
             // 
             // importWAVMP3ToolStripMenuItem
             // 
             this.importWAVMP3ToolStripMenuItem.Name = "importWAVMP3ToolStripMenuItem";
-            this.importWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.importWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.importWAVMP3ToolStripMenuItem.Text = "Import WAV/MP3";
             // 
             // exportWAVMP3ToolStripMenuItem
             // 
             this.exportWAVMP3ToolStripMenuItem.Name = "exportWAVMP3ToolStripMenuItem";
-            this.exportWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exportWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.exportWAVMP3ToolStripMenuItem.Text = "Export WAV/MP3";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -586,13 +586,12 @@
             // 
             // timeLine
             // 
-            this.timeLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeLine.AutoScroll = true;
             this.timeLine.BackColor = System.Drawing.SystemColors.Control;
             this.timeLine.Location = new System.Drawing.Point(0, 0);
             this.timeLine.Margin = new System.Windows.Forms.Padding(4);
             this.timeLine.Name = "timeLine";
-            this.timeLine.Size = new System.Drawing.Size(722, 31);
+            this.timeLine.Size = new System.Drawing.Size(1724, 31);
             this.timeLine.TabIndex = 0;
             // 
             // frmMatf

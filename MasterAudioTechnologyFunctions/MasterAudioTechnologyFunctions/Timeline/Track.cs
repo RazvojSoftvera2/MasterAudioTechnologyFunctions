@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 using System.Xml;
@@ -23,31 +18,21 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         public List<WaveViewer> Tracks;
         public List<long> Times;
-
-        // public bool Playing = false;
+        
         public List<bool> Playing;
 
         public WaveOut WaveOut;
         public WaveOffsetStream WaveOffsetStream;
         public WaveFileReader WaveFileReader;
         public float TrackVolume = (float)0.7;
-        
-        private Timeline _timeline; //TODO: Refactor so we use the parent of track instead of a private field.
 
-        public Track(Timeline tl)
-        {
-            InitializeComponent();
-            _timeline = tl;
-            Tracks = new List<WaveViewer>();
-            Times = new List<long>();
-            Playing = new List<bool>();
-            setStyle();
-        }
+        private Timeline _timeline; //TODO: Refactor so we use the parent of track instead of a private field.
 
         public Track(string name, string fileName, Color color, Timeline tl)
         {
             InitializeComponent();
             InitializeTrack(name, fileName, color, tl);
+
             Tracks = new List<WaveViewer>();
             Times = new List<long>();
             Playing = new List<bool>();
@@ -93,8 +78,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             TrackName = name;
             TrackFileName = fileName;
             TrackColor = color;
-            
-            if (tl!=null)
+
+            if (tl != null)
             {
                 _timeline = tl;
             }
@@ -108,14 +93,18 @@ namespace MasterAudioTechnologyFunctions.Timeline
             WaveOut.Volume = TrackVolume;
 
             //TrackLen = (int)WaveFileReader.TotalTime.TotalSeconds*10;
-            TrackLen = (int)WaveOffsetStream.Length/10000;
-            //MessageBox.Show(WaveFileReader.TotalTime.TotalMilliseconds + "");
-            //TODO: Replace 10000 with something concrete 
-            //MessageBox.Show(WaveOffsetStream.Length / 10000 + "");
+            TrackLen = (int)WaveOffsetStream.Length / 10000;
 
             if (Tracks != null && Tracks.Count > 0)
                 foreach (var wvTrack in Tracks)
                     InitializeWaveViewer(wvTrack);
+
+            pnlInfo.Paint += new PaintEventHandler(pnlInfo_Paint);
+        }
+
+        void pnlInfo_Paint(object sender, PaintEventArgs e)
+        {
+            pnlInfo.Location = new Point(-_timeline.AutoScrollPosition.X, pnlInfo.Location.Y);
         }
 
         public void addSound(int startPosition)
@@ -135,11 +124,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         private void InitializeWaveViewer(WaveViewer wvTrack)
         {
-            wvTrack.WaveStream = new NAudio.Wave.WaveFileReader(TrackFileName);
+            wvTrack.WaveStream = new WaveFileReader(TrackFileName);
             wvTrack.PenColor = TrackColor;
             wvTrack.Height = pnlWaveViewer.Height;
             wvTrack.Width = TrackLen;
-            //wvTrack.FitToScreen();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -154,9 +142,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
         //TODO: Where and for what is this used?
         public void Update(long globalTime)
         {
-            foreach(long l in Times)
+            foreach (long l in Times)
             {
-                if(l == globalTime)
+                if (l == globalTime)
                 {
                     Play();
                 }
@@ -265,7 +253,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (e.Button != MouseButtons.Left)
                 return;
-            
+
             switch (Timeline.TrackMode)
             {
                 case Timeline.TrackEditMode.Edit:

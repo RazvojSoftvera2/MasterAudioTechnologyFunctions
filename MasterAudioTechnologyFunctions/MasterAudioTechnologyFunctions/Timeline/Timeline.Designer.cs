@@ -42,8 +42,8 @@
             // 
             this.pnlBottom.BackColor = System.Drawing.SystemColors.Control;
             this.pnlBottom.Controls.Add(this.timelineCursor);
-            this.pnlBottom.Controls.Add(this.changeProgressBar);
             this.pnlBottom.Controls.Add(this.btnAddTrack);
+            this.pnlBottom.Controls.Add(this.changeProgressBar);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.HorizontalScrollbarBarColor = true;
             this.pnlBottom.HorizontalScrollbarHighlightOnWheel = false;

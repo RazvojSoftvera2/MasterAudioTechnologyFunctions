@@ -64,7 +64,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (addTrack.ShowDialog() != DialogResult.OK)
                 return;
 
-            //mp3 file conversion
+            #region MP3
             if (addTrack.TrackFileName.EndsWith(".mp3"))
             {
                 //do a conversion and asserts
@@ -95,6 +95,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
                 addTrack.TrackFileName = newFileName;
             }
+            #endregion MP3
 
             Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
 
@@ -153,12 +154,16 @@ namespace MasterAudioTechnologyFunctions.Timeline
                         }
                     }
                 }
+
+                t.SendToBack();
             }
 
             // TODO: Remove hardcoding of pnlWaveViewer X position
             // 92: X position of pnlWaveViewer
             Point cursorPreviousLocation = timelineCursor.Location;
             timelineCursor.Location = new Point(92 + (int)totalMilliseconds/55, cursorPreviousLocation.Y);
+
+            timelineCursor.BringToFront();
             
             // TODO: Change Location.X + Size.Width with duration of the song
             if (totalMilliseconds > _songDuration)
