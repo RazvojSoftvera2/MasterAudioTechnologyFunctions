@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
 using System.Xml;
@@ -264,12 +259,92 @@ namespace MasterAudioTechnologyFunctions.Timeline
         
         private void cmbbNotes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (WaveOut == null || cmbbNotes.Items.Count <= 0)
+                return;
+
             SoundTouchSharp soundTouch = new SoundTouchSharp();
+            int numChannels = WaveOffsetStream.WaveFormat.Channels;
 
             soundTouch.CreateInstance();
+
             soundTouch.SetSampleRate((int)WaveFileReader.SampleCount);
-            soundTouch.SetPitch(15.0f);
+            soundTouch.SetChannels(numChannels);
+
+            soundTouch.SetPitchSemiTones(12.0f);
+
             soundTouch.SetSetting(SoundTouchSharp.SoundTouchSettings.SETTING_USE_QUICKSEEK, 0);
+            soundTouch.SetSetting(SoundTouchSharp.SoundTouchSettings.SETTING_USE_AA_FILTER, 0);
+
+            uint numSamples;
+            int bytesRead = 0;
+            const int buffSize = 4;
+            byte[] buffer = new byte[buffSize];
+            float[] fBuffer = new float[buffSize / 4];
+            uint buffSizeSamples = (uint)(buffSize / numChannels);
+
+            WaveFormat w = new WaveFormat((int)(WaveFileReader.SampleCount / numChannels), numChannels);
+
+            using (WaveFileWriter fw = new WaveFileWriter("temp.wav", w))
+            {
+                int offset = 0;
+
+                while ((bytesRead = WaveFileReader.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    numSamples = (uint)(bytesRead / numChannels);
+
+                    Buffer.BlockCopy(buffer, 0, fBuffer, 0, fBuffer.Length);
+
+                    soundTouch.PutSamples(fBuffer, numSamples);
+
+                    do
+                    {
+                        numSamples = soundTouch.ReceiveSamples(fBuffer, buffSizeSamples);
+                        //Buffer.BlockCopy(fBuffer, 0, buffer, 0, buffer.Length);
+                        int numBytes = (int)(numSamples * numChannels);
+                        fw.Write(buffer, 0, numBytes);
+                        offset += numBytes;
+                    } while (numSamples != 0);
+                }
+                
+                soundTouch.Flush();
+                do
+                {
+                    numSamples = soundTouch.ReceiveSamples(fBuffer, buffSizeSamples);
+                    //Buffer.BlockCopy(fBuffer, 0, buffer, 0, buffer.Length);
+                    int numBytes = (int)(numSamples * numChannels);
+                    fw.Write(buffer, 0, numBytes);
+                    offset += numBytes;
+                } while (numSamples != 0);
+            }
+            //int samplesProcessed = 0;
+
+            //do
+            //{
+            //    samplesProcessed = soundTouch.ReceiveSamples(convertOutputBuffer.Floats, outBufferSizeFloats);
+                
+            //    if (samplesProcessed > 0)
+            //    {
+            //        TimeSpan currentBufferTime = WaveFileReader.CurrentTime;
+
+            //        // ** Play samples that came out of SoundTouch by adding them to AdvancedBufferedWaveProvider - the buffered player 
+            //        m_inputProvider.AddSamples(convertOutputBuffer.Bytes, 0, (int)samplesProcessed * sizeof(float) * format.Channels, currentBufferTime);
+            //        // **********************************************************************
+            //    }
+            //} while (samplesProcessed != 0);
+        }
+
+        public static float[] ConvertByteToFloat(byte[] array)
+        {
+            float[] floatArr = new float[array.Length / 4];
+            for (int i = 0; i < floatArr.Length; i++)
+            {
+                if (BitConverter.IsLittleEndian)
+                {
+                    Array.Reverse(array, i * 4, 4);
+                }
+                floatArr[i] = BitConverter.ToSingle(array, i * 4);
+            }
+            return floatArr;
         }
     }
 }
