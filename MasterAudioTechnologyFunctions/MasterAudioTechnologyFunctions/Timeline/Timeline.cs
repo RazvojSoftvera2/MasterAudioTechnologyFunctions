@@ -33,6 +33,11 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _tracks = new List<Track>();
         }
 
+        public List<Track> getTracks()
+        {
+            return _tracks;
+        }
+
         public void setStyle()
         {
             string path = "..\\..\\settings.xml";
@@ -104,6 +109,26 @@ namespace MasterAudioTechnologyFunctions.Timeline
             pnlTracks.Controls.Add(newTrack);
 
             Height += newTrack.Height;
+        }
+
+        public void addTrack(Track newTrack)
+        {
+            
+
+            _tracks.Add(newTrack);
+            newTrack.Dock = DockStyle.Bottom;
+            pnlTracks.Controls.Add(newTrack);
+
+            Height += newTrack.Height;
+        }
+
+        public void removeAllTracks()
+        {
+            int h = _trackHeight * _tracks.Count;
+            pnlTracks.Controls.Clear();
+            _tracks.Clear();
+            Height -= h;
+
         }
 
         public void removeTrack(Track t)

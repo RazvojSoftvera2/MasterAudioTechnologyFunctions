@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="thisIsMyTest">
+  <tracks>
+    <track name="kick" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Drums, QS4\deep kick.wav" color="-16777216">
+      <times>
+        <time value="3" />
+        <time value="9" />
+        <time value="16" />
+        <time value="22" />
+        <time value="29" />
+        <time value="36" />
+        <time value="42" />
+        <time value="47" />
+        <time value="53" />
+        <time value="61" />
+        <time value="66" />
+        <time value="74" />
+        <time value="80" />
+      </times>
+    </track>
+    <track name="bass" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Bass\Bass, FM  Bass 1.wav" color="-8388608">
+      <times>
+        <time value="5" />
+        <time value="45" />
+      </times>
+    </track>
+    <track name="key" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Synth\Synth, FilterSweep7.wav" color="-256">
+      <times>
+        <time value="9" />
+        <time value="56" />
+      </times>
+    </track>
+  </tracks>
+</project>
