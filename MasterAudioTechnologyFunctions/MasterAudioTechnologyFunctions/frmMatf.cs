@@ -5,6 +5,8 @@ using MetroFramework.Forms;
 using MetroFramework;
 using System.Xml;
 using System.IO;
+using System.Collections.Generic;
+using MasterAudioTechnologyFunctions.Timeline;
 
 namespace MasterAudioTechnologyFunctions
 {
@@ -14,6 +16,9 @@ namespace MasterAudioTechnologyFunctions
         public TimeSpan Timer = new TimeSpan();
         private string _openedFile;
         private string _settingsPath = "..\\..\\settings.xml";
+
+        private string _projectName;
+        private bool _hasSaved = false;
 
         public frmMatf()
         {
@@ -129,18 +134,61 @@ namespace MasterAudioTechnologyFunctions
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            timeLine.removeAllTracks();
+
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "MATF projects (.matf)|*.matf";
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
+            
+            _projectName = dialog.FileName;
+            _hasSaved = true;
 
-            _openedFile = dialog.FileName;
-            // TODO: Load project
+            Stream s = dialog.OpenFile();
+            XmlReader xmlReader = XmlReader.Create(s);
+            xmlReader.ReadToFollowing("tracks");
 
-            //trbTime.Maximum = (int) _waveOffsetStream.Length;
+            if (!xmlReader.IsEmptyElement)
+            {
+                xmlReader.ReadToFollowing("track");
+                while (xmlReader.Name == "track")
+                {
+                    xmlReader.MoveToAttribute("name");
+                    string name = xmlReader.Value;
+
+                    xmlReader.MoveToAttribute("filepath");
+                    string filepath = xmlReader.Value;
+
+                    xmlReader.MoveToAttribute("color");
+                    string color = xmlReader.Value;
+
+                    Track track = new Track(name, filepath, Color.FromArgb(int.Parse(color)), timeLine);
+
+                    xmlReader.ReadToFollowing("times");
+                    if (!xmlReader.IsEmptyElement)
+                    {
+                        xmlReader.ReadToFollowing("time");
+
+                        while (xmlReader.Name == "time")
+                        {
+                            xmlReader.MoveToAttribute("value");
+                            string t = xmlReader.Value;
+                            track.addSound(int.Parse(t));
+                            xmlReader.Read();
+                            xmlReader.Read();
+                        }
+                    }
+
+                    xmlReader.ReadToFollowing("track");
+                    timeLine.addTrack(track);
+                }
+            }
 
             Text = ApplicationName + " - " + _openedFile;
+
+            xmlReader.Close();
+            s.Close();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -263,10 +311,7 @@ namespace MasterAudioTechnologyFunctions
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            //enabling all editing buttons in track
             timeLine.EnableEdit();
-            // TODO: Stop all tracks
-
             timeLine.Stop();
         }
 
@@ -309,6 +354,125 @@ namespace MasterAudioTechnologyFunctions
             height.InnerText = "" + (Int32)this.Height;
 
             doc.Save(_settingsPath);
+        }
+
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(!_hasSaved)
+            {
+                saveProjectAsToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                List<Track> tracks = timeLine.getTracks();
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                XmlWriter xmlWriter = XmlWriter.Create(_projectName, settings);
+
+                int startIndex = _projectName.LastIndexOf('\\') + 1;
+                int endIndex = _projectName.LastIndexOf('.');
+                int length = endIndex - startIndex;
+                xmlWriter.WriteStartElement("project");
+                xmlWriter.WriteAttributeString("name", _projectName.Substring(_projectName.LastIndexOf('\\') + 1, length));
+
+                xmlWriter.WriteStartElement("tracks");
+
+
+                foreach (Track track in tracks)
+                {
+                    xmlWriter.WriteStartElement("track");
+                    xmlWriter.WriteAttributeString("name", track.TrackName);
+                    xmlWriter.WriteAttributeString("filepath", track.TrackFileName);
+                    xmlWriter.WriteAttributeString("color", track.TrackColor.ToArgb().ToString());
+
+                    string test = track.TrackColor.ToArgb().ToString();
+                    int c = int.Parse(test);
+                    Color col = Color.FromArgb(c);
+
+                    xmlWriter.WriteStartElement("times");
+                    foreach (long time in track.Times)
+                    {
+                        long newtime = time / 55;
+                        xmlWriter.WriteStartElement("time");
+                        xmlWriter.WriteAttributeString("value", newtime.ToString());
+                        xmlWriter.WriteEndElement();
+
+                    }
+                    xmlWriter.WriteEndElement();
+                    xmlWriter.WriteEndElement();
+                }
+
+                xmlWriter.WriteEndElement();
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.Close();
+            }
+        }
+
+        private void saveProjectAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "MATF projects (.matf)|*.matf";
+
+            List<Track> tracks = timeLine.getTracks();
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            if(dialog.FileName!= "")
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                Stream s = dialog.OpenFile();
+                XmlWriter xmlWriter = XmlWriter.Create(s, settings);
+                
+
+                int startIndex = dialog.FileName.LastIndexOf('\\') + 1;
+                int endIndex = dialog.FileName.LastIndexOf('.');
+                int length = endIndex - startIndex;
+                xmlWriter.WriteStartElement("project");
+                xmlWriter.WriteAttributeString("name", dialog.FileName.Substring(dialog.FileName.LastIndexOf('\\') + 1, length));
+
+                xmlWriter.WriteStartElement("tracks");
+                foreach(Track track in tracks)
+                {
+                    xmlWriter.WriteStartElement("track");
+                    xmlWriter.WriteAttributeString("name", track.TrackName);
+                    xmlWriter.WriteAttributeString("filepath", track.TrackFileName);
+                    xmlWriter.WriteAttributeString("color", track.TrackColor.ToArgb().ToString());
+
+                    xmlWriter.WriteStartElement("times");
+                    foreach (long time in track.Times)
+                    {
+                        long newtime = time / 55;
+                        xmlWriter.WriteStartElement("time");
+                        xmlWriter.WriteAttributeString("value", newtime.ToString());
+                        xmlWriter.WriteEndElement();
+
+                    }
+                    xmlWriter.WriteEndElement();
+
+                    xmlWriter.WriteEndElement();
+                }
+
+                xmlWriter.WriteEndElement();
+                xmlWriter.WriteEndElement();
+
+                _projectName = dialog.FileName;
+                _hasSaved = true;
+
+                xmlWriter.Close();
+                s.Close();
+            }
+
+            Text = SoftwareName + " - " + _projectName;
+        }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timeLine.removeAllTracks();
+            _projectName = null;
+            _hasSaved = false;
         }
     }
 }

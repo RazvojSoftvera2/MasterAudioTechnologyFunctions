@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="testpoject">
+  <tracks>
+    <track name="New Track" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Lead\Lead, Jam Guitar.wav" color="-1">
+      <times>
+        <time value="715" />
+        <time value="6710" />
+        <time value="13200" />
+        <time value="19195" />
+      </times>
+    </track>
+    <track name="adasd" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Lead\Lead, Lite Pulse.wav" color="-16777088">
+      <times>
+        <time value="2365" />
+        <time value="5170" />
+        <time value="440" />
+        <time value="7755" />
+        <time value="10175" />
+        <time value="12595" />
+        <time value="14960" />
+        <time value="16940" />
+        <time value="19085" />
+        <time value="21450" />
+      </times>
+    </track>
+  </tracks>
+</project>

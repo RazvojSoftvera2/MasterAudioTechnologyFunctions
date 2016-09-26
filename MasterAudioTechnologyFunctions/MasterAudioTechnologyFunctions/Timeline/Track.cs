@@ -40,6 +40,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             pnlWaveViewer.AutoScrollMinSize = new Size(2000, 1000);
         }
 
+
         public void setStyle()
         {
             XmlDocument doc = new XmlDocument();
@@ -161,6 +162,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
             WaveOut.Stop();
             WaveOffsetStream.CurrentTime = new TimeSpan(0);
         }
+
+
+
 
         private void BtnX_Click(object sender, EventArgs e)
         {

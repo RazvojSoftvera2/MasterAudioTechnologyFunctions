@@ -312,49 +312,52 @@
             this.exportWAVMP3ToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(168, 158);
+            this.menuFile.Size = new System.Drawing.Size(169, 180);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.newProjectToolStripMenuItem.Text = "New project";
+            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.saveProjectToolStripMenuItem.Text = "Save project";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem
             // 
             this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
-            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.saveProjectAsToolStripMenuItem.Text = "Save project as";
+            this.saveProjectAsToolStripMenuItem.Click += new System.EventHandler(this.saveProjectAsToolStripMenuItem_Click);
             // 
             // importWAVMP3ToolStripMenuItem
             // 
             this.importWAVMP3ToolStripMenuItem.Name = "importWAVMP3ToolStripMenuItem";
-            this.importWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.importWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.importWAVMP3ToolStripMenuItem.Text = "Import WAV/MP3";
             // 
             // exportWAVMP3ToolStripMenuItem
             // 
             this.exportWAVMP3ToolStripMenuItem.Name = "exportWAVMP3ToolStripMenuItem";
-            this.exportWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.exportWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.exportWAVMP3ToolStripMenuItem.Text = "Export WAV/MP3";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
