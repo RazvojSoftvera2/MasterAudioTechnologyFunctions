@@ -10,29 +10,23 @@ namespace MasterAudioTechnologyFunctions
 {
     public partial class frmMatf : MetroForm
     {
-
-        public static string SoftwareName = "Master Audio Technology Functions";
-        private string _openedFile;
-        private bool _playing = false; //TODO: Do we need _playing at this scope? Are we using only _playing in Timeline?
-        //public long Timer = 0;
+        public static string ApplicationName = "Master Audio Technology Functions";
         public TimeSpan Timer = new TimeSpan();
-        //TODO: do a refactoring to a relative path: and to a childrens also!
-        string dir = Directory.GetCurrentDirectory();
+        private string _openedFile;
         private string _settingsPath = "..\\..\\settings.xml";
 
         public frmMatf()
         {
             InitializeComponent();
-            this.StyleManager = metroStyleManager;
-            this.pnlSong.Parent = this;
             setStyle();
         }
 
         public void setStyle()
         {
+            StyleManager = metroStyleManager;
+
             //settings loading
             XmlDocument doc = new XmlDocument();
-
             try
             {
                 doc.Load(_settingsPath);
@@ -74,11 +68,11 @@ namespace MasterAudioTechnologyFunctions
             }
             catch (Exception)
             {
-                System.IO.FileInfo file = new System.IO.FileInfo(_settingsPath);
+                FileInfo file = new FileInfo(_settingsPath);
                 file.Delete();
                 MetroMessageBox.Show(this, "The settings.xml file is corrupted! Please restart the application.",
                                 "File corrupted!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                Close();
             }
 
             XmlNode styleN = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
@@ -86,43 +80,29 @@ namespace MasterAudioTechnologyFunctions
             XmlNode widthN = doc.DocumentElement.SelectSingleNode("/settings/size/width");
             XmlNode heightN = doc.DocumentElement.SelectSingleNode("/settings/size/height");
 
-            //za slucaj da ne moze da procita kako valja: corrupted file 
-
+            //corrupt file
             if (styleN == null || themeN == null || heightN == null || widthN == null)
             {
                 System.IO.FileInfo file = new System.IO.FileInfo(_settingsPath);
                 file.Delete();
                 MetroMessageBox.Show(this, "The settings.xml file is corrupted! Please restart the application.",
                                 "File corrupted!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                Close();
             }
             else
             {
                 metroStyleManager.Style = (MetroColorStyle)Int32.Parse(styleN.InnerText);
                 metroStyleManager.Theme = (MetroThemeStyle)Int32.Parse(themeN.InnerText);
-                this.Width = Int32.Parse(widthN.InnerText);
-                this.Height = Int32.Parse(heightN.InnerText);
+                Width = Int32.Parse(widthN.InnerText);
+                Height = Int32.Parse(heightN.InnerText);
             }
         }
-
-        public void SetTime(long time)
+        
+        internal void SetTime()
         {
-            // TODO: Convert time to hh:mm:ss:fff
-            // Curently presented in number of miliseconds elapsed
-            lblTimeElapsed.Text = time + "";
-        }
-
-        public void SetTime(string time)
-        {
-            lblTimeElapsed.Text = time;
-        }
-
-        // TODO: Place label inside Timeline
-        internal void SetTime(TimeSpan timer)
-        {
-            lblTimeElapsed.Text = timer.Minutes.ToString("D2") + ":" + 
-                                  timer.Seconds.ToString("D2") + ":" + 
-                                  timer.Milliseconds.ToString("D3");
+            lblTimeElapsed.Text = Timer.Minutes.ToString("D2") + ":" + 
+                                  Timer.Seconds.ToString("D2") + ":" + 
+                                  Timer.Milliseconds.ToString("D3");
         }
 
         #region Menu
@@ -144,20 +124,11 @@ namespace MasterAudioTechnologyFunctions
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Stop current play
-            //_playing = false;
-            //btnPlay.Text = "Pl";
-            //if (_waveOut != null)
-            //{
-            //    _waveOut.Stop();
-            //    _waveOut.Dispose();
-            //}
-
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "MATF projects (.matf)|*.matf";
 
@@ -169,7 +140,7 @@ namespace MasterAudioTechnologyFunctions
 
             //trbTime.Maximum = (int) _waveOffsetStream.Length;
 
-            Text = SoftwareName + " - " + _openedFile;
+            Text = ApplicationName + " - " + _openedFile;
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,185 +149,122 @@ namespace MasterAudioTechnologyFunctions
                                  "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        #region MetroStyle
+
+        private void SetTheme(MetroThemeStyle themeStyle)
         {
-            metroStyleManager.Theme = MetroThemeStyle.Dark;
+            metroStyleManager.Theme = themeStyle;
             XmlDocument doc = new XmlDocument();
             doc.Load(_settingsPath);
             XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
-            theme.InnerText = "" + (Int32)MetroThemeStyle.Dark;
+            theme.InnerText = "" + (Int32)themeStyle;
             doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            timeLine.SetStyle();
+        }
+
+        private void SetStyle(MetroColorStyle colorStyle)
+        {
+            metroStyleManager.Style = colorStyle;
+            XmlDocument doc = new XmlDocument();
+            doc.Load(_settingsPath);
+            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            style.InnerText = "" + (Int32)colorStyle;
+            doc.Save(_settingsPath);
+            timeLine.SetStyle();
+        }
+
+        private void darkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetTheme(MetroThemeStyle.Dark);
         }
 
         private void lightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Theme = MetroThemeStyle.Light;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
-            theme.InnerText = "" + (Int32)MetroThemeStyle.Light;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetTheme(MetroThemeStyle.Light);
         }
+
         private void greenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Green;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Green;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Green);
         }
 
         private void blueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Blue;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Blue;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Blue);
         }
 
         private void silverToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Silver;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Silver;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Silver);
         }
 
         private void limeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Lime;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Lime;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Lime);
         }
 
         private void magentaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Magenta;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Magenta;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Magenta);
         }
 
         private void brownToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Brown;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Brown;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Brown);
         }
 
         private void orangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Orange;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Orange;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Orange);
         }
 
         private void pinkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Pink;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Pink;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Pink);
         }
 
         private void purpleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Purple;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Purple;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Purple);
         }
 
         private void redToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Red;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Red;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Red);
         }
 
         private void tealToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Teal;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Teal;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Teal);
         }
 
         private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.White;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.White;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.White);
         }
 
         private void yelowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            metroStyleManager.Style = MetroColorStyle.Yellow;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(_settingsPath);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            style.InnerText = "" + (Int32)MetroColorStyle.Yellow;
-            doc.Save(_settingsPath);
-            this.timeLine.setStyle();
+            SetStyle(MetroColorStyle.Yellow);
         }
+        #endregion MetroStyle
+
         #endregion Menu
 
         #region PlayButtons
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            if (timeLine.GetNumberOfTracks() > 0)
-                timeLine.Play();
+            if (timeLine.GetNumberOfTracks() == 0)
+                return;
 
-            //disabling all editing buttons in track
-            timeLine.DisableEditingOptionInTracks();
+            timeLine.Play();
+            timeLine.DisableEdit();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
             //enabling all editing buttons in track
-            timeLine.EnableEditingOptionInTracks();
+            timeLine.EnableEdit();
             // TODO: Stop all tracks
 
             timeLine.Stop();
@@ -376,56 +284,17 @@ namespace MasterAudioTechnologyFunctions
             }
         }
 
-
         #endregion PlayButtons
-
-        private void trbTime_Scroll(object sender, EventArgs e)
-        {
-            // Set the current position of the song to the value of trbTime in milliseconds
-            // TODO: Refactor for Timeline
-            //if (_waveOut != null)
-            //{
-            //    _waveOffsetStream.Position = trbTime.Value;
-            //}
-        }
-
-        private void trbTime_MouseDown(object sender, MouseEventArgs e)
-        {
-            // TODO: Pause all tracks
-            //Pause();
-        }
-
-        private void trbTime_MouseUp(object sender, MouseEventArgs e)
-        {
-            // TODO: Play all tracks
-            //Play();
-        }
 
         private void volumeBar_Scroll(object sender, ScrollEventArgs e)
         {
             timeLine.ChangeVolume((float)volumeBar.Value / 100);
         }
 
-        private void tmrMain_Tick(object sender, EventArgs e)
-        {
-            Timer = Timer.Add(new TimeSpan(0, 0, 0, 0, tmrMain.Interval));
-            SetTime(Timer);
-        }
-
         public void resetTimer()
         {
             Timer = new TimeSpan(0);
-            SetTime(Timer);
-        }
-
-        public void enableTmrMain()
-        {
-            tmrMain.Enabled = true;
-        }
-
-        public void disableTmrMain()
-        {
-            tmrMain.Enabled = false;
+            SetTime();
         }
 
         private void frmMatf_ResizeEnd(object sender, EventArgs e)

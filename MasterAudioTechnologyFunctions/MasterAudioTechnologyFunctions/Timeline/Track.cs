@@ -18,7 +18,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         public List<WaveViewer> Tracks;
         public List<long> Times;
-        
         public List<bool> Playing;
 
         public WaveOut WaveOut;
@@ -37,6 +36,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
             Times = new List<long>();
             Playing = new List<bool>();
             setStyle();
+
+            pnlWaveViewer.AutoScrollMinSize = new Size(2000, 1000);
         }
 
         public void setStyle()
@@ -44,33 +45,23 @@ namespace MasterAudioTechnologyFunctions.Timeline
             XmlDocument doc = new XmlDocument();
             string dir = System.IO.Directory.GetCurrentDirectory();
             doc.Load("..\\..\\settings.xml");
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            XmlNode styleNode = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode themeNode = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            MetroColorStyle style = (MetroColorStyle)Int32.Parse(styleNode.InnerText);
+            MetroThemeStyle theme = (MetroThemeStyle)Int32.Parse(themeNode.InnerText);
 
-            this.BtnX.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.BtnX.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.BtnDelete.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.BtnDelete.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.btnEdit.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.btnEdit.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.BtnSelect.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.BtnSelect.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.EditBtn.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.EditBtn.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.lblTrackName.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.lblTrackName.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.pnlInfo.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.pnlInfo.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.pnlWaveViewer.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.pnlWaveViewer.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            btnCloseTrack.Style = style;
+            btnCloseTrack.Theme = theme;
+            btnChange.Style = style;
+            btnChange.Theme = theme;
+            lblTrackName.Style = style;
+            lblTrackName.Theme = theme;
+            pnlInfo.Style = style;
+            pnlInfo.Theme = theme;
+            pnlWaveViewer.Style = style;
+            pnlWaveViewer.Theme = theme;
 
-            this.UpdateStyles();
-        }
-
-        //TODO: Where and for what is this used?
-        public long getTrackLength()
-        {
-            return WaveOffsetStream.Length;
+            UpdateStyles();
         }
 
         private void InitializeTrack(string name, string fileName, Color color, Timeline tl)
@@ -99,13 +90,13 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 foreach (var wvTrack in Tracks)
                     InitializeWaveViewer(wvTrack);
 
-            pnlInfo.Paint += new PaintEventHandler(pnlInfo_Paint);
+            //pnlInfo.Paint += new PaintEventHandler(pnlInfo_Paint);
         }
 
-        void pnlInfo_Paint(object sender, PaintEventArgs e)
-        {
-            pnlInfo.Location = new Point(-_timeline.AutoScrollPosition.X, pnlInfo.Location.Y);
-        }
+        //void pnlInfo_Paint(object sender, PaintEventArgs e)
+        //{
+        //    pnlInfo.Location = new Point(-_timeline.AutoScrollPosition.X, pnlInfo.Location.Y);
+        //}
 
         public void addSound(int startPosition)
         {
@@ -139,37 +130,14 @@ namespace MasterAudioTechnologyFunctions.Timeline
             InitializeTrack(editTrack.TrackName, editTrack.TrackFileName, editTrack.TrackColor, null);
         }
 
-        //TODO: Where and for what is this used?
-        public void Update(long globalTime)
-        {
-            foreach (long l in Times)
-            {
-                if (l == globalTime)
-                {
-                    Play();
-                }
-            }
-        }
-
         public void Play()
         {
             if (WaveOut == null)
                 return;
 
-            //Playing = true;
-            //btnPlay.Text = "Pa";
-            //tmrSong.Enabled = true;
-
             if (WaveOut.GetPosition() == 0)
             {
-                try
-                {
-                    WaveOut.Play();
-                }
-                catch
-                {
-                    //TODO: handle this empty catch
-                }
+                WaveOut.Play();
             }
             else
             {
@@ -181,9 +149,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (WaveOut == null)
                 return;
-            //Playing = false;
-            //btnPlay.Text = "Pl";
-            //tmrSong.Enabled = false;
 
             WaveOut.Pause();
         }
@@ -209,28 +174,12 @@ namespace MasterAudioTechnologyFunctions.Timeline
             {
                 //TODO: reset timer to 0 (problematic method of doing that)
                 frmMatf parent = (frmMatf)(Parent.Parent).Parent.Parent;
-                parent.disableTmrMain();
                 // parent.Timer = new TimeSpan(0);
                 // parent.SetTime(parent.Timer);
                 parent.resetTimer();
             }
 
             _timeline.removeTrack(this);
-        }
-
-        private void BtnSelect_Click(object sender, EventArgs e)
-        {
-            Timeline.TrackMode = Timeline.TrackEditMode.Select;
-        }
-
-        private void EditBtn_Click(object sender, EventArgs e)
-        {
-            Timeline.TrackMode = Timeline.TrackEditMode.Edit;
-        }
-
-        private void BtnDelete_Click(object sender, EventArgs e)
-        {
-            Timeline.TrackMode = Timeline.TrackEditMode.Delete;
         }
 
         public void RemoveWave(WaveViewer wv)
@@ -257,31 +206,41 @@ namespace MasterAudioTechnologyFunctions.Timeline
             switch (Timeline.TrackMode)
             {
                 case Timeline.TrackEditMode.Edit:
-                    int start = e.X;
-                    addSound(start);
+                    addSound(e.X);
                     break;
-                case Timeline.TrackEditMode.Select:
-                    Console.WriteLine(e.X);
+                case Timeline.TrackEditMode.Play:
+                    Skip(e.Location.X);
                     break;
             }
         }
 
-        public void DisableEditButtons()
+        public void Skip(int x, WaveViewer wave = null)
         {
-            this.BtnDelete.Enabled = false;
-            this.btnEdit.Enabled = false;
-            this.BtnSelect.Enabled = false;
-            this.EditBtn.Enabled = false;
-            this.Update();
+            Timeline timeline = (Timeline)Parent.Parent;
+            frmMatf frmMatf = (frmMatf)Parent.Parent.Parent.Parent;
+            int wavePosition = 0;
+
+            if (wave != null)
+                wavePosition = wave.Location.X;
+
+            timeline.Stop();
+            frmMatf.Timer = new TimeSpan(0, 0, 0, 0, (x + wavePosition) * 55);
+            timeline.Play();
         }
 
-        public void EnableEditButtons()
+        public Panel PnlWaveViewer { get { return pnlWaveViewer; } protected set { } }
+
+
+        public void DisableChange()
         {
-            this.BtnDelete.Enabled = true;
-            this.btnEdit.Enabled = true;
-            this.BtnSelect.Enabled = true;
-            this.EditBtn.Enabled = true;
-            this.Update();
+            btnChange.Enabled = false;
+            btnCloseTrack.Enabled = false;
+        }
+
+        public void EnableChange()
+        {
+            btnChange.Enabled = true;
+            btnCloseTrack.Enabled = true;
         }
     }
 }
