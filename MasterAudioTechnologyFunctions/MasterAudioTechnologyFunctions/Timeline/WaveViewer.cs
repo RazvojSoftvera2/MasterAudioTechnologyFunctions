@@ -117,12 +117,11 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 waveStream.Position = 0;
                 int bytesRead;
                 byte[] waveData = new byte[samplesPerPixel * bytesPerSample];
-                //byte[] waveData = new byte[bytesPerSecond];
-
+                
                 long tempWavePosition = waveStream.Position;
                 waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSample * samplesPerPixel);
                 waveStream.Position = tempWavePosition;
-                //waveStream.Position = startPosition + (e.ClipRectangle.Left * bytesPerSecond);
+                
                 using (Pen linePen = new Pen(PenColor, PenWidth))
                 {
                     for (float x = e.ClipRectangle.X; x < e.ClipRectangle.Right; x += 1)
@@ -131,7 +130,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                         short high = 0;
 
                         bytesRead = waveStream.Read(waveData, 0, samplesPerPixel * bytesPerSample);
-                        //bytesRead = waveStream.Read(waveData, 0, bytesPerSecond);
+                        
                         if (bytesRead == 0)
                             break;
                         for (int n = 0; n < bytesRead; n += 2)
@@ -154,10 +153,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         {
             if (WaveStream == null)
                 return;
-
-           // Width = WaveLength;
+            
             int samples = (int)(WaveStream.Length / bytesPerSample);
-            //startPosition = 0;
             SamplesPerPixel = samples / Width;
         }
 
@@ -176,7 +173,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveStream == null)
                 return;
 
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && Timeline.TrackMode == Timeline.TrackEditMode.Edit)
             {
                 startPos = e.Location;
                 mousePos = e.Location;
@@ -201,7 +198,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                         p.RemoveWave(this);
                     }
                     break;
-                case Timeline.TrackEditMode.Select:
+                case Timeline.TrackEditMode.Edit:
                     if (mouseDrag && e.Button == MouseButtons.Left)
                     {
                         mouseDrag = false;
@@ -210,10 +207,24 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
                         if (mousePos.X != startPos.X)
                         {
-                            Location = new Point(oldLocation.X + e.X - startPos.X, oldLocation.Y);
+                            int newX = oldLocation.X + e.X - startPos.X;
+
+                            if (((Timeline)Parent.Parent.Parent.Parent).SnapToGrid)
+                            {
+                                int modFive = newX % 10;
+                                newX = modFive == 0 ? newX : newX - modFive;
+                            }
+
+                            if (newX < 0)
+                                newX = 0;
+
+                            Location = new Point(newX, oldLocation.Y);
                             p.MoveWave(this);
                         }
                     }
+                    break;
+                case Timeline.TrackEditMode.Play:
+                    ((Track)Parent.Parent).Skip(e.Location.X, this);
                     break;
             }
             
@@ -225,13 +236,24 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (WaveStream == null)
                 return;
 
-            if (mouseDrag && Timeline.TrackMode == Timeline.TrackEditMode.Select)
+            if (mouseDrag && Timeline.TrackMode == Timeline.TrackEditMode.Edit)
             {
                 Point oldLocation = Location;
 
                 if (mousePos.X != startPos.X)
                 {
-                    Location = new Point(oldLocation.X + e.X - startPos.X, oldLocation.Y);
+                    int newX = oldLocation.X + e.X - startPos.X;
+
+                    if (((Timeline)Parent.Parent.Parent.Parent).SnapToGrid)
+                    {
+                        int modFive = newX % 10;
+                        newX = modFive == 0 ? newX : newX - modFive;
+                    }
+
+                    if (newX < 0)
+                        newX = 0;
+
+                    Location = new Point(newX, oldLocation.Y);
                     Track p = (Track)Parent.Parent;
                     p.MoveWave(this);
                 }
@@ -240,11 +262,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             }
 
             base.OnMouseDown(e);
-        }
-
-        private void WaveViewer_Click(object sender, EventArgs e)
-        {
-
         }
 
         #region Component Designer generated code

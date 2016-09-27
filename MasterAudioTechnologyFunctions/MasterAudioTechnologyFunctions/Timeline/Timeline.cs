@@ -14,18 +14,20 @@ namespace MasterAudioTechnologyFunctions.Timeline
         private List<Track> _tracks;
         private float _masterVolume = 0.7f;
         private long _songDuration = 0;
-        // TODO: Change from 61
         private int _trackHeight = 61;
+        
+        public bool Looping = false;
+        public bool SnapToGrid = false;
 
         public enum TrackEditMode
         {
-            Select,
             Edit,
-            Delete
+            Delete,
+            Play
         };
 
         public static TrackEditMode TrackMode = TrackEditMode.Edit;
-        public bool Looping = false;
+        private static TrackEditMode _previousTrackMode = TrackMode;
 
         public Timeline()
         {
@@ -33,29 +35,41 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _tracks = new List<Track>();
         }
 
-        public void setStyle()
+        public List<Track> getTracks()
+        {
+            return _tracks;
+        }
+
+        public void SetStyle()
         {
             string path = "..\\..\\settings.xml";
             XmlDocument doc = new XmlDocument();
-            string dir = System.IO.Directory.GetCurrentDirectory();
 
             doc.Load(path);
-            XmlNode style = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
-            XmlNode theme = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            XmlNode styleNode = doc.DocumentElement.SelectSingleNode("/settings/visual/style");
+            XmlNode themeNode = doc.DocumentElement.SelectSingleNode("/settings/visual/theme");
+            MetroColorStyle style = (MetroColorStyle)Int32.Parse(styleNode.InnerText);
+            MetroThemeStyle theme = (MetroThemeStyle)Int32.Parse(themeNode.InnerText);
 
-            this.btnAddTrack.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.btnAddTrack.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.pnlBottom.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.pnlBottom.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.pnlTracks.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.pnlTracks.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
-            this.changeProgressBar.Style = (MetroColorStyle)Int32.Parse(style.InnerText);
-            this.changeProgressBar.Theme = (MetroThemeStyle)Int32.Parse(theme.InnerText);
+            btnAddTrack.Style = style;
+            btnAddTrack.Theme = theme;
+            btnDelete.Style = style;
+            btnDelete.Theme = theme;
+            btnEdit.Style = style;
+            btnEdit.Theme = theme;
+            btnSnapToGrid.Style = style;
+            btnSnapToGrid.Theme = theme;
+            pnlButtons.Style = style;
+            pnlButtons.Theme = theme;
+            pnlTracks.Style = style;
+            pnlTracks.Theme = theme;
+            timelineCursor.Style = style;
+            timelineCursor.Theme = theme;
 
             foreach (var track in _tracks)
                 track.setStyle();
 
-            this.UpdateStyles();
+            UpdateStyles();
         }
 
         private async void btnAddTrack_Click(object sender, EventArgs e)
@@ -64,10 +78,9 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (addTrack.ShowDialog() != DialogResult.OK)
                 return;
 
-            //mp3 file conversion
+            #region MP3
             if (addTrack.TrackFileName.EndsWith(".mp3"))
             {
-                //do a conversion and asserts
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.Filter = "WAV files (.wav)|*.wav";
                 dialog.Title = "Choose where to save converted file...";
@@ -80,9 +93,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 }
 
                 string newFileName = dialog.FileName;
-
-                this.changeProgressBar.Visible = true;
-                this.Update();
+                
                 await Task.Run(() =>
                 {
                     using (Mp3FileReader reader = new Mp3FileReader(addTrack.TrackFileName))
@@ -90,11 +101,10 @@ namespace MasterAudioTechnologyFunctions.Timeline
                         WaveFileWriter.CreateWaveFile(newFileName, reader);
                     }
                 }).ConfigureAwait(true);
-                this.changeProgressBar.Visible = false;
-                this.Update();
 
                 addTrack.TrackFileName = newFileName;
             }
+            #endregion MP3
 
             Track newTrack = new Track(addTrack.TrackName, addTrack.TrackFileName, addTrack.TrackColor, this);
 
@@ -103,6 +113,29 @@ namespace MasterAudioTechnologyFunctions.Timeline
             pnlTracks.Controls.Add(newTrack);
 
             Height += newTrack.Height;
+            pnlTracks.Height += newTrack.Height;
+
+            timelineCursor.BringToFront();
+
+            scrollBar.Visible = true;
+
+            ScrollTracks();
+        }
+
+        public void addTrack(Track newTrack)
+        {
+            _tracks.Add(newTrack);
+            newTrack.Dock = DockStyle.Bottom;
+            pnlTracks.Controls.Add(newTrack);
+            Height += newTrack.Height;
+        }
+
+        public void removeAllTracks()
+        {
+            int h = _trackHeight * _tracks.Count;
+            pnlTracks.Controls.Clear();
+            _tracks.Clear();
+            Height -= h;
         }
 
         public void removeTrack(Track t)
@@ -110,23 +143,26 @@ namespace MasterAudioTechnologyFunctions.Timeline
             _tracks.Remove(t);
             pnlTracks.Controls.Remove(t);
             Height -= t.Height;
+            pnlTracks.Height -= t.Height;
+
+            if (_tracks.Count == 0)
+                scrollBar.Visible = false;
         }
 
         private void tmrSong_Tick(object sender, EventArgs e)
         {
-            // Set trbTime to the number of miliseconds that since the start of the song
-            // Set the text of lblTimeElapsed to correct time since the start of the song
-            // Time format: mm:ss:milliseconds
-
             frmMatf parent = (frmMatf)Parent.Parent;
-            var totalMilliseconds = parent.Timer.TotalMilliseconds;
+            var parentTimer = parent.Timer;
+            var totalMilliseconds = parentTimer.TotalMilliseconds;
+
+            parent.Timer = parentTimer.Add(new TimeSpan(0, 0, 0, 0, tmrSong.Interval));
+            parent.SetTime();
 
             foreach (Track t in _tracks)
             {
                 if (t.WaveOut == null)
                 {
                     tmrSong.Enabled = false;
-                    parent.disableTmrMain();
                     return;
                 }
 
@@ -154,13 +190,12 @@ namespace MasterAudioTechnologyFunctions.Timeline
                     }
                 }
             }
-
-            // TODO: Remove hardcoding of pnlWaveViewer X position
-            // 92: X position of pnlWaveViewer
-            Point cursorPreviousLocation = timelineCursor.Location;
-            timelineCursor.Location = new Point(92 + (int)totalMilliseconds/55, cursorPreviousLocation.Y);
             
-            // TODO: Change Location.X + Size.Width with duration of the song
+            Point cursorPreviousLocation = timelineCursor.Location;
+            timelineCursor.Location = new Point((int)totalMilliseconds / 55 - scrollBar.Value, cursorPreviousLocation.Y);
+
+            timelineCursor.BringToFront();
+            
             if (totalMilliseconds > _songDuration)
             {
                 if (Looping)
@@ -178,7 +213,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             tmrSong.Enabled = false;
 
             frmMatf parent = (frmMatf)Parent.Parent;
-            parent.disableTmrMain();
             parent.resetTimer();
             timelineCursor.Visible = false;
 
@@ -189,13 +223,12 @@ namespace MasterAudioTechnologyFunctions.Timeline
                         t.Stop();
                         t.Playing[i] = false;
                     }
+
+            TrackMode = _previousTrackMode;
         }
 
         public void Play()
         {
-            // TODO: Find cause and fix bug
-            // Iz nekog razloga mora svaka od traka jednom
-            // da "odsvira" pre nego sto moze da stvarno pusti ton
             var actualVolume = _masterVolume;
             _masterVolume = 0;
             foreach (Track t in _tracks)
@@ -204,20 +237,18 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 t.Stop();
             }
             _masterVolume = actualVolume;
-            
-            // TODO: Find out why BringToFront isn't working
+
             timelineCursor.Visible = true;
             timelineCursor.BringToFront();
             timelineCursor.Height = GetNumberOfTracks() * _trackHeight;
 
             tmrSong.Enabled = true;
-            frmMatf parent = (frmMatf)this.Parent.Parent;
-            parent.enableTmrMain();
-        }
 
-        private void DrawVerticalLine(int x)
-        {
-            ControlPaint.DrawReversibleLine(PointToScreen(new Point(x, 0)), PointToScreen(new Point(x, Height)), Color.Gray);
+            if (TrackMode != TrackEditMode.Play)
+            {
+                _previousTrackMode = TrackMode;
+                TrackMode = TrackEditMode.Play;
+            }
         }
 
         public void ChangeVolume(float change)
@@ -247,19 +278,68 @@ namespace MasterAudioTechnologyFunctions.Timeline
             return _tracks.Count;
         }
 
-        public void DisableEditingOptionInTracks()
+        public void DisableEdit()
         {
-            foreach (var track in _tracks)
-            {
-                track.DisableEditButtons();
-            }
+            btnAddTrack.Enabled = false;
+            btnDelete.Enabled = false;
+            btnEdit.Enabled = false;
+            btnSnapToGrid.Enabled = false;
+
+            foreach (var t in _tracks)
+                t.DisableChange();
         }
 
-        public void EnableEditingOptionInTracks()
+        public void EnableEdit()
         {
-            foreach (var track in _tracks)
+            btnAddTrack.Enabled = true;
+            btnDelete.Enabled = true;
+            btnEdit.Enabled = true;
+            btnSnapToGrid.Enabled = true;
+
+            foreach (var t in _tracks)
+                t.EnableChange();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            TrackMode = TrackEditMode.Edit;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            TrackMode = TrackEditMode.Delete;
+        }
+
+        public void ScrollTracks()
+        {
+            foreach (var t in _tracks)
+                t.PnlWaveViewer.Left = -1 * scrollBar.Value;
+            
+            var parentTimer = ((frmMatf)Parent.Parent).Timer;
+            var totalMilliseconds = parentTimer.TotalMilliseconds;
+
+            Point cursorPreviousLocation = timelineCursor.Location;
+            timelineCursor.Location = new Point((int)totalMilliseconds / 55 - scrollBar.Value, cursorPreviousLocation.Y);
+
+            timelineCursor.BringToFront();
+        }
+
+        private void scrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            ScrollTracks();
+        }
+
+        private void btnSnapToGrid_Click(object sender, EventArgs e)
+        {
+            if (SnapToGrid)
             {
-                track.EnableEditButtons();
+                SnapToGrid = false;
+                btnSnapToGrid.BackColor = Color.WhiteSmoke;
+            }
+            else
+            {
+                SnapToGrid = true;
+                btnSnapToGrid.BackColor = Color.DarkGray;
             }
         }
     }

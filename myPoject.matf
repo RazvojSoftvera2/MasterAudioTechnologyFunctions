@@ -1,0 +1,19 @@
+<project name="myPoject">
+  <tracks>
+    <track name="dsf" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Drums, QS4\clap.wav" color="-32768">
+      <times>
+        <time value="770" />
+        <time value="1210" />
+        <time value="2145" />
+        <time value="3080" />
+      </times>
+    </track>
+    <track name="dfg" filepath="D:\Projects\matf\MasterAudioTechnologyFunctions\wav_database\Drums, QS4\cym splash.wav" color="-16711681">
+      <times>
+        <time value="1430" />
+        <time value="4400" />
+        <time value="7810" />
+      </times>
+    </track>
+  </tracks>
+</project>
