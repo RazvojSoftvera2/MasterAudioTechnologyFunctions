@@ -44,12 +44,13 @@
             // btnAddTrack
             // 
             this.btnAddTrack.BackColor = System.Drawing.Color.White;
+            this.btnAddTrack.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.add;
+            this.btnAddTrack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddTrack.FontSize = MetroFramework.MetroButtonSize.Tall;
             this.btnAddTrack.Location = new System.Drawing.Point(80, 3);
             this.btnAddTrack.Name = "btnAddTrack";
             this.btnAddTrack.Size = new System.Drawing.Size(25, 25);
             this.btnAddTrack.TabIndex = 0;
-            this.btnAddTrack.Text = "+";
             this.btnAddTrack.UseSelectable = true;
             this.btnAddTrack.UseStyleColors = true;
             this.btnAddTrack.Click += new System.EventHandler(this.btnAddTrack_Click);
@@ -126,11 +127,12 @@
             // btnSnapToGrid
             // 
             this.btnSnapToGrid.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSnapToGrid.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.snap;
+            this.btnSnapToGrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnSnapToGrid.Location = new System.Drawing.Point(49, 3);
             this.btnSnapToGrid.Name = "btnSnapToGrid";
             this.btnSnapToGrid.Size = new System.Drawing.Size(25, 25);
             this.btnSnapToGrid.TabIndex = 7;
-            this.btnSnapToGrid.Text = "Snap";
             this.btnSnapToGrid.UseSelectable = true;
             this.btnSnapToGrid.UseStyleColors = true;
             this.btnSnapToGrid.Click += new System.EventHandler(this.btnSnapToGrid_Click);
@@ -138,11 +140,12 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.remove;
+            this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDelete.Location = new System.Drawing.Point(25, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(25, 25);
             this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "Delete";
             this.btnDelete.UseSelectable = true;
             this.btnDelete.UseStyleColors = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -150,11 +153,12 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.SystemColors.Control;
+            this.btnEdit.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.edit;
+            this.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnEdit.Location = new System.Drawing.Point(1, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(25, 25);
             this.btnEdit.TabIndex = 5;
-            this.btnEdit.Text = "Edit";
             this.btnEdit.UseSelectable = true;
             this.btnEdit.UseStyleColors = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);

@@ -25,7 +25,7 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public WaveFileReader WaveFileReader;
         public float TrackVolume = (float)0.7;
 
-        private Timeline _timeline; //TODO: Refactor so we use the parent of track instead of a private field.
+        private Timeline _timeline;
 
         public Track(string name, string fileName, Color color, Timeline tl)
         {
@@ -83,21 +83,13 @@ namespace MasterAudioTechnologyFunctions.Timeline
             WaveOffsetStream = new WaveOffsetStream(WaveFileReader);
             WaveOut.Init(WaveOffsetStream);
             WaveOut.Volume = TrackVolume;
-
-            //TrackLen = (int)WaveFileReader.TotalTime.TotalSeconds*10;
+            
             TrackLen = (int)WaveOffsetStream.Length / 10000;
 
             if (Tracks != null && Tracks.Count > 0)
                 foreach (var wvTrack in Tracks)
                     InitializeWaveViewer(wvTrack);
-
-            //pnlInfo.Paint += new PaintEventHandler(pnlInfo_Paint);
         }
-
-        //void pnlInfo_Paint(object sender, PaintEventArgs e)
-        //{
-        //    pnlInfo.Location = new Point(-_timeline.AutoScrollPosition.X, pnlInfo.Location.Y);
-        //}
 
         public void addSound(int startPosition)
         {
@@ -106,9 +98,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             pnlWaveViewer.Controls.Add(wvTrack);
             wvTrack.Location = new Point(startPosition, 0);
-
-            //TODO: we should definitely replace this with non-constant value
-            int startPositionTime = startPosition * 55; //length in millsec/graphical lenght is about 55
+            
+            int startPositionTime = startPosition * 55;
             Tracks.Add(wvTrack);
             Times.Add(startPositionTime);
             Playing.Add(false);
@@ -174,16 +165,15 @@ namespace MasterAudioTechnologyFunctions.Timeline
                 WaveOffsetStream.CurrentTime = new TimeSpan(0);
             }
 
-            if (_timeline.GetNumberOfTracks() == 1)
+            Timeline timeline = (Timeline)Parent.Parent;
+
+            if (timeline.GetNumberOfTracks() == 1)
             {
-                //TODO: reset timer to 0 (problematic method of doing that)
                 frmMatf parent = (frmMatf)(Parent.Parent).Parent.Parent;
-                // parent.Timer = new TimeSpan(0);
-                // parent.SetTime(parent.Timer);
                 parent.resetTimer();
             }
 
-            _timeline.removeTrack(this);
+            timeline.removeTrack(this);
         }
 
         public void RemoveWave(WaveViewer wv)
@@ -198,7 +188,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
         public void MoveWave(WaveViewer wv)
         {
             int i = Tracks.IndexOf(wv);
-            // TODO: Change hardcoding of 55
             Times[i] = wv.Location.X * 55;
         }
 

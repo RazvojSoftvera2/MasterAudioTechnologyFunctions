@@ -14,9 +14,8 @@ namespace MasterAudioTechnologyFunctions.Timeline
         private List<Track> _tracks;
         private float _masterVolume = 0.7f;
         private long _songDuration = 0;
-        // TODO: Change from 61
         private int _trackHeight = 61;
-
+        
         public bool Looping = false;
         public bool SnapToGrid = false;
 
@@ -82,7 +81,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
             #region MP3
             if (addTrack.TrackFileName.EndsWith(".mp3"))
             {
-                //do a conversion and asserts
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.Filter = "WAV files (.wav)|*.wav";
                 dialog.Title = "Choose where to save converted file...";
@@ -198,7 +196,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
             timelineCursor.BringToFront();
             
-            // TODO: Change Location.X + Size.Width with duration of the song
             if (totalMilliseconds > _songDuration)
             {
                 if (Looping)
@@ -232,9 +229,6 @@ namespace MasterAudioTechnologyFunctions.Timeline
 
         public void Play()
         {
-            // TODO: Find cause and fix bug
-            // Iz nekog razloga mora svaka od traka jednom
-            // da "odsvira" pre nego sto moze da stvarno pusti ton
             var actualVolume = _masterVolume;
             _masterVolume = 0;
             foreach (Track t in _tracks)
@@ -340,12 +334,12 @@ namespace MasterAudioTechnologyFunctions.Timeline
             if (SnapToGrid)
             {
                 SnapToGrid = false;
-                btnSnapToGrid.Text = "s";
+                btnSnapToGrid.BackColor = Color.WhiteSmoke;
             }
             else
             {
                 SnapToGrid = true;
-                btnSnapToGrid.Text = "S";
+                btnSnapToGrid.BackColor = Color.DarkGray;
             }
         }
     }

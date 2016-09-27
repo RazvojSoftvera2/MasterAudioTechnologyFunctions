@@ -50,8 +50,6 @@
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importWAVMP3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportWAVMP3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuView = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.themesStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,48 +141,45 @@
             // 
             // btnLoop
             // 
-            this.btnLoop.AutoSize = true;
             this.btnLoop.BackColor = System.Drawing.SystemColors.Control;
+            this.btnLoop.BackgroundImage = global::MasterAudioTechnologyFunctions.Properties.Resources.repeat;
             this.btnLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLoop.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnLoop.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.btnLoop.Location = new System.Drawing.Point(70, 0);
+            this.btnLoop.Location = new System.Drawing.Point(60, 0);
             this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(30, 25);
+            this.btnLoop.Size = new System.Drawing.Size(25, 25);
             this.btnLoop.TabIndex = 7;
-            this.btnLoop.Text = "L";
             this.btnLoop.UseSelectable = true;
             this.btnLoop.UseStyleColors = true;
             this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
             // 
             // btnStop
             // 
-            this.btnStop.AutoSize = true;
             this.btnStop.BackColor = System.Drawing.SystemColors.Control;
+            this.btnStop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnStop.BackgroundImage")));
             this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStop.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnStop.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.btnStop.Location = new System.Drawing.Point(40, 0);
+            this.btnStop.Location = new System.Drawing.Point(35, 0);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(30, 25);
+            this.btnStop.Size = new System.Drawing.Size(25, 25);
             this.btnStop.TabIndex = 6;
-            this.btnStop.Text = "S";
             this.btnStop.UseSelectable = true;
             this.btnStop.UseStyleColors = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnPlay
             // 
-            this.btnPlay.AutoSize = true;
             this.btnPlay.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPlay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPlay.BackgroundImage")));
             this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPlay.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnPlay.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.btnPlay.Location = new System.Drawing.Point(10, 0);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(30, 25);
+            this.btnPlay.Size = new System.Drawing.Size(25, 25);
             this.btnPlay.TabIndex = 5;
-            this.btnPlay.Text = "PL";
             this.btnPlay.UseSelectable = true;
             this.btnPlay.UseStyleColors = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
@@ -308,56 +303,42 @@
             this.newProjectToolStripMenuItem,
             this.saveProjectToolStripMenuItem,
             this.saveProjectAsToolStripMenuItem,
-            this.importWAVMP3ToolStripMenuItem,
-            this.exportWAVMP3ToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(169, 180);
+            this.menuFile.Size = new System.Drawing.Size(153, 114);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newProjectToolStripMenuItem.Text = "New project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveProjectToolStripMenuItem.Text = "Save project";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // saveProjectAsToolStripMenuItem
             // 
             this.saveProjectAsToolStripMenuItem.Name = "saveProjectAsToolStripMenuItem";
-            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.saveProjectAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveProjectAsToolStripMenuItem.Text = "Save project as";
             this.saveProjectAsToolStripMenuItem.Click += new System.EventHandler(this.saveProjectAsToolStripMenuItem_Click);
-            // 
-            // importWAVMP3ToolStripMenuItem
-            // 
-            this.importWAVMP3ToolStripMenuItem.Name = "importWAVMP3ToolStripMenuItem";
-            this.importWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.importWAVMP3ToolStripMenuItem.Text = "Import WAV/MP3";
-            // 
-            // exportWAVMP3ToolStripMenuItem
-            // 
-            this.exportWAVMP3ToolStripMenuItem.Name = "exportWAVMP3ToolStripMenuItem";
-            this.exportWAVMP3ToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.exportWAVMP3ToolStripMenuItem.Text = "Export WAV/MP3";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -552,7 +533,6 @@
             this.TransparencyKey = System.Drawing.Color.Empty;
             this.ResizeEnd += new System.EventHandler(this.frmMatf_ResizeEnd);
             this.pnlPlay.ResumeLayout(false);
-            this.pnlPlay.PerformLayout();
             this.pnlVolume.ResumeLayout(false);
             this.pnlVolume.PerformLayout();
             this.pnlSong.ResumeLayout(false);
@@ -587,8 +567,6 @@
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveProjectAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importWAVMP3ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportWAVMP3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private MetroFramework.Controls.MetroContextMenu menuView;
         private System.Windows.Forms.ToolStripMenuItem themesStylesToolStripMenuItem;

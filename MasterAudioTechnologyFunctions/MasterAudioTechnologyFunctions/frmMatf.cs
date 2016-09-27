@@ -320,12 +320,12 @@ namespace MasterAudioTechnologyFunctions
             if (timeLine.Looping)
             {
                 timeLine.Looping = false;
-                btnLoop.Text = "l";
+                btnLoop.BackColor = Color.WhiteSmoke;
             }
             else
             {
                 timeLine.Looping = true;
-                btnLoop.Text = "L";
+                btnLoop.BackColor = Color.DarkGray;
             }
         }
 
@@ -465,7 +465,7 @@ namespace MasterAudioTechnologyFunctions
                 s.Close();
             }
 
-            Text = SoftwareName + " - " + _projectName;
+            Text = ApplicationName + " - " + _projectName;
         }
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
